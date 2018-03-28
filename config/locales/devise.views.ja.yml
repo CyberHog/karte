@@ -1,0 +1,167 @@
+ja:
+  date:
+    formats:
+      default: "%Y/%m/%d"
+      short: "%m/%d"
+      long: "%Y年%m月%d日(%a)"
+    day_names: [日曜日, 月曜日, 火曜日, 水曜日, 木曜日, 金曜日, 土曜日]
+    abbr_day_names: [日, 月, 火, 水, 木, 金, 土]
+    month_names: [~, 1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月]
+    abbr_month_names: [~, 1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月]
+    order:
+      - :year
+      - :month
+      - :day
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      short: "%y/%m/%d %H:%M"
+      long: "%Y年%m月%d日(%a) %H時%M分%S秒 %Z"
+    am: "午前"
+    pm: "午後"
+  activerecord:
+    models:
+      user: "ユーザ"
+      user_image: "ユーザー画像"
+    attributes:
+      user:
+        last_name: "苗字"
+        first_name: "名前"
+        user_id: "ユーザーID"
+        phone: "電話番号"
+        birthday: "誕生日"
+        gender: "性別"
+        gender_0: "男"
+        gender_1: "女"
+        business: "ビジネスユーザー"
+        current_password: "現在のパスワード"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "確認用パスワード"
+        remember_me: "ログインを記憶"
+      user_image:
+        uploaded_image: "画像"
+        _destroy: "削除する"
+      image:
+        uploaded_image: "画像"
+  views:
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&laquo; 前"
+      next: "次 &raquo;"
+      truncate: "..."
+  devise:
+    confirmations:
+      confirmed: "アカウントが確認されました。ログインしています。"
+      send_instructions: "アカウントの確認方法を数分以内にメールでご連絡します。"
+      send_paranoid_instructions: "ご登録のメールアドレスが保存されている場合、アカウントの確認方法をメールでご連絡します。"
+    failure:
+      already_authenticated: "既にログインしています。"
+      inactive: "あなたのアカウントはまだ有効になっていません"
+      invalid: "メールアドレスかパスワードが無効です"
+      locked: "アカウントがロックされています。"
+      last_attempt: "あなたのアカウントがロックされる前に、もう1つの試みを持っています。"
+      not_found_in_database: "メールアドレスまたはパスワードが無効です。"
+      timeout: "一定時間が経過したため、再度ログインが必要です"
+      unauthenticated: "ログインまたは登録が必要です。"
+      unconfirmed: "本登録を行ってください。"
+      confirmations:
+      new:
+        resend_confirmation_instructions: "アカウント確認メール再送"
+    mailer:
+      confirmation_on_create_instructions:
+        action: "アカウント登録"
+        greeting: "ようこそ、%{recipient}さん!"
+        instruction: "次のリンクでメールアドレスの確認が完了します:"
+        subject: "アカウント登録"
+      confirmation_instructions:
+        action: "アカウント確認"
+        greeting: "%{recipient}様"
+        instruction: "次のリンクでメールアドレスの変更が完了します。"
+        subject: "メールアドレスの変更"
+      reset_password_instructions:
+        action: "パスワード変更"
+        greeting: "こんにちは、%{recipient}さん!"
+        instruction: "誰かがパスワードの再設定を希望しました。次のリンクでパスワードの再設定が出来ます。"
+        instruction_2: "あなたが希望したのではないのなら、このメールは無視してください。"
+        instruction_3: "上のリンクにアクセスして新しいパスワードを設定するまで、パスワードは変更されません。"
+        subject:
+      unlock_instructions:
+        action: "アカウントのロック解除"
+        greeting: "こんにちは、%{recipient}さん!"
+        instruction: "アカウントのロックを解除するには下のリンクをクリックしてください。"
+        message: "ログイン失敗が繰り返されたため、アカウントはロックされています。"
+    omniauth_callbacks:
+      failure: "%{kind} から承認されませんでした。理由：%{reason}"
+      success: "%{kind} から承認されました。"
+    passwords:
+      no_token: "このページにアクセスする事が出来ません。正しいURLでアクセスしている事を確認して下さい。"
+      send_instructions: "パスワードのリセット方法を数分以内にメールでご連絡します。"
+      send_paranoid_instructions: ""
+      updated: "パスワードを変更しました。"
+      updated_not_active: "パスワードを変更しました。"
+      edit:
+        change_my_password: "パスワードを変更する"
+        change_your_password: "パスワードを変更"
+        confirm_new_password: "確認用新しいパスワード"
+        new_password: "新しいパスワード"
+      new:
+        forgot_your_password: "パスワードを忘れましたか?"
+        send_me_reset_password_instructions: "パスワードの再設定方法を送信する"
+    registrations:
+      destroyed: "アカウントを削除しました。またのご利用をお待ちしております。"
+      signed_up: "アカウント登録を受け付けました。"
+      signed_up_but_inactive: "アカウントは登録されていますが、アクティブになっていないため利用できません。"
+      signed_up_but_locked: "アカウントは登録されていますが、ロックされているため利用できません。"
+      signed_up_but_unconfirmed: "確認メールを登録したメールアドレス宛に送信しました。リンクを開いてアカウントを有効にして下さい。"
+      update_needs_confirmation: "アカウント情報が更新されました。更新の確認メールを新しいメールアドレス宛に送信しましたので、リンクを開いて更新を有効にして下さい。"
+      updated: "アカウントが更新されました。"
+      edit:
+        are_you_sure: "本当に宜しいですか?"
+        cancel_my_account: "アカウント削除"
+        currently_waiting_confirmation_for_email: "%{email} の確認待ち"
+        leave_blank_if_you_don_t_want_to_change_it: "変更しない場合は空欄にして下さい"
+        title: "%{resource}編集"
+        unhappy: "気に入りません"
+        update: "更新"
+        we_need_your_current_password_to_confirm_your_changes: "変更を反映するには現在のパスワードを入力してください"
+      new:
+        sign_up: "アカウント登録"
+    sessions:
+      new:
+        sign_in: "ログイン"
+    shared:
+      links:
+        back: "戻る"
+        didn_t_receive_confirmation_instructions: "アカウント確認のメールを受け取っていませんか?"
+        didn_t_receive_unlock_instructions: "アカウントの凍結解除方法のメールを受け取っていませんか?"
+        forgot_your_password: "パスワードを忘れましたか?"
+        sign_in: "ログイン"
+        sign_in_with_provider: "%{provider}でログイン"
+        sign_up: "アカウント登録"
+    unlocks:
+      send_instructions: "アカウントのロックを解除する方法を数分以内にメールでご連絡します。"
+      send_paranoid_instructions: "アカウントが存在する場合、ロックを解除する方法をメールでご連絡します。"
+      unlocked: "アカウントのロックが解除されました。ログインしています。"
+      new:
+        resend_unlock_instructions: "アカウントの凍結解除方法を再送する"
+  errors:
+    messages:
+      already_confirmed: "は既に登録済みです。ログインしてください"
+      confirmation_period_expired: "%{period}以内に確認する必要がありますので、新しくリクエストしてください。"
+      expired: "有効期限切れです。新規登録してください。"
+      not_found: "は見つかりませんでした。"
+      not_locked: "ロックされていません。"
+      not_saved:
+        one: "エラーにより、この %{resource} を保存できません："
+        other: "%{count} 個のエラーにより、この %{resource} を保存できません："
+      taken: "は既に使用されています。"
+      blank: "が入力されていません。"
+      too_short: "は%{count}文字以上に設定して下さい。"
+      too_long: "は%{count}文字以下に設定して下さい。"
+      invalid: "は有効でありません。"
+      confirmation: "が内容とあっていません。"
+      too_big_image: "が大きすぎます(最大64KB)"
+      invalid_image: "の形式が違います(JPEG、GIF、PNGのどれかにして下さい)。"
+      invalid_user_name: "ユーザー名は半角英数字です。（_も使えます）。"

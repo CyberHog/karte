@@ -1,0 +1,23 @@
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href="#!">one</a></li>
+  <li><a href="#!">two</a></li>
+  <li class="divider"></li>
+  <li><a href="#!">three</a></li>
+</ul>
+<nav>
+  <div class="nav-wrapper">
+    <a href="#!" class="brand-logo">Logo</a>
+    <ul class="right hide-on-med-and-down">
+      <% if user_signed_in? %>
+        <li><a href="#"><i class="material-icons">search</i></a></li>
+        <li><%= link_to current_user.full_name, edit_user_registration_path %></li>
+        <li><a href="<%= homes_show_path %>"><i class="material-icons">home</i></a></li>
+        <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+        <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+      <% else %>
+        <li><%= link_to 'アカウント作成', new_user_registration_path %></li>
+        <li><%= link_to 'ログイン', new_user_session_path %></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

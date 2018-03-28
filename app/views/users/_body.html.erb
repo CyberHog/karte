@@ -1,0 +1,34 @@
+<table class="highlight">
+  <tr>
+    <th width="150">画像</th>
+    <td><%= user_image_tag @user, width: 96 %></td>
+  </tr>
+  <tr>
+    <th>ユーザーID</th>
+    <td><%= @user.user_id %></td>
+  </tr>
+  <tr>
+    <th>氏名</th>
+    <td><%= @user.full_name %></td>
+  </tr>
+  <tr>
+    <th>電話</th>
+    <td><%= @user.phone %></td>
+  </tr>
+  <tr>
+    <th>メールアドレス</th>
+    <td><%= @user.email %></td>
+  </tr>
+  <tr>
+    <th>生年月日</th>
+    <td><%= @user.birthday.try(:strftime, "%Y年%m月%d日") %></td>
+  </tr>
+  <tr>
+    <th>性別</th>
+    <td><%= @user.gender == 0 ? "男" : "女" %></td>
+  </tr>
+  <tr>
+    <th>ビジネス</th>
+    <td><%= @user.business? ? "○" : "－" %></td>
+  </tr>
+</table>

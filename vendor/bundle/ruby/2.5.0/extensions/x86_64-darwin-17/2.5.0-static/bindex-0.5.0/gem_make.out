@@ -1,0 +1,15 @@
+current directory: /Users/cyberhog/Desktop/karte/vendor/bundle/ruby/2.5.0/gems/bindex-0.5.0/ext/bindex
+/Users/cyberhog/.rbenv/versions/2.5.0/bin/ruby -r ./siteconf20180318-75737-3i9mtx.rb extconf.rb
+creating Makefile
+
+current directory: /Users/cyberhog/Desktop/karte/vendor/bundle/ruby/2.5.0/gems/bindex-0.5.0/ext/bindex
+make "DESTDIR=" clean
+
+current directory: /Users/cyberhog/Desktop/karte/vendor/bundle/ruby/2.5.0/gems/bindex-0.5.0/ext/bindex
+make "DESTDIR="
+compiling cruby.c
+linking shared-object bindex/cruby.bundle
+
+current directory: /Users/cyberhog/Desktop/karte/vendor/bundle/ruby/2.5.0/gems/bindex-0.5.0/ext/bindex
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 cruby.bundle ./.gem.20180318-75737-1jv63oq/bindex

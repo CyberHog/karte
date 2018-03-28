@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>karte</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons" %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  </head>
+  <body>
+    <header>
+      <div calss="navbar-fixed">
+
+        <%= render "shared/header" %>
+
+      </div>
+    </header>
+
+    <main>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+        <div class="container">
+
+          <%= yield %>
+
+        </div>
+    </main>
+
+    <footer class="page-footer">
+
+      <%= render "shared/footer" %>
+
+    </footer>
+  </body>
+</html>
