@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20180327032310) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "business", default: 0, null: false
+    t.boolean "business", default: false, null: false
     t.string "user_id", null: false
     t.string "last_name", null: false
     t.string "first_name", default: "", null: false

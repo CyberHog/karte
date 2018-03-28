@@ -4,7 +4,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
   def change
     create_table :users do |t|
       # User Information    
-      t.integer :business, null: false, default: false  # 所属(0:個人,1:ビジネス)
+      t.boolean :business, null: false, default: false  # 所属(0:個人,1:ビジネス)
       t.string :user_id, null: false                    # ユーザーID
       t.string :last_name, null: false, dafault: ""     # 苗字
       t.string :first_name, null: false, default: ""    # 名前
