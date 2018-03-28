@@ -26,6 +26,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+gem 'kaminari', '~> 1.1', '>= 1.1.1'
 
 gem 'materialize-sass'
 
