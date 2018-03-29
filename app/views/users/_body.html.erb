@@ -1,11 +1,11 @@
 <table class="highlight">
   <tr>
     <th width="150">画像</th>
-    <td><%= user_image_tag @user, width: 96 %></td>
+    <td><%= image_tag @user.avatar.url %></td>
   </tr>
   <tr>
-    <th>ユーザーID</th>
-    <td><%= @user.user_id %></td>
+    <th>ユーザーネーム</th>
+    <td><%= @user.user_name %></td>
   </tr>
   <tr>
     <th>氏名</th>

@@ -5,7 +5,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
     create_table :users do |t|
       # User Information    
       t.boolean :business, null: false, default: false  # 所属(0:個人,1:ビジネス)
-      t.string :user_id, null: false                    # ユーザーID
+      t.string :user_name, null: false                  # ユーザーネーム
       t.string :last_name, null: false, dafault: ""     # 苗字
       t.string :first_name, null: false, default: ""    # 名前
       t.string :phone                                   # 電話番号
@@ -14,6 +14,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.boolean :account_suspension, null: false,       # アカウント停止
                   default: false                                     
       t.date :suspended_at                              # 退会日
+      t.string :avatar                                  # ユーザー画像
 
       # SNS
       t.string :uid, null: false, default: ""           # SNSのユーザーID

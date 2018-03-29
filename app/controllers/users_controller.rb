@@ -3,13 +3,13 @@ class UsersController < ApplicationController
 
   # 会員一覧
   def index
-    @users = User.order("user_id")
+    @users = User.order("user_name")
       .page(params[:page]).per(10)
   end
 
   # 会員情報の詳細
   def show
-    @user = User.find(params[:id])
+    @user = User.find(current_user.id)
     if params[:format].in?(["jpg", "png", "gif"])
       send_image
     else

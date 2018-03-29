@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20180327032310) do
 
   create_table "users", force: :cascade do |t|
     t.boolean "business", default: false, null: false
-    t.string "user_id", null: false
+    t.string "user_name", null: false
     t.string "last_name", null: false
     t.string "first_name", default: "", null: false
     t.string "phone"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20180327032310) do
     t.integer "gender", default: 0, null: false
     t.boolean "account_suspension", default: false, null: false
     t.date "suspended_at"
+    t.string "avatar"
     t.string "uid", default: "", null: false
     t.string "provider", default: "", null: false
     t.string "username"

@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  helper_method :current_user
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -8,9 +9,11 @@ class ApplicationController < ActionController::Base
 
   	protected
     def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:business, :user_id, :last_name, :first_name, :email, :phone, :birthday, :gender])
-    devise_parameter_sanitizer.permit(:sign_in, keys: [:business, :user_id, :last_name, :first_name, :email, :phone, :birthday, :gender])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:business, :user_id, :last_name, :first_name, :phone, :birthday, :gender, :image])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:business, :user_name, :last_name, :first_name, :email, :phone, :birthday, :gender, :password,
+      :password_confirmation, :avatar, :avatar_cache, :remove_avatar])
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:business, :user_name, :last_name, :first_name, :email, :phone, :birthday, :gender])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:business, :user_name, :last_name, :first_name, :phone, :birthday, :gender, :password,
+      :password_confirmation, :current_password, :avatar, :avatar_cache, :remove_avatar])
     end
 
     private

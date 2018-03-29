@@ -27,6 +27,8 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
+gem 'carrierwave', '~> 1.2', '>= 1.2.2'
+gem 'mini_magick', '~> 4.8'
 
 gem 'materialize-sass'
 
