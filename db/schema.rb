@@ -10,15 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180327032310) do
+ActiveRecord::Schema.define(version: 20180330043320) do
 
-  create_table "user_images", force: :cascade do |t|
+  create_table "notices", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.binary "data"
-    t.string "content_type"
+    t.string "title", null: false
+    t.text "body"
+    t.date "released_at", null: false
+    t.date "expired_at"
+    t.string "status", default: "draft", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_user_images_on_user_id"
+    t.index ["user_id"], name: "index_notices_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -20,5 +20,5 @@ $(document).on 'turbolinks:load', ->
     showMonthAfterYear: true,
     # Close upon selecting a date,
     closeOnSelect: true,
-    format: 'yyyy年m月d日'
+    format: 'yyyy-mm-dd'
   }

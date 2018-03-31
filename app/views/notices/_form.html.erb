@@ -1,0 +1,32 @@
+<%= render "shared/errors", obj: @notice %>
+
+<table>
+  <tr>
+    <th width="80"><%= form.label :title %></th>
+    <td><%= form.text_field :title, size: 50 %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :body %></th>
+    <td><%= form.text_area :body, rows: 10, cols: 45  %></td>
+  </tr>
+  <tr>
+    <th>
+      <%= form.label :released_at %>
+    </th>
+    <td>
+      <%= form.date_field :released_at, class: "validate datepicker", autocomplete: "expired_at" %>
+    </td>
+  </tr>
+  <tr>
+    <th><%= form.label :expired_at, for: "article_expired_at_1i" %></th>
+    <td>
+      <%= form.check_box :no_expiration, id: "notice_no_expiration", for: "notice_expired_at" %>
+      <%= form.label :no_expiration %>
+      <%= form.date_field :expired_at, id: "notice_expired_at", class: "validate datepicker", autocomplete: "expired_at" %>
+    </td>
+  </tr>
+  <tr>
+    <th><%= form.label :status %></th>
+    <td><%= form.select :status, Notice.status_options %></td>
+  </tr>
+</table>

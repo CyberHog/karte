@@ -1,6 +1,6 @@
 <table class="highlight">
   <tr>
-    <th width="150">画像</th>
+    <th width="190">画像</th>
     <td><%= image_tag @user.avatar.url %></td>
   </tr>
   <tr>
@@ -28,7 +28,7 @@
     <td><%= @user.gender == 0 ? "男" : "女" %></td>
   </tr>
   <tr>
-    <th>ビジネス</th>
-    <td><%= @user.business? ? "○" : "－" %></td>
+    <th>所属</th>
+    <td><%= @user.business? ? "ビジネスユーザー" : "個人ユーザー" %></td>
   </tr>
 </table>

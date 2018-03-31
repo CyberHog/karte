@@ -47,7 +47,7 @@
 
     <div class="input-field col s12">
       <i class="material-icons prefix">cake</i>
-        <%= f.date_field :birthday,id: "icon_cake", class: "validate, datepicker", autocomplete: "birthday" %>
+        <%= f.date_field :birthday,id: "icon_cake", class: "validate datepicker", autocomplete: "birthday" %>
         <label for="icon_cake">生年月日</label>
     </div>
 
@@ -64,8 +64,8 @@
 
       <div class="col s6">
         <i class="material-icons prefix">verified_user</i>
-        <%= f.check_box :business %>
-        <%= f.label :business %>
+        <%= f.check_box :business, id: "business" %>
+        <label for="business">ビジネスユーザーの方はチェックして下さい</label>
       </div>
 
       <div class="input-field col s12">

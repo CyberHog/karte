@@ -1,4 +1,4 @@
-ja:
+ ja:
   date:
     formats:
       default: "%Y/%m/%d"
@@ -22,28 +22,34 @@ ja:
   activerecord:
     models:
       user: "ユーザ"
-      user_image: "ユーザー画像"
+      notice: "お知らせ"
     attributes:
       user:
         last_name: "苗字"
         first_name: "名前"
-        user_id: "ユーザーID"
+        user_name: "ユーザーネーム"
         phone: "電話番号"
         birthday: "誕生日"
         gender: "性別"
         gender_0: "男"
         gender_1: "女"
-        business: "ビジネスユーザー"
+        business: "所属"
         current_password: "現在のパスワード"
         email: "メールアドレス"
         password: "パスワード"
         password_confirmation: "確認用パスワード"
         remember_me: "ログインを記憶"
-      user_image:
-        uploaded_image: "画像"
-        _destroy: "削除する"
-      image:
-        uploaded_image: "画像"
+      notice:
+        title: "タイトル"
+        body: "本文"
+        released_at: "掲載日"
+        expired_at: "掲載終了日"
+        no_expiration: 掲載終了日時を設定しない
+        member_only: 会員限定
+        status: "状態"
+        status_draft: "下書き"
+        status_member_only: "会員限定"
+        status_public: "公開"
   views:
     pagination:
       first: "&laquo; 最初"
@@ -176,3 +182,4 @@ ja:
       mini_magick_processing_error: "MiniMagickがファイルを処理できませんでした。画像を確認してください。エラーメッセージ: %{e}"
       min_size_error: "ファイルを%{min_size}バイト以上のサイズにしてください"
       max_size_error: "ファイルを%{max_size}バイト以下のサイズにしてください"
+      expired_at_too_old: は掲載開始日より新しい日時にしてください。

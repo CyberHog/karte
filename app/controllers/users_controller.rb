@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   # 会員情報の詳細
   def show
     @user = User.find(current_user.id)
-    if params[:format].in?(["jpg", "png", "gif"])
+    if params[:format].in?(["jpg", "jpeg", "png", "gif"])
       send_image
     else
       render "show"
@@ -24,14 +24,4 @@ class UsersController < ApplicationController
     render "index"
   end
 
-  private
-  # 画像送信
-  def send_image
-    if @user.image.present?
-      send_data @user.image.data,
-      type: @user.image.content_type, disposition: "inline"
-    else
-      raise NotFound
-    end
-  end
 end

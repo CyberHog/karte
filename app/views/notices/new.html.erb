@@ -1,0 +1,12 @@
+<% @page_title = "お知らせの新規作成"%>
+<h1><%= @page_title %></h1>
+
+<div class="row">
+  <%= form_for @notice do |form| %>
+
+  <%= render "form", form: form %>
+
+  <p><%= button_tag '投稿する', class: "btn waves-effect waves-light btn", type: "button", onclick: "submit();" %></p>
+  <% end %>
+
+</div>

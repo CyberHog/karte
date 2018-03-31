@@ -25,6 +25,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'devise'
 gem 'devise-i18n'
+gem 'rails-i18n', '~> 5.1', '>= 5.1.1'
 gem 'devise-i18n-views'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
 gem 'carrierwave', '~> 1.2', '>= 1.2.2'

@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'notices/index'
+
+  get 'notices/show'
+
+  get 'notices/new'
+
+  get 'notices/edit'
+
   root "users#index"
   get "users/show"
 
@@ -13,7 +21,9 @@ Rails.application.routes.draw do
   
   resources :users, :only => [:index, :show] do
     collection { get "search" }
+    resources :notices, only: [:index]
   end
+  resources :notices
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: '/letter_opener'

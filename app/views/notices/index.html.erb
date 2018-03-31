@@ -1,0 +1,18 @@
+<% @page_title = @user? @user.full_name + "さんの投稿" : "お知らせ" %>
+<h1><%= @page_title %></h1>
+
+<% if current_user %>
+<p><%= link_to "お知らせの作成", :new_notice %></p>
+<% end %>
+
+<% if @notices.present? %>
+  <% @notices.each do |notice| %>
+  <h2><%=  notice.title %></h2>
+  <p><%= truncate(notice.body, length: 80) %>
+    <%= link_to "もっと読む", notice %></p>
+    <%= render "footer", notice: notice %>
+    <% end %>
+    <%= paginate @notices, class: "pagination" %>
+    <% else %>
+    <p>記事がありません</p>
+    <% end %>
