@@ -23,36 +23,36 @@
     <div class="input-field col s12">
       <i class="material-icons prefix">android</i>
           <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", id: "user_id", class: "validate" %>
-          <label for="user_id">ユーザーネーム</label>
+          <label class="active" for="user_id">ユーザーネーム</label>
     </div>
 
     <div class="input-field col s6">
       <i class="material-icons prefix">account_circle</i>
         <%= f.text_field :last_name, id: "icon_prefix", class: "validate" %>
-      <label for="icon_prefix">名字</label>
+      <label class="active" for="icon_prefix">名字</label>
     </div>
 
     <div class="input-field col s6">
       <%= f.text_field :first_name, id: "first_name",  class: "validate" %>
-      <label for="first_name">名前</label>
+      <label class="active" for="first_name">名前</label>
     </div>
 
     <div class="input-field col s12">
       <i class="material-icons prefix">phone</i>
         <%= f.text_field :phone, id: "icon_telephone", class: "validate", autocomplete: "phone" %>
-      <label for="icon_telephone">電話</label>
+      <label class="active" for="icon_telephone">電話</label>
     </div>
 
     <div class="input-field col s12">
       <i class="material-icons prefix">email</i>
         <%= f.email_field :email, id: "icon_email", class: "validate", autocomplete: "email" %>
-      <label for="icon_email">メールアドレス</label>
+      <label class="active" for="icon_email">メールアドレス</label>
     </div>
 
     <div class="input-field col s12">
       <i class="material-icons prefix">cake</i>
         <%= f.date_field :birthday, id: "icon_cake", class: "datepicker", autocomplete: "birthday" %>
-        <label for="icon_cake">生年月日</label>
+        <label class="active" for="icon_cake">生年月日</label>
     </div>
 
     <div class="col s2">
@@ -75,27 +75,27 @@
     <%= f.fields_for :address do |fin| %>
 
         <div class="input-field col s6">
-          <%= fin.label :postcode %>
+          <%= fin.label :postcode, class: "active"  %>
           <%= fin.text_field :postcode, input_html: {id: "address_zipcode"} %>
         </div>
 
         <div class="input-field col s12">
-          <%= fin.label :prefucture %>
-          <%= fin.text_field :prefecture, input_html: {id: "address_prefecture_name"} %>
+          <%= fin.label :prefecture, class: "active" %>
+          <%= fin.text_field :prefecture, inpu_html: {id: "address_prefecture_name"} %>
         </div>
 
         <div class="input-field col s12">
-          <%= fin.label :city %>
+          <%= fin.label :city, class: "active" %>
           <%= fin.text_field :city, input_html: {id: "address_city"} %>
         </div>
 
         <div class="input-field col s12">
-          <%= fin.label :street %>
+          <%= fin.label :street, class: "active" %>
           <%= fin.text_field :street, input_html: {id: "address_street"} %>
         </div>
 
         <div class="input-field col s12">
-          <%= fin.label :building %>
+          <%= fin.label :building, class: "active" %>
           <%= fin.text_field :building, input_html: {id: "address_building"} %>
         </div>
 
