@@ -1,11 +1,4 @@
 Rails.application.routes.draw do
-  get 'notices/index'
-
-  get 'notices/show'
-
-  get 'notices/new'
-
-  get 'notices/edit'
 
   root "users#index"
   get "users/show"
@@ -19,9 +12,10 @@ Rails.application.routes.draw do
     :unlocks => "users/unlocks"
   }
   
-  resources :users, :only => [:index, :show] do
+  resources :users do
     collection { get "search" }
     resources :notices, only: [:index]
+    resources :address
   end
   resources :notices
 

@@ -31,4 +31,30 @@
     <th>所属</th>
     <td><%= @user.business? ? "ビジネスユーザー" : "個人ユーザー" %></td>
   </tr>
+
+  <% if @user.address.present? %>
+
+  <tr>
+    <th>郵便番号</th>
+    <td><%= @user.address.postcode %></td>
+  </tr>
+  <tr>
+    <th>都道府県</th>
+    <td><%= @user.address.prefecture %></td>
+  </tr>
+  <tr>
+    <th>市区町村</th>
+    <td><%= @user.address.city %></td>
+  </tr>
+  <tr>
+  <tr>
+    <th>町域・番号</th>
+    <td><%= @user.address.street %></td>
+  </tr>
+  <tr>
+    <th>建物名・号室</th>
+    <td><%= @user.address.building %></td>
+  </tr>
+
+  <% end %>
 </table>

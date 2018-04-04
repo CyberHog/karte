@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   mount_uploader :avatar, AvatarUploader
 
+  has_one :address, dependent: :destroy
+  accepts_nested_attributes_for :address, allow_destroy: true
   has_many :notices, dependent: :destroy
   
   devise :database_authenticatable, :registerable,
@@ -18,7 +20,7 @@ class User < ApplicationRecord
   validates :first_name, length: { maximum: 20}
   validates :phone, length: { maximum: 12 }
   validates :email, length: { maximum: 30 }, uniqueness: true
-  validates_presence_of   :avatar
+  
   validates_integrity_of  :avatar
   validates_processing_of :avatar
 

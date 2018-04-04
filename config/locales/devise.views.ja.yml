@@ -23,8 +23,11 @@
     models:
       user: "ユーザ"
       notice: "お知らせ"
+      address: "住所"
     attributes:
       user:
+        avatar: "画像"
+        remove_avatar: "画像を削除"
         last_name: "苗字"
         first_name: "名前"
         user_name: "ユーザーネーム"
@@ -50,6 +53,12 @@
         status_draft: "下書き"
         status_member_only: "会員限定"
         status_public: "公開"
+      address:
+        postcode: "郵便番号"
+        prefecture: "都道府県"
+        city: "市区町村"
+        street: "番地"
+        building: "建物名/号室"
   views:
     pagination:
       first: "&laquo; 最初"

@@ -10,11 +10,6 @@ class UsersController < ApplicationController
   # 会員情報の詳細
   def show
     @user = User.find(current_user.id)
-    if params[:format].in?(["jpg", "jpeg", "png", "gif"])
-      send_image
-    else
-      render "show"
-    end
   end
 
   # 検索

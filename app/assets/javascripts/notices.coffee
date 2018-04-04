@@ -1,2 +1,2 @@
 $(document).on 'turbolinks:load', ->
-    $('select').formSelect();
+    $('select').formSelect()
