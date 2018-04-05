@@ -3,7 +3,7 @@
 
 <%= form_tag :search_users, method: :get do %>
   <p><%= text_field_tag "q", params[:q] %>
-  <%= button_tag '探索', class: "btn waves-effect waves-light btn", type: "button", onclick: "submit();" %></p>
+  <%= button_tag '検索', class: "btn waves-effect waves-light btn", type: "button", onclick: "submit();" %></p>
 <% end %>
 
 <% if @clinicks.present? %>

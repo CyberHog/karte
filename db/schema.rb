@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180402123353) do
+ActiveRecord::Schema.define(version: 20180405003154) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id"
@@ -24,6 +24,37 @@ ActiveRecord::Schema.define(version: 20180402123353) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
+  create_table "clinics", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_clinics_on_user_id"
+  end
+
+  create_table "coupons", force: :cascade do |t|
+    t.integer "patient_id"
+    t.integer "clinic_id"
+    t.integer "ment_id"
+    t.integer "remaining"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clinic_id"], name: "index_coupons_on_clinic_id"
+    t.index ["ment_id"], name: "index_coupons_on_ment_id"
+    t.index ["patient_id"], name: "index_coupons_on_patient_id"
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.integer "clinic_id"
+    t.integer "content_id"
+    t.string "content_name"
+    t.integer "price"
+    t.integer "attached_point"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clinic_id"], name: "index_menus_on_clinic_id"
+  end
+
   create_table "notices", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "title", null: false
@@ -34,6 +65,14 @@ ActiveRecord::Schema.define(version: 20180402123353) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_notices_on_user_id"
+  end
+
+  create_table "patients", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "holding_point", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_patients_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,0 +1,28 @@
+<%  @page_title = "メニューの詳細" %>
+
+<h1><%=  @page_title %></h1>
+
+<div class="row">
+
+<p><%= link_to "メニュー一覧", :menus %> | <%= link_to "編集", [:edit, @menu] %></p>
+
+<table class="highlight">
+  <tr>
+    <th width="150px">ID</th>
+    <td><%= @menu.content_id %></td>
+  </tr>
+  <tr>
+    <th>コース名</th>
+    <td><%= @menu.content_name %></td>
+  </tr>
+  <tr>
+    <th>価格</th>
+    <td><%= @menu.price %></td>
+  </tr>
+  <tr>
+    <th>付与ポイント</th>
+    <td><%= @menu.attached_point %></td>
+  </tr>
+</table>
+
+</div>

@@ -14,9 +14,14 @@ Rails.application.routes.draw do
   
   resources :users do
     collection { get "search" }
+    resources :patient
     resources :notices, only: [:index]
     resources :address
   end
+  resources :menus do
+    collection { get "search" }
+  end
+  resources :patient
   resources :notices
 
   if Rails.env.development?

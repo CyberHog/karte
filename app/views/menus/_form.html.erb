@@ -1,0 +1,20 @@
+<%= render "shared/errors", obj: @menu %>
+
+<table class="highlight">
+  <tr>
+    <th width="150px"><%= form.label :content_id %></th>
+    <td><%= form.text_field :content_id, size: 8 %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :content_name %></th>
+    <td><%= form.text_field :content_name %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :price %></th>
+    <td><%= form.text_field :price %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :attached_point %></th>
+    <td><%= form.text_field :attached_point %></td>
+  </tr>
+</table>

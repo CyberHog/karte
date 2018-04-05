@@ -13,6 +13,7 @@
         <li><%= link_to current_user.full_name, users_show_url %></li>
         <li><a href="<%= users_path %>"><i class="material-icons">home</i></a></li>
         <li><%= link_to "お知らせ", :notices %></li>
+        <li><%= link_to "メニュー管理", :menus %></li>
         <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
         <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
       <% else %>

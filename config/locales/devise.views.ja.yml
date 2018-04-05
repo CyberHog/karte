@@ -24,6 +24,7 @@
       user: "ユーザ"
       notice: "お知らせ"
       address: "住所"
+      menu: "メニュー"
     attributes:
       user:
         avatar: "画像"
@@ -59,6 +60,11 @@
         city: "市区町村"
         street: "番地"
         building: "建物名/号室"
+      menu:
+        content_id: "コースID"
+        content_name: "コース名"
+        price: "価格"
+        attached_point: "ポイント"
   views:
     pagination:
       first: "&laquo; 最初"

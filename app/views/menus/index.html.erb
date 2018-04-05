@@ -1,0 +1,36 @@
+<%  @page_title = "メニュー管理" %>
+<h1><%=  @page_title %></h1>
+
+<%= form_tag :search_menus, method: :get do %>
+  <p><%= text_field_tag "q", params[:q] %>
+  <%= button_tag "検索", class: "btn waves-effect waves-light btn", type: "button", onclick: "submit();" %></p>
+<% end %>
+
+<p><%= link_to "メニュー新規作成", :new_menu %></p>
+
+<% if @menus.present? %>
+<table class="highlight">
+  <tr>
+    <th>コースID</th>
+    <th>コース名</th>
+    <th>価格</th>
+    <th>ポイント</th>
+    <th>操作</th>
+  </tr>
+  <% @menus.each do |menu| %>
+  <tr>
+    <td><%= menu.content_id %></td>
+    <td><%= link_to menu.content_name, menu %></td>
+    <td><%= menu.price %></td>
+    <td><%= menu.attached_point %></td>
+    <td>
+      <%= link_to "編集", [:edit, menu] %> |
+      <%= link_to "削除", menu, method: :delete,
+            data: { confirm: "本当に削除しますか?" } %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<% else %>
+<p>メニュー情報がありません。</p>
+<% end %>
