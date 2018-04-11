@@ -9,9 +9,7 @@
   </tr>
   <tr>
     <th><%= form.label :service %></th>
-    <%= form.fields_for :menu do |me| %>
-    <td><%= me.collection_select :content_name, Menu.all, :id, :content_name %></td>
-    <% end %>
+    <td><%= form.select :service, Menu.all.map(&:content_name) %></td>
   </tr>
   <tr>
     <th><%= form.label :payment %></th>
