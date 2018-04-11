@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180405003154) do
+ActiveRecord::Schema.define(version: 20180407004429) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id"
@@ -35,17 +35,29 @@ ActiveRecord::Schema.define(version: 20180405003154) do
   create_table "coupons", force: :cascade do |t|
     t.integer "patient_id"
     t.integer "clinic_id"
-    t.integer "ment_id"
+    t.integer "menu_id"
     t.integer "remaining"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_coupons_on_clinic_id"
-    t.index ["ment_id"], name: "index_coupons_on_ment_id"
+    t.index ["menu_id"], name: "index_coupons_on_menu_id"
     t.index ["patient_id"], name: "index_coupons_on_patient_id"
+  end
+
+  create_table "medical_charts", force: :cascade do |t|
+    t.integer "card_number"
+    t.date "visited_at"
+    t.string "staff_name"
+    t.text "cc"
+    t.text "tx_comment"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "menus", force: :cascade do |t|
     t.integer "clinic_id"
+    t.integer "receipt_id"
     t.integer "content_id"
     t.string "content_name"
     t.integer "price"
@@ -53,6 +65,7 @@ ActiveRecord::Schema.define(version: 20180405003154) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_menus_on_clinic_id"
+    t.index ["receipt_id"], name: "index_menus_on_receipt_id"
   end
 
   create_table "notices", force: :cascade do |t|
@@ -73,6 +86,22 @@ ActiveRecord::Schema.define(version: 20180405003154) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_patients_on_user_id"
+  end
+
+  create_table "receipts", force: :cascade do |t|
+    t.integer "medical_chart_id"
+    t.integer "user_id"
+    t.integer "clinic_id"
+    t.date "payday"
+    t.integer "payment_method", limit: 3, default: 0, null: false
+    t.string "service"
+    t.integer "payment"
+    t.integer "gained_point"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clinic_id"], name: "index_receipts_on_clinic_id"
+    t.index ["medical_chart_id"], name: "index_receipts_on_medical_chart_id"
+    t.index ["user_id"], name: "index_receipts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

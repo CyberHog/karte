@@ -1,0 +1,38 @@
+<%= render "shared/errors", obj: @medical_chart %>
+
+<table class="highlight">
+  <tr>
+    <th><%= form.label :card_number %></th>
+    <td>10000</td>
+  </tr>
+  <tr>
+    <th><%= form.label :visited_at %></th>
+    <td width="800px"><%= form.date_select :visited_at,
+              start_year: 2000, end_year: Time.now.year + 1,
+              use_month_numbers: true %></td>
+  </tr>
+  <tr>
+    <th>コース</th>
+    <td>マッサージ30分</td>
+  </tr>
+  <tr>
+    <th>取得ポイント</th>
+    <td>3000</td>
+  </tr>
+  <tr>
+    <th><%= form.label :staff_name %></th>
+    <td>坂岡</td>
+  </tr>
+  <tr>
+    <th width="150px"><%= form.label :cc %></th>
+    <td><%= form.text_field :cc, size: 8 %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :tx_comment %></th>
+    <td><%= form.text_area :tx_comment,rows: 10, cols: 45 %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :comment %></th>
+    <td><%= form.text_area :comment,rows: 2, cols: 30 %></td>
+  </tr>
+</table>

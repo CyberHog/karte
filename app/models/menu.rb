@@ -1,5 +1,6 @@
 class Menu < ApplicationRecord
   belongs_to :clinic, optional: true
+  belongs_to :receipt, optional: true
   has_many :coupons, dependent: :nullify
 
   validates :content_id, presence: true,

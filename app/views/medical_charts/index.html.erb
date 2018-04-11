@@ -1,0 +1,44 @@
+<% @page_title = "カルテ一覧" %>
+<h1><%= current_user.full_name %>さんのカルテ</h1>
+<h3>診察券ID　10000</h2>
+
+<p><%= link_to "新規作成", :new_medical_chart %></p>
+
+<div class="row">
+
+<% if @medical_charts.present? %>
+<%= paginate @medical_charts %>
+  <table class="highlight">
+    <tr>
+      <th>日付</th>
+      <th>コース</th>
+      <th>担当者</th>
+      <th>主訴</th>
+      <th>施術内容</th>
+      <th>コメント</th>
+      <th>取得ポイント</th>
+      <th>操作</th>
+    </tr>
+    <% @medical_charts.each do |medical_chart| %>
+    <tr>
+      <td><%= medical_chart.visited_at.strftime("%Y/%m/%d") %></td>
+      <td>マッサージ30分</td>
+      <td>坂岡</td>
+      <td><%= link_to medical_chart.cc, medical_chart %></td>
+      <td><%= truncate(medical_chart.tx_comment,:length => 12) %>
+        <%= link_to "全て表示", medical_chart %></td>
+      <td><%= truncate(medical_chart.comment,:length => 12) %>
+        <%= link_to "全て表示", medical_chart %></td>
+      <td style="text-align: right">30</td>
+      <td>
+        <%= link_to "編集", [:edit, medical_chart] %> |
+        <%= link_to "削除",  medical_chart, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+  <%= paginate @medical_charts %>
+</div>
+  <% else %>
+  <p>カルテがありません</p>
+  <% end %>

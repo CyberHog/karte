@@ -22,9 +22,11 @@
   activerecord:
     models:
       user: "ユーザ"
-      notice: "お知らせ"
       address: "住所"
+      medical_chart: "カルテ"
       menu: "メニュー"
+      notice: "お知らせ"
+      receipt: "お会計情報"
     attributes:
       user:
         avatar: "画像"
@@ -43,6 +45,24 @@
         password: "パスワード"
         password_confirmation: "確認用パスワード"
         remember_me: "ログインを記憶"
+      address:
+        postcode: "郵便番号"
+        prefecture: "都道府県"
+        city: "市区町村"
+        street: "番地"
+        building: "建物名/号室"
+      medical_chart:
+        card_number: "診察券ID"
+        visited_at: "施術日"
+        staff_name: "担当者"
+        cc: "主訴"
+        tx_comment: "施術内容"
+        comment: "コメント"
+      menu:
+        content_id: "コースID"
+        content_name: "コース名"
+        price: "価格"
+        attached_point: "ポイント"
       notice:
         title: "タイトル"
         body: "本文"
@@ -54,17 +74,16 @@
         status_draft: "下書き"
         status_member_only: "会員限定"
         status_public: "公開"
-      address:
-        postcode: "郵便番号"
-        prefecture: "都道府県"
-        city: "市区町村"
-        street: "番地"
-        building: "建物名/号室"
-      menu:
-        content_id: "コースID"
-        content_name: "コース名"
-        price: "価格"
-        attached_point: "ポイント"
+      receipt:
+        payday: "支払日"
+        payment_method: "支払方法"
+        method_0: "現金"
+        method_1: "カード"
+        method_2: "クーポン"
+        method_3: "ポイント"
+        service: "サービス名"
+        payment: "支払金額"
+        gained_point: "取得ポイント"
   views:
     pagination:
       first: "&laquo; 最初"

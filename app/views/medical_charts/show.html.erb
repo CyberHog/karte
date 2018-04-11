@@ -1,0 +1,35 @@
+<%  @page_title = @medical_chart.cc %>
+<h1><%=  @medical_chart.cc %></h1>
+
+<p><%= link_to "カルテ一覧", :medical_charts %> | <%= link_to "編集", [:edit, @medical_chart] %></p>
+
+<table class="highlight">
+  <tr>
+    <th>施術日</th>
+    <td><%= @medical_chart.visited_at.strftime("%Y/%m/%d") %></td>
+  </tr>
+  <tr>
+    <th>コース</th>
+    <td>マッサージ30分</td>
+    <tr>
+      <th>取得ポイント</th>
+      <td>30</td>
+    </tr>
+  </tr>
+  <tr>
+    <th>担当者</th>
+    <td>坂岡</td>
+  </tr>
+  <tr>
+    <th width="150px">主訴</th>
+    <td><%= @medical_chart.cc %></td>
+  </tr>
+  <tr>
+    <th height="200">施術内容</th>
+    <td height="200" overflow-wrap="break-word"><%= @medical_chart.tx_comment.gsub(/\r\n|\r|\n/, "<br />").html_safe %></td>
+  </tr>
+  <tr>
+    <th>コメント</th>
+    <td><%= @medical_chart.comment %></td>
+  </tr>
+</table>

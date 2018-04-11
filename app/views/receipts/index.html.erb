@@ -1,0 +1,38 @@
+<% @page_title = "お会計一覧" %>
+<h1><%= current_user.full_name %>さんのお会計履歴</h1>
+<h3>診察券ID　10000</h2>
+
+<p><%= link_to "お会計画面へ", :new_receipt %></p>
+
+<div class="row">
+
+<% if @receipts.present? %>
+<%= paginate @receipts %>
+  <table class="highlight">
+    <tr>
+      <th>支払日</th>
+      <th>サービス名</th>
+      <th>支払金額</th>
+      <th>取得ポイント</th>
+      <th>支払方法</th>
+      <th>操作</th>
+    </tr>
+    <% @receipts.each do |receipt| %>
+    <tr>
+      <td><%= receipt.payday("%Y/%m/%d") %></td>
+      <td><%= receipt.service %></td>
+      <td><%= receipt.payment %></td>
+      <td><%= receipt.gained_point %></td>
+      <td><%= receipt.payment_method %></td>
+      <td>
+        <%= link_to "編集", [:edit, receipt] %> |
+        <%= link_to "削除",  receipt, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+  <%= paginate @receipts %>
+</div>
+  <% else %>
+  <p>お会計情報がありません</p>
+  <% end %>

@@ -38,7 +38,7 @@ class MenusController < ApplicationController
   # メニュー情報の更新
   def update
   	@menu = Menu.find(params[:id])
-  	@menu.assign_attributes(params[:menu])
+  	@menu.assign_attributes(menu_params)
   	if @menu.save
   	  redirect_to @menu, notice: "メニューを更新しました"
   	else

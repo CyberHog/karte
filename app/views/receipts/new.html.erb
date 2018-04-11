@@ -1,0 +1,17 @@
+<% @page_title = "お会計登録画面" %>
+
+<h1><%= @page_title %></h1>
+
+<p><%= link_to "一覧に戻る", :receipts %></p>
+
+<div class="row">
+
+  <%= form_for @receipt do |form| %>
+
+    <%= render "form", form: form %>
+
+    <p><%= button_tag 'お会計登録', class: "btn waves-effect waves-light btn", type: "button", onclick: "submit();" %></p>
+
+  <% end %>
+
+</div>

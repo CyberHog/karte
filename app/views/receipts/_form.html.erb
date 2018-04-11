@@ -1,0 +1,28 @@
+<%= render "shared/errors", obj: @receipt %>
+
+<table class="highlight">
+  <tr>
+    <th><%= form.label :payday %></th>
+    <td><%= form.date_select :payday,
+              start_year: 2000, end_year: Time.now.year + 1,
+              use_month_numbers: true %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :service %></th>
+    <%= form.fields_for :menu do |me| %>
+    <td><%= me.collection_select :content_name, Menu.all, :id, :content_name %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <th><%= form.label :payment %></th>
+    <td><%= form.text_field :payment %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :gained_point %></th>
+    <td><%= form.text_field :gained_point %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :payment_method %></th>
+    <td><%= form.select :payment_method, Receipt.payment_methods.keys %></td>
+  </tr>
+</table>

@@ -14,15 +14,18 @@ Rails.application.routes.draw do
   
   resources :users do
     collection { get "search" }
-    resources :patient
+    resources :patients
     resources :notices, only: [:index]
-    resources :address
+    resources :addresses
+    resources :receipts
   end
   resources :menus do
     collection { get "search" }
   end
-  resources :patient
+  resources :patients
+  resources :medical_charts
   resources :notices
+  resources :receipts
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: '/letter_opener'
