@@ -3,9 +3,8 @@
 <table class="highlight">
   <tr>
     <th><%= form.label :payday %></th>
-    <td><%= form.date_select :payday,
-              start_year: 2000, end_year: Time.now.year + 1,
-              use_month_numbers: true %></td>
+    <td><%= form.date_field :payday,
+              start_year: 2000, end_year: Time.now.year + 1 %></td>
   </tr>
   <tr>
     <th><%= form.label :service %></th>
@@ -13,10 +12,12 @@
   </tr>
   <tr>
     <th><%= form.label :payment %></th>
+      <% payment = Menu.pluck(:price) %>
     <td><%= form.text_field :payment %></td>
   </tr>
   <tr>
     <th><%= form.label :gained_point %></th>
+      <% point = Menu.pluck(:attached_point) %>
     <td><%= form.text_field :gained_point %></td>
   </tr>
   <tr>
@@ -24,3 +25,16 @@
     <td><%= form.select :payment_method, Receipt.payment_methods.keys %></td>
   </tr>
 </table>
+
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+
+$(function () {
+                var pay = payment;
+
+                $('select').on('change', function () {
+                    var i = $(this).val();
+                    $('#receipt_payment').val(pay[i]);
+                });
+            });
+</script>

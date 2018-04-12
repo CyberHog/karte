@@ -7,7 +7,7 @@
 <div class="input-field col s12">
   <i class="material-icons prefix">email</i>
     <%= f.text_field :email, id: "icon_email", class: "validate", autofocus: true, autocomplete: "email" %>
-    <label for="icon_email">メールアドレスまたはユーザーID</label>
+    <label for="icon_email" class="active">メールアドレスまたはユーザーID</label>
 </div>
 
 <div class="input-field col s12">
@@ -17,7 +17,7 @@
       <br />
       <em><%= @minimum_password_length %> 文字以上</em>
     <% end %>
-  <label for="password">パスワード</label>
+  <label for="password" class="active">パスワード</label>
 </div>
 
   <% if devise_mapping.rememberable? -%>

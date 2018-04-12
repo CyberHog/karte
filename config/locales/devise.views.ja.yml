@@ -27,6 +27,7 @@
       menu: "メニュー"
       notice: "お知らせ"
       receipt: "お会計情報"
+      staff: "スタッフ"
     attributes:
       user:
         avatar: "画像"
@@ -84,6 +85,10 @@
         service: "サービス名"
         payment: "支払金額"
         gained_point: "取得ポイント"
+      staff:
+        staff_number: "スタッフID"
+        staff_name: "名前"
+        staff_suspension: "状態"
   views:
     pagination:
       first: "&laquo; 最初"

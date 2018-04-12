@@ -13,7 +13,6 @@ class MedicalChartsController < ApplicationController
   # 新規登録フォーム
   def new
   	@medical_chart = MedicalChart.new
-    @medical_chart.receipts.build
   end
 
   # 編集フォーム
@@ -55,6 +54,6 @@ class MedicalChartsController < ApplicationController
 
   private
   def medical_chart_params
-    params.require(:medical_chart).permit(:card_number, :visited_at, :staff_name, :cc, :tx_comment, :comment, receipts_attributes: [:id, :service, :payment, :gained_point])
+    params.require(:medical_chart).permit(:card_number, :visited_at, :service, :staff_name, :cc, :tx_comment, :comment)
   end
 end

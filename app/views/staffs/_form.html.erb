@@ -1,0 +1,19 @@
+<%= render "shared/errors", obj: @staff %>
+
+<table class="highlight">
+  <tr>
+    <th width="110px"><%= form.label :staff_number %></th>
+    <td><%= form.text_field :staff_number, size: 8,placeholder: "1" %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :staff_name %></th>
+    <td><%= form.text_field :staff_name,placeholder: "佐藤" %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :staff_suspension %></th>
+    <td>
+      <%= form.check_box :staff_suspension, id: "suspension" %>
+      <label for="suspension">利用停止</label>
+    </td>
+  </tr>
+</table>

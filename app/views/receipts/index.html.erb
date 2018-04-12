@@ -19,7 +19,7 @@
     </tr>
     <% @receipts.each do |receipt| %>
     <tr>
-      <td><%= receipt.payday("%Y/%m/%d") %></td>
+      <td><%= receipt.payday.strftime("%Y/%m/%d") %></td>
       <td><%= receipt.service %></td>
       <td><%= receipt.payment %></td>
       <td><%= receipt.gained_point %></td>

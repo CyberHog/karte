@@ -5,20 +5,21 @@
 
 <table class="highlight">
   <tr>
+    <th>診察券ID</th>
+    <td><%= @medical_chart.card_number %></td>
+  </tr>
+  <tr>
     <th>施術日</th>
     <td><%= @medical_chart.visited_at.strftime("%Y/%m/%d") %></td>
   </tr>
   <tr>
     <th>コース</th>
-    <td>マッサージ30分</td>
-    <tr>
-      <th>取得ポイント</th>
-      <td>30</td>
-    </tr>
+    <td><%= @medical_chart.service %></td>
+  </tr>
   </tr>
   <tr>
     <th>担当者</th>
-    <td>坂岡</td>
+    <td><%= @medical_chart.staff_name %></td>
   </tr>
   <tr>
     <th width="150px">主訴</th>

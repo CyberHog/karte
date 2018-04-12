@@ -13,7 +13,6 @@ class ReceiptsController < ApplicationController
   # 会計登録フォーム
   def new
   	@receipt = Receipt.new
-  	@receipt.menus.build
   end
 
   # 編集フォーム
@@ -51,7 +50,7 @@ class ReceiptsController < ApplicationController
 
   private
   def receipt_params
-  	params.require(:receipt).permit(:payday, :payment_method, :service, :payment, :gained_point, menus_attributes: [:id, :content_name, :price, :attached_point])
+  	params.require(:receipt).permit(:payday, :payment_method, :service, :payment, :gained_point)
   end
 
 end

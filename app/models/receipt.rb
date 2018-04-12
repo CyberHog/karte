@@ -3,7 +3,6 @@ class Receipt < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :clinic, optional: true
   has_many :menus, dependent: :nullify
-  accepts_nested_attributes_for :menus
 
   enum payment_method: { 現金: 0, カード: 1, クーポン: 2, ポイント: 3 }
 

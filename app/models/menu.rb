@@ -1,6 +1,7 @@
 class Menu < ApplicationRecord
   belongs_to :clinic, optional: true
   belongs_to :receipt, optional: true
+  belongs_to :medical_chart, optional: true
   has_many :coupons, dependent: :nullify
 
   validates :content_id, presence: true,
@@ -17,7 +18,7 @@ class Menu < ApplicationRecord
   	  rel = order("content_id")
   	  if query.present?
   		rel = rel.where("content_name LIKE ? OR price LIKE ?",
-  			"%w{query}%", "%#{query}%")
+  			"%#{query}%", "%#{query}%")
   	  end
   	  rel
     end

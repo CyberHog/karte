@@ -22,8 +22,13 @@ Rails.application.routes.draw do
   resources :menus do
     collection { get "search" }
   end
+  resources :staffs do
+    collection { get "search" }
+  end
   resources :patients
-  resources :medical_charts
+  resources :medical_charts do
+    resources :staffs
+  end
   resources :notices
   resources :receipts
 
