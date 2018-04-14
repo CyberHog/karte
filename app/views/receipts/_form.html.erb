@@ -9,7 +9,7 @@
   <tbody id="receipt_table">
   <tr>
     <th><%= form.label :service %></th>
-    <td><%= form.select :service, Menu.all.map(&:content_name) %></td>
+    <td><%= form.select :service, Menu.all.map(&:content_name), id: "receipt_service" %></td>
     <td>
       <a class="btn-floating btn-small waves-effect waves-light green lighten-1" onclick="addList(this);"><i class="material-icons">add</i></a>
       <a class="btn-floating btn-small waves-effect waves-light red lighten-1" onclick="removeList(this);"><i class="material-icons">remove</i></a>
@@ -18,7 +18,7 @@
   <tr>
     <th><%= form.label :payment %></th>
       <% payment = Menu.pluck(:price) %>
-    <td><%= form.text_field :payment %></td>
+    <td><%= form.text_field :payment, id: "receipt_payment" %></td>
   </tr>
   <tr>
     <th><%= form.label :gained_point %></th>
@@ -63,6 +63,7 @@ function removeList(obj) {
 <script type="text/javascript">
 
 $(function () {
+                var i = $("#receipt_service").prop("selectedIndex");
                 var pay = payment;
 
                 $('select').on('change', function () {
