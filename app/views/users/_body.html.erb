@@ -32,7 +32,7 @@
     <td><%= @user.business? ? "ビジネスユーザー" : "個人ユーザー" %></td>
   </tr>
 
-  <% if @user.address.present? %>
+  <% if @user.business? %>
 
   <tr>
     <th>郵便番号</th>

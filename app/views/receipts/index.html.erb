@@ -20,7 +20,9 @@
     <% @receipts.each do |receipt| %>
     <tr>
       <td><%= receipt.payday.strftime("%Y/%m/%d") %></td>
-      <td><%= receipt.service %></td>
+      <td>
+        <%= link_to receipt.service, receipt %>
+      </td>
       <td><%= receipt.payment %></td>
       <td><%= receipt.gained_point %></td>
       <td><%= receipt.payment_method %></td>
@@ -29,6 +31,16 @@
         <%= link_to "削除",  receipt, method: :delete, data: { confirm: "本当に削除しますか？" } %>
       </td>
     </tr>
+    <% if receipt.service.size >= 2 %>
+    <tr>
+      <td></td>
+      <td><%= receipt.service.size[1] %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <rd></rd>
+    </tr>
+    <% end %>
     <% end %>
   </table>
   <%= paginate @receipts %>

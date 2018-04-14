@@ -13,30 +13,30 @@
     <div class="input-field col s12">
       <i class="material-icons prefix">android</i>
           <%= f.text_field :user_name, autofocus: true, autocomplete: "user_name", id: "user_id", class: "validate" %>
-          <label for="user_id">ユーザーネーム</label>
+          <label for="user_id" class="active">ユーザーネーム</label>
     </div>
 
     <div class="input-field col s6">
       <i class="material-icons prefix">account_circle</i>
         <%= f.text_field :last_name, id: "icon_prefix", class: "validate" %>
-      <label for="icon_prefix">名字</label>
+      <label for="icon_prefix" class="active">名字</label>
     </div>
 
     <div class="input-field col s6">
       <%= f.text_field :first_name, id: "first_name",  class: "validate" %>
-      <label for="first_name">名前</label>
+      <label for="first_name" class="active">名前</label>
     </div>
 
     <div class="input-field col s12">
       <i class="material-icons prefix">phone</i>
         <%= f.text_field :phone, id: "icon_telephone", class: "validate", autocomplete: "phone" %>
-      <label for="icon_telephone">電話</label>
+      <label for="icon_telephone" class="active">電話</label>
     </div>
 
     <div class="input-field col s12">
       <i class="material-icons prefix">email</i>
         <%= f.email_field :email, id: "icon_email", class: "validate", autocomplete: "email" %>
-      <label for="icon_email">メールアドレス</label>
+      <label for="icon_email" class="active">メールアドレス</label>
     </div>
 
     <div class="input-field col s12">
@@ -62,34 +62,38 @@
         <label for="business">ビジネスユーザー?</label>
       </div>
 
-  <%= f.fields_for :address do |fin| %>
+      <div id="private_user">
+
+        <%= f.fields_for :address do |fin| %>
 
       <div class="input-field col s6">
-        <%= fin.label :postcode %>
+        <%= fin.label :postcode, class: "active" %>
         <%= fin.text_field :postcode, input_html: {id: "address_zipcode"}, class: "validate" %>
       </div>
 
       <div class="input-field col s12">
-        <%= fin.label :prefecture %>
+        <%= fin.label :prefecture, class: "active" %>
         <%= fin.text_field :prefecture, input_html: {id: "address_prefecture_name"}, class: "validate" %>
       </div>
 
       <div class="input-field col s12">
-        <%= fin.label :city %>
+        <%= fin.label :city, class: "active" %>
         <%= fin.text_field :city, input_html: {id: "address_city"}, class: "validate" %>
       </div>
 
       <div class="input-field col s12">
-        <%= fin.label :street %>
+        <%= fin.label :street, class: "active" %>
         <%= fin.text_field :street, input_html: {id: "address_street"}, class: "validate" %>
       </div>
 
       <div class="input-field col s12">
-        <%= fin.label :building %>
+        <%= fin.label :building, class: "active" %>
         <%= fin.text_field :building, input_html: {id: "address_building"}, class: "validate" %>
       </div>
 
-  <% end %>
+        <% end %>
+
+      </div>
 
       <div class="input-field col s12">
         <i class="material-icons prefix">vpn_key</i>
@@ -112,7 +116,7 @@
       </div>
 
   </div>
-<% end %>
+  <% end %>
 
   <div class="row col s12">
 
