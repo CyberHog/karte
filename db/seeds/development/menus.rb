@@ -34,3 +34,21 @@ menu = Menu.create(
 	price: "6000",
 	attached_point: "60"
 	)
+menu = Menu.create(
+	content_id: "7",
+	content_name: "整体",
+	price: "6000",
+	attached_point: "60"
+	)
+menu = Menu.create(
+	content_id: "8",
+	content_name: "回数券(60分×6回分)",
+	price: "30000",
+	attached_point: "300"
+	)
+menu = Menu.create(
+	content_id: "9",
+	content_name: "回数券利用(60分)",
+	price: "0",
+	attached_point: "0"
+	)

@@ -5,8 +5,8 @@ class CreateAddresses < ActiveRecord::Migration[5.1]
       t.string :postcode                        # 郵便番号
       t.string :prefecture                      # 都道府県
       t.string :city                            # 市区町村
-      t.string :street                  		# 番地
-      t.string :building                		# 建物名/号室
+      t.string :street                       		# 番地
+      t.string :building                     		# 建物名/号室
 
       t.timestamps
     end

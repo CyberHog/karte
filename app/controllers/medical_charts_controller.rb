@@ -2,7 +2,7 @@ class MedicalChartsController < ApplicationController
   # 記事一覧
   def index
   	@medical_charts = MedicalChart.order(visited_at: :desc)
-  		.order("visited_at DESC").page(params[:page]).per(10)
+  		.reverse_order.page(params[:page]).per(10)
   end
 
   # カルテ詳細

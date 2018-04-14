@@ -30,3 +30,15 @@ main {
 select {
   display: inline;
 }
+
+th #short_th {
+  width: 120px;
+}
+
+td #short_td {
+  width: 400px;
+}
+
+table #short_t {
+  width: 80%;
+}

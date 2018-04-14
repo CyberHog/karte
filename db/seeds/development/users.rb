@@ -6,8 +6,16 @@
     email: "taro@example.com",
     birthday: "1981-12-01",
     gender: 0,
-    business: (idx == 0),
+    business: true,
     password: "password",
     password_confirmation: "password"
     )
+    Address.create(
+        user: user,
+        postcode: "1530044",
+        prefecture: "東京都",
+        city: "目黒区大橋",
+        street: "2-3-5",
+        building: "Ohashi235 5F"
+        )
 
