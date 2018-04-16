@@ -3,7 +3,6 @@ class Menu < ApplicationRecord
   belongs_to :receipt, optional: true
   belongs_to :medical_chart, optional: true
   has_many :coupons, dependent: :nullify
-  has_many :receipts, through: :checks
 
   validates :content_id, presence: true,
 		numericality: { only_integer: true,

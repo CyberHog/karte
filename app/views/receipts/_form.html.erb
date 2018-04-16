@@ -17,13 +17,17 @@
   </tr>
   <tr>
     <th><%= form.label :payment %></th>
-      <% payment = Menu.pluck(:price) %>
+      <%= javascript_tag do %>
+        payment = <%= Menu.pluck(:price) %>;
+      <% end %>
     <td><%= form.text_field :payment, id: "receipt_payment" %></td>
   </tr>
   <tr>
     <th><%= form.label :gained_point %></th>
-      <% point = Menu.pluck(:attached_point) %>
-    <td><%= form.text_field :gained_point %></td>
+      <%= javascript_tag do %>
+        point = <%= Menu.pluck(:attached_point) %>
+      <% end %>
+    <td><%= form.text_field :gained_point, id: "receipt_point" %></td>
   </tr>
   <tr>
     <th><%= form.label :payment_method %></th>
@@ -33,9 +37,8 @@
 </table>
 
 <script>
-
-  function addList(obj) {
-
+// 行追加
+function addList(obj) {
   // tbody要素に指定したIDを取得し、変数「tbody」に代入
   var tbody = document.getElementById("receipt_table");
   // objの親の親のノードを取得し（つまりtr要素）、変数「tr」に代入
@@ -47,6 +50,7 @@
   tbody.insertBefore(list, tr.nextSibling);
 }
 
+// 行削除
 function removeList(obj) {
 
   // tbody要素に指定したIDを取得し、変数「tbody」に代入
@@ -55,20 +59,24 @@ function removeList(obj) {
   var tr = obj.parentNode.parentNode;
   // 「tbody」の子ノード「tr」を削除
   tbody.removeChild(tr);
-
 }
 </script>
 
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script type="text/javascript">
-
+// 価格の自動入力
 $(function () {
-                var i = $("#receipt_service").prop("selectedIndex");
-                var pay = payment;
+    $('select').on('change', function () {
+        var i = $("#receipt_service").prop("selectedIndex");
+        $('#receipt_payment').val(payment[i]);
+    });
+});
 
-                $('select').on('change', function () {
-                    var i = $(this).val();
-                    $('#receipt_payment').val(pay[i]);
-                });
-            });
+// ポイントの自動入力
+$(function () {
+    $('select').on('change', function () {
+        var x = $("#receipt_service").prop("selectedIndex");
+        $('#receipt_point').val(point[x]);
+    });
+});
 </script>

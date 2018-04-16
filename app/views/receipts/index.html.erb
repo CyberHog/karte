@@ -31,16 +31,6 @@
         <%= link_to "削除",  receipt, method: :delete, data: { confirm: "本当に削除しますか？" } %>
       </td>
     </tr>
-    <% if receipt.service.size >= 2 %>
-    <tr>
-      <td></td>
-      <td><%= receipt.service.size[1] %></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <rd></rd>
-    </tr>
-    <% end %>
     <% end %>
   </table>
   <%= paginate @receipts %>

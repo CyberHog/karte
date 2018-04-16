@@ -45,7 +45,7 @@ class ReceiptsController < ApplicationController
   def destroy
   	@receipt = Receipt.find(params[:id])
   	@receipt.destroy
-  	redirect_to @receipts
+  	redirect_to :receipts, notice: "お会計情報を削除しました"
   end
 
   private
