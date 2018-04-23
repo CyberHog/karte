@@ -1,8 +1,8 @@
 class Clinic < ApplicationRecord
   belongs_to :user, optional: true
-  has_many :patients, through: :coupons
-  has_many :medical_charts, thorough: :receipts
-  accepts_nested_attributes_for :receipts
+  has_many :clinic_cards
+  has_many :patients, through: :clinic_cards
+  has_many :menus
 
-  validates :user, length: { maximum: 20 }
+  validates :name, length: { maximum: 20 }
 end

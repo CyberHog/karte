@@ -14,10 +14,29 @@ Rails.application.routes.draw do
   
   resources :users do
     collection { get "search" }
+    resources :clinics
     resources :patients
     resources :notices, only: [:index]
     resources :addresses
     resources :receipts
+  end
+  resources :clinics do
+    resources :clinic_cards
+    resources :menus
+    resources :staffs
+  end
+  resources :patients do
+    resources :clinic_cards
+  end
+  resources :clinic_cards do
+    resources :patients_receipts
+  end
+  resources :patients_receipts do
+    resources :receipts
+    resources :menus
+  end
+  resources :receipts do
+    resources :menus
   end
   resources :menus do
     collection { get "search" }
@@ -25,7 +44,6 @@ Rails.application.routes.draw do
   resources :staffs do
     collection { get "search" }
   end
-  resources :patients
   resources :medical_charts do
     resources :staffs
   end

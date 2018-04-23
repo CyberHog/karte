@@ -1,0 +1,2 @@
+module PatientsReceiptsHelper
+end

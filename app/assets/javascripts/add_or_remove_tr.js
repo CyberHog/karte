@@ -1,11 +1,11 @@
 // 行追加
-function addList(obj) {
+function addLine(obj) {
   // tbody要素に指定したIDを取得し、変数「tbody」に代入
   var tbody = document.getElementById("receipt_table");
   // objの親の親のノードを取得し（つまりtr要素）、変数「tr」に代入
-  var tr = obj.parentNode.parentNode;
-  // selectがあるtr（行）を複製し、変数「list」に代入
-  var list = tbody.childNodes[1].cloneNode(true);
+  var tr = obj.parentNode.parentNode.parentNode.childNodes[2];
+  // tbodyタグ直下のノード（行）を複製し、変数「list」に代入
+  var list = tbody.childNodes[2].cloneNode(true);
   //　複製したノード「list」を直後の兄弟ノードの上に挿入
   // （「tr」の下に挿入）
   tbody.insertBefore(list, tr.nextSibling);

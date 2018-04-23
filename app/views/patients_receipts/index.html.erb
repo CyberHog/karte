@@ -1,0 +1,38 @@
+<%  @page_title = "お会計管理" %>
+<h1><%=  @page_title %></h1>
+
+
+<p><%= link_to "お会計登録", :new_patients_receipt %></p>
+
+<% if @patients_receipts.present? %>
+<table class="highlight">
+  <tr>
+    <th>支払日</th>
+    <th>支払う人</th>
+    <th>サービス名</th>
+    <th>取得ポイント</th>
+    <th>支払金額</th>
+    <th>支払方法</th>
+    <th>操作</th>
+  </tr>
+  <% @patients_receipts.each do |patients_receipt| %>
+    <% patients_receipt.receipts.each do |receipt| %>
+  <tr>
+    <td><%= receipt.payday %></td>
+    <td><%= receipt.payee %></td>
+    <td><%= receipt.service %></td>
+    <td><%= receipt.gained_point %></td>
+    <td><%= receipt.payment %></td>
+    <td><%= receipt.payment_method %></td>
+    <td>
+      <%= link_to "編集", [:edit, patients_receipt] %> |
+      <%= link_to "削除", patients_receipt, method: :delete,
+            data: { confirm: "本当に削除しますか?" } %>
+    </td>
+  </tr>
+    <% end %>
+  <% end %>
+</table>
+<% else %>
+<p>お会計情報がありません。</p>
+<% end %>

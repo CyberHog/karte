@@ -3,10 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   mount_uploader :avatar, AvatarUploader
 
-  has_one :patient, dependent: :destroy
-  accepts_nested_attributes_for :patient, allow_destroy: true
-  has_one :clinic, dependent: :destroy
-  accepts_nested_attributes_for :clinic, allow_destroy: true
+  has_one :patient, dependent: :nullify
+  accepts_nested_attributes_for :patient
+  has_one :clinic, dependent: :nullify
+  accepts_nested_attributes_for :clinic
   has_one :address, dependent: :destroy
   accepts_nested_attributes_for :address, allow_destroy: true
   has_many :notices, dependent: :destroy
