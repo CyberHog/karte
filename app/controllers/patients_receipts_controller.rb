@@ -1,7 +1,7 @@
 class PatientsReceiptsController < ApplicationController
   # テーブル一覧
   def index
-  	@patients_receipts = PatientsReceipt.order(:id)
+  	@patients_receipts = PatientsReceipt.joins(:receipts).includes(:receipts).order("receipts.payday")
       .page(params[:page]).per(10)
   end
 

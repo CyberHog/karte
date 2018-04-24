@@ -26,6 +26,6 @@
       <%= f.select :payment_method, Receipt.payment_methods.keys %>
     </td>
     <td>
-      <%= link_to_remove_association 'Delete', f %>
+      <%= link_to_remove_association '-', f, class: "btn waves-effect waves-light red hoverable" %>
     </td>
 </tr>
