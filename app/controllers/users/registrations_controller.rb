@@ -45,13 +45,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:business, :user_name, :last_name, :first_name, :email, :phone, :birthday, :gender, :password,
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:practice, :last_name, :first_name, :email, :phone, :birthday, :gender, :password,
       :password_confirmation, :avatar, :avatar_cache, :remove_avatar, address_attributes: [ :id, :postcode, :prefecture, :city, :street, :building ]])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:business, :user_name, :last_name, :first_name, :email, :phone, :birthday, :gender, :password,
+    devise_parameter_sanitizer.permit(:account_update, keys: [:practice, :last_name, :first_name, :email, :phone, :birthday, :gender, :password,
       :password_confirmation, :current_password, :avatar, :avatar_cache, :remove_avatar, address_attributes: [ :id, :postcode, :prefecture, :city, :street, :building ]])
   end
 
@@ -66,13 +66,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
   private
   def sign_up_params
-    attrs = [:business, :user_name, :last_name, :first_name, :email, :phone, :birthday, :gender, :password,
+    attrs = [:practice, :last_name, :first_name, :email, :phone, :birthday, :gender, :password,
       :password_confirmation, :avatar, :avatar_cache, :remove_avatar, address_attributes: [ :id, :postcode, :prefecture, :city, :street, :building ]]
     params.require(resource_name).permit(attrs)
   end
 
   def account_update_params
-    attrs = [:business, :user_name, :last_name, :first_name, :email, :phone, :birthday, :gender, :password,
+    attrs = [:practice, :last_name, :first_name, :email, :phone, :birthday, :gender, :password,
       :password_confirmation, :current_password, :avatar, :avatar_cache, :remove_avatar, address_attributes: [ :id, :postcode, :prefecture, :city, :street, :building ]]
     params.require(resource_name).permit(attrs)
   end

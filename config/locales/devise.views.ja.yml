@@ -22,12 +22,15 @@
   activerecord:
     models:
       user: "ユーザ"
+      practice: "治療院を開業しています"
       address: "住所"
       medical_chart: "カルテ"
       menu: "メニュー"
       notice: "お知らせ"
       receipt: "お会計情報"
       staff: "スタッフ"
+      clinic_card: "診察券"
+      card_number: "診察券番号"
     attributes:
       user:
         avatar: "画像"
@@ -46,6 +49,9 @@
         password: "パスワード"
         password_confirmation: "確認用パスワード"
         remember_me: "ログインを記憶"
+      clinic:
+        name: "治療院名等"
+        hp_url: "ホームページ"
       address:
         postcode: "郵便番号"
         prefecture: "都道府県"
@@ -60,6 +66,8 @@
         cc: "主訴"
         tx_comment: "施術内容"
         comment: "コメント"
+      card_number:
+        number: "診察券番号"
       menu:
         content_id: "コースID"
         content_name: "コース名"
@@ -210,7 +218,8 @@
       confirmation: "が内容とあっていません。"
       too_big_image: "が大きすぎます(最大64KB)"
       invalid_image: "の形式が違います(JPEG、GIF、PNGのどれかにして下さい)。"
-      invalid_user_name: "ユーザー名は半角英数字です。（_も使えます）。"
+      invalid_hp_url: "ホームページのURLは半角英数字です。（_も使えます）。"
+      invalid_card_number: "診察券番号は半角英数字です。（_も使えます）。"
       carrierwave_processing_error: 処理できませんでした
       carrierwave_integrity_error: は許可されていないファイルタイプです
       carrierwave_download_error: はダウンロードできません

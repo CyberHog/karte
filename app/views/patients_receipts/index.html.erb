@@ -18,11 +18,11 @@
   <% @patients_receipts.each do |patients_receipt| %>
     <% patients_receipt.receipts.each do |receipt| %>
   <tr>
-    <td><%= receipt.payday %></td>
+    <td><%= link_to receipt.payday, patients_receipt %></td>
     <td><%= receipt.payee %></td>
     <td><%= receipt.service %></td>
-    <td><%= receipt.gained_point %></td>
-    <td><%= receipt.payment %></td>
+    <td style= "text-align: right"><%= receipt.gained_point %></td>
+    <td style= "text-align: right"><%= receipt.payment %></td>
     <td><%= receipt.payment_method %></td>
     <td>
       <%= link_to "編集", [:edit, patients_receipt] %> |

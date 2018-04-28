@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180423064712) do
+ActiveRecord::Schema.define(version: 20180428005340) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id"
@@ -24,10 +24,17 @@ ActiveRecord::Schema.define(version: 20180423064712) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
+  create_table "card_numbers", force: :cascade do |t|
+    t.integer "clinic_card_id"
+    t.string "number", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clinic_card_id"], name: "index_card_numbers_on_clinic_card_id"
+  end
+
   create_table "clinic_cards", force: :cascade do |t|
     t.integer "clinic_id"
     t.integer "patient_id"
-    t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_clinic_cards_on_clinic_id"
@@ -37,6 +44,7 @@ ActiveRecord::Schema.define(version: 20180423064712) do
   create_table "clinics", force: :cascade do |t|
     t.integer "user_id"
     t.string "name", default: "", null: false
+    t.string "hp_url", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_clinics_on_user_id"
@@ -132,8 +140,7 @@ ActiveRecord::Schema.define(version: 20180423064712) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.boolean "business", default: false, null: false
-    t.string "user_name", null: false
+    t.boolean "practice", default: false, null: false
     t.string "last_name", null: false
     t.string "first_name", default: "", null: false
     t.string "phone"

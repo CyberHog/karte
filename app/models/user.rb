@@ -4,9 +4,7 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
   has_one :patient, dependent: :nullify
-  accepts_nested_attributes_for :patient
   has_one :clinic, dependent: :nullify
-  accepts_nested_attributes_for :clinic
   has_one :address, dependent: :destroy
   accepts_nested_attributes_for :address, allow_destroy: true
   has_many :notices, dependent: :destroy
@@ -15,11 +13,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
 
-  validates :user_name, presence: true,
-    format: { with: /\A[A-Za-z0-9]\w*\z/, allow_blank: true,
-          message: :invalid_user_name },
-    length: { maximum: 20, allow_blank: true },
-    uniqueness: { case_sensitive: false }
   validates :last_name, length: { maximum: 20}
   validates :first_name, length: { maximum: 20}
   validates :phone, length: { maximum: 12 }
@@ -49,9 +42,9 @@ class User < ApplicationRecord
 
   class << self
     def search(query)
-      rel = order("user_mame")
+      rel = order("full_mame")
       if query.present?
-        rel = rel.where("user_name LIKE ? OR full_name LIKE ?",
+        rel = rel.where("last_name LIKE ? OR first_name LIKE ?",
           "%#{query}%", "%#{query}%")
       end
       rel

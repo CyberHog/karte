@@ -4,10 +4,6 @@
     <td><%= image_tag @user.avatar.url %></td>
   </tr>
   <tr>
-    <th>ユーザーネーム</th>
-    <td><%= @user.user_name %></td>
-  </tr>
-  <tr>
     <th>氏名</th>
     <td><%= @user.full_name %></td>
   </tr>
@@ -29,10 +25,10 @@
   </tr>
   <tr>
     <th>所属</th>
-    <td><%= @user.business? ? "ビジネスユーザー" : "個人ユーザー" %></td>
+    <td><%= @user.practice? ? "ビジネスユーザー" : "個人ユーザー" %></td>
   </tr>
 
-  <% if @user.business? %>
+  <% if @user.practice? %>
 
   <tr>
     <th>郵便番号</th>

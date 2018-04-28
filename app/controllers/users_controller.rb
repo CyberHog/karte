@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   # 会員一覧
   def index
-    @users = User.order("user_name")
+    @users = User.order("full_name")
       .page(params[:page]).per(10)
   end
 

@@ -6,24 +6,24 @@
   <%= button_tag '検索', class: "btn waves-effect waves-light btn", type: "button", onclick: "submit();" %></p>
 <% end %>
 
-<% if @clinicks.present? %>
-<%= paginate @clinicks %>
+<% if @clinics.present? %>
+<%= paginate @clinics %>
 
-<% @clinicks.each do |clinick| %>
+<% @clinics.each do |clinic| %>
 
 <div class="row">
   <div class="col s12 m7">
     <div class="card">
       <div class="card-image">
         <img src="images/sample-1.jpg">
-        <span class="card-title"><%= 坂道の鍼灸マッサージ療院 %></span>
+        <span class="card-title"><%= clinic.name %></span>
       </div>
       <div class="card-content">
         <p>I am a very simple card. I am good at containing small bits of information.
         I am convenient because I require little markup to use effectively.</p>
       </div>
       <div class="card-action">
-        <a href="#">ホームページ</a>
+        <a href="<%= clinic.hp_url %>"><%= clinic.hp_url %></a>
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@
 
   <% end %>
 </table>
-<%= paginate @clinicks %>
+<%= paginate @clinics %>
 <% else %>
 <p>マイクリニックがありません。</p>
 <% end %>

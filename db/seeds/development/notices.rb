@@ -4,7 +4,7 @@ body =
   "お会計時１０％OFFとなります。" +
   "ご予約はお早めに！。"
 %w(Taro Jiro Hana).each do |name|
-  user = User.find_by(user_name: name)
+  user = User.find_by(last_name: name)
   0.upto(9) do |idx|
     Notice.create(
       author: user,
