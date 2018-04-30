@@ -2,4 +2,10 @@
 
 <h1><%=  @page_title %></h1>
 
+<%= link_to "一覧に戻る", users_url %>
+
 <%= render "body" %>
+
+<%= render "stats" %>
+
+<%= render "follow_form" if user_signed_in? %>

@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  root "users#index"
-  get "users/show"
-
   devise_for :users, :controllers => {
   	:sessions => "users/sessions",
   	:registrations => "users/registrations",
@@ -11,8 +8,17 @@ Rails.application.routes.draw do
     :confirmations => "users/confirmations",
     :unlocks => "users/unlocks"
   }
-  
+
+
+
+    root "users#index"
+    get "users/:id", to: "users#show"
+    get "users/edit"
+
   resources :users do
+    member do
+      get :following, :followers
+    end
     collection { get "search" }
     resources :clinics
     resources :patients

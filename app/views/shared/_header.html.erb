@@ -10,7 +10,7 @@
     <ul class="right hide-on-med-and-down">
       <% if user_signed_in? %>
         <li><a href="#"><i class="material-icons">search</i></a></li>
-        <li><%= link_to current_user.full_name, users_show_url %></li>
+        <li><%= link_to current_user.full_name, current_user %></li>
         <li><a href="<%= users_path %>"><i class="material-icons">home</i></a></li>
         <li><%= link_to "お知らせ", :notices %></li>
         <li><%= link_to "メニュー管理", :menus %></li>
