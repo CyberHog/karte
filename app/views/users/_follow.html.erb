@@ -1,4 +1,6 @@
-<%= form_for(current_user.active_relationships.build) do |f| %>
+<%= form_for @user do |f| %>
+<%= fields_for @relationship do |r| %>
   <div><%= hidden_field_tag :following_id, @user.id %></div>
   <%= f.submit "フォローする", class: "btn waves-effect waves-light btn" %>
+<% end %>
 <% end %>

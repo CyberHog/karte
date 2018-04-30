@@ -73,7 +73,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def account_update_params
     attrs = [:practice, :last_name, :first_name, :email, :phone, :birthday, :gender, :password,
-      :password_confirmation, :current_password, :avatar, :avatar_cache, :remove_avatar, address_attributes: [ :id, :postcode, :prefecture, :city, :street, :building ]]
+      :password_confirmation, :current_password, :avatar, :avatar_cache, :remove_avatar, 
+      address_attributes: [ :id, :postcode, :prefecture, :city, :street, :building ], 
+      relationshpis_attributes: [ :id, :user_id, :follower_id, :following_id]]
     params.require(resource_name).permit(attrs)
   end
 end

@@ -1,8 +1,12 @@
-<% @user.followers.each do |user| %>
-<table>
-  <tr>
-    <td><%= user.full_name %></td>
-    <td><%= link_to '詳細', user_path(user) %></td>
-  </tr>
-</table>
+<% if @user.following.count > 0 %>
+  <% @user.following.each do |user| %>
+    <table>
+      <tr>
+        <td><% user.full_name %></td>
+        <td><%= link_to '詳細', user_path(@user) %></td>
+      </tr>
+    </table>
+  <% end %>
+<% else %>
+<p>フォロワーはいません</p>
 <% end %>

@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   # 会員情報の詳細
   def show
     @user = User.find(params[:id])
+    @relationship = Relationship.new
   end
 
   # 検索
@@ -22,13 +23,24 @@ class UsersController < ApplicationController
   # 編集
   def edit
     @user = User.find(params[:id])
+    @relationship = Relationship.find(params[:id])
   end
 
   # 更新
   def update
     @user = User.find(params[:id])
     @user.assign_attributes(user_update_params)
-    if @user.save
+
+    @relationship = Relationship.find(params[:id])
+    @ralationship.assign_attributes(relationship_update_params)
+
+    if @user.save 
+      redirect_to @user, notice: "会員情報を更新しました"
+    else
+      render "edit"
+    end
+
+    if @ralationship.save 
       redirect_to @user, notice: "会員情報を更新しました"
     else
       render "edit"
@@ -60,6 +72,10 @@ class UsersController < ApplicationController
       :password_confirmation, :avatar, :avatar_cache, :remove_avatar,
        address_attributes: [ :id, :postcode, :prefecture, :city, :street, :building ]]
     params.require(:user).permit(attrs)
+  end
+
+  def relationship_update_params
+    params.require(:relationship).permit(:id, :user_id, :follower_id, :following_id)
   end
 
 end

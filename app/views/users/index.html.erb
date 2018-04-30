@@ -19,7 +19,7 @@
 <ul class="collection hoverable">
 
 <% @users.each do |user| %>
-
+<% unless user.id == current_user.id %>
   <li class="collection-item avatar">
     <%= image_tag user.avatar.url, class: "circle" %>
     <p>カルテ番号<br>
@@ -32,7 +32,7 @@
           data: { confirm: "本当に削除しますか?" } %>
     </p>
   </li>
-
+<% end %>
 <% end %>
 
 </ul>
