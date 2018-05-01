@@ -55,6 +55,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       :password_confirmation, :current_password, :avatar, :avatar_cache, :remove_avatar, address_attributes: [ :id, :postcode, :prefecture, :city, :street, :building ]])
   end
 
+
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
   #   super(resource)

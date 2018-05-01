@@ -1,5 +1,5 @@
-<% if @user.following.count > 0 %>
-  <% @user.following.each do |user| %>
+<% if @user.followers_count > 0 %>
+  <% @user.followers.each do |user| %>
     <table>
       <tr>
         <td><% user.full_name %></td>

@@ -10,7 +10,8 @@ class UsersController < ApplicationController
   # 会員情報の詳細
   def show
     @user = User.find(params[:id])
-    @relationship = Relationship.new
+    @follow_count = current_user.follow_count
+    @followers_count = current_user.followers_count
   end
 
   # 検索
@@ -23,7 +24,7 @@ class UsersController < ApplicationController
   # 編集
   def edit
     @user = User.find(params[:id])
-    @relationship = Relationship.find(params[:id])
+    
   end
 
   # 更新
@@ -31,32 +32,39 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.assign_attributes(user_update_params)
 
-    @relationship = Relationship.find(params[:id])
-    @ralationship.assign_attributes(relationship_update_params)
-
     if @user.save 
       redirect_to @user, notice: "会員情報を更新しました"
     else
       render "edit"
     end
-
-    if @ralationship.save 
-      redirect_to @user, notice: "会員情報を更新しました"
-    else
-      render "edit"
-    end
   end
 
+  # フォローしている人のリストを表示
   def following
-    @user = User.find(params[:id])
-    @users = @user.following
-    render 'show_follow'
+    @user = User.find(params[:user_id])
+    @users = @user.all_following
+    render 'users/show_follow'
   end
 
+  # フォロワーのリストを表示
   def followers
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     @users = @user.followers
-    render 'show_follower'
+    render 'users/show_follower'
+  end
+
+  # フォローする
+  def follow
+    @user = User.find(params[:user_id])
+    current_user.follow(@user)
+    redirect_to user_path(@user)
+  end
+
+  # フォロー解除
+  def unfollow
+    @user = User.find(params[:user_id])
+    current_user.stop_following(@user)
+    redirect_to user_path(@user)
   end
 
   # 会員の削除
@@ -72,10 +80,6 @@ class UsersController < ApplicationController
       :password_confirmation, :avatar, :avatar_cache, :remove_avatar,
        address_attributes: [ :id, :postcode, :prefecture, :city, :street, :building ]]
     params.require(:user).permit(attrs)
-  end
-
-  def relationship_update_params
-    params.require(:relationship).permit(:id, :user_id, :follower_id, :following_id)
   end
 
 end

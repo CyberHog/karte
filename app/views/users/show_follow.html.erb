@@ -1,8 +1,8 @@
-<% unless @user.followers.count == 0 %>
-  <% @user.followers.each do |user| %>
+<% unless @user.follow_count == 0 %>
+  <% @user.all_following.each do |user| %>
     <table>
       <tr>
-        <td>  <%= user.name %> </td>
+        <td><%= user.full_name %></td>
         <td><%= link_to '詳細', user_path(user) %></td>
       </tr>
     </table>
