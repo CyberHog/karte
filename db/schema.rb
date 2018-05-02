@@ -24,17 +24,10 @@ ActiveRecord::Schema.define(version: 20180501002252) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
-  create_table "card_numbers", force: :cascade do |t|
-    t.integer "clinic_card_id"
-    t.string "number", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["clinic_card_id"], name: "index_card_numbers_on_clinic_card_id"
-  end
-
   create_table "clinic_cards", force: :cascade do |t|
     t.integer "clinic_id"
     t.integer "patient_id"
+    t.string "number", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_clinic_cards_on_clinic_id"
@@ -139,15 +132,6 @@ ActiveRecord::Schema.define(version: 20180501002252) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["patients_receipt_id"], name: "index_receipts_on_patients_receipt_id"
-  end
-
-  create_table "relationships", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "follower_id"
-    t.integer "following_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
   create_table "staffs", force: :cascade do |t|

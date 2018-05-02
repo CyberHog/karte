@@ -1,21 +1,21 @@
 <%= form_for(@clinic_card) do |f| %>
 ...
-  <table class="table table-striped table-bordered table-hover">
-    <tbody>
+  <table class="table table-striped table-bordered table-hover" width="350px">
       <tr>
-         <th>診察券番号</th>
-         <th>操作</th>
+         <th width=350px>診察券番号</th>
       </tr>
-      <%= f.fields_for :card_numbers do |c| %>
-
-        <%= render "card_number_fields", f: c %>
-
-      <% end %>
-    </tbody>
+      <tr>
+          <td width=350px>
+            <%= f.hidden_field :id %>
+  <%= f.fields_for :clinic_card do |c| %>
+            <%= c.hidden_field :clinic_card_id %>
+  <% end %>
+            <%= f.text_field :number, class: "validate" %>
+          </td>
+      </tr>
   </table>
-      <div class="links col s10">
-      <%= link_to_add_association '+', f, :card_numbers, class: "btn waves-effect waves-light green hoverable" %>
-      </div>
+
+
       <div class="col s2">
       <%= f.submit class: "btn waves-effect waves-light btn" %>
       </div>

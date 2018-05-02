@@ -1,28 +1,28 @@
 <%  @page_title = "診察券" %>
 <h1><%=  @page_title %></h1>
 
-<% if @user.clinic_card.present? %>
+<% if @clinic_card.number.present? %>
 
 <div class="row">
 <div class="col s9">
 
 <ul class="collection hoverable">
 
-  <% @card_numbers.each do |card_number| %>
+  <% @clinic_cards.each do |clinic_card| %>
     <li class="collection-item avatar">
       <%= image_tag user.avatar.url, class: "circle" %>
       <p>治療院名<br>
-       <%= card_number.clinic_card.clinic.name %>
+       <%= clinic_card.clinic.name %>
       </p>
-      <span class="title"><%= link_to card_number.number,  %></span>
+      <span class="title"><%= link_to clinic_card.number,  %></span>
       <p class="secondary-content">
-        <%= link_to "編集", [:edit, user] %> |
-        <%= link_to "削除", user, method: :delete,
+        <%= link_to "編集", [:edit, clinic_card] %> |
+        <%= link_to "削除", clinic_card, method: :delete,
           data: { confirm: "本当に削除しますか?" } %>
       </p>
     </li>
   <% end %>
-  
+
 <% end %>
 
 </ul>

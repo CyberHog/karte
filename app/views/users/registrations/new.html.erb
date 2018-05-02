@@ -62,27 +62,27 @@
 
       <div class="input-field col s6">
         <%= fin.label :postcode, class: "active" %>
-        <%= fin.text_field :postcode, input_html: {id: "address_zipcode"}, class: "validate", placeholder: "0000000" %>
+        <%= fin.text_field :postcode, id: "address_zipcode", class: "validate", placeholder: "0000000" %>
       </div>
 
       <div class="input-field col s12">
         <%= fin.label :prefecture, class: "active" %>
-        <%= fin.text_field :prefecture, input_html: {id: "address_prefecture_name"}, class: "validate" %>
+        <%= fin.text_field :prefecture, id: "address_prefecture_name", class: "validate" %>
       </div>
 
       <div class="input-field col s12">
         <%= fin.label :city, class: "active" %>
-        <%= fin.text_field :city, input_html: {id: "address_city"}, class: "validate" %>
+        <%= fin.text_field :city, id: "address_city", class: "validate" %>
       </div>
 
       <div class="input-field col s12">
         <%= fin.label :street, class: "active" %>
-        <%= fin.text_field :street, input_html: {id: "address_street"}, class: "validate" %>
+        <%= fin.text_field :street, id: "address_street", class: "validate" %>
       </div>
 
       <div class="input-field col s12">
         <%= fin.label :building, class: "active" %>
-        <%= fin.text_field :building, input_html: {id: "address_building"}, class: "validate" %>
+        <%= fin.text_field :building, id: "address_building", class: "validate" %>
       </div>
 
         <% end %>

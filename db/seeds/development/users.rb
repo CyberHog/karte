@@ -18,6 +18,8 @@
         street: "2-3-5",
         building: "Ohashi235 5F"
         )
+user.skip_confirmation!
+user.save!
 
   user = User.create(
     avatar: File.open("./db/seeds/development/skull-2723063_1920.jpg"),
@@ -39,6 +41,8 @@
         street: "2-16-8",
         building: "AKビル 5F"
         )
+user.skip_confirmation!
+user.save!
 
   user = User.create(
     avatar: File.open("./db/seeds/development/waraji.jpg"),
@@ -60,6 +64,8 @@
         street: "3-5-2",
         building: ""
         )
+user.skip_confirmation!
+user.save!
 
   user = User.create(
     avatar: File.open("./db/seeds/development/laptop-2838921_1920.jpg"),
@@ -81,6 +87,8 @@
         street: "5-5-26",
         building: "ライオンズマンション三郷市第五 1101"
         )
+user.skip_confirmation!
+user.save!
 
  user = User.create(
     last_name: "武蔵",
@@ -101,3 +109,5 @@
         street: "3-492",
         building: ""
         )
+user.skip_confirmation!
+user.save!

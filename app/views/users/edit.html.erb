@@ -71,27 +71,27 @@
 
         <div class="input-field col s6">
           <%= fin.label :postcode, class: "active"  %>
-          <%= fin.text_field :postcode, input_html: {id: "address_zipcode"} %>
+          <%= fin.text_field :postcode, id: "address_zipcode", class: "validate" %>
         </div>
 
         <div class="input-field col s12">
           <%= fin.label :prefecture, class: "active" %>
-          <%= fin.text_field :prefecture, inpu_html: {id: "address_prefecture_name"} %>
+          <%= fin.text_field :prefecture, id: "address_prefecture_name", class: "validate" %>
         </div>
 
         <div class="input-field col s12">
           <%= fin.label :city, class: "active" %>
-          <%= fin.text_field :city, input_html: {id: "address_city"} %>
+          <%= fin.text_field :city, id: "address_city", class: "validate" %>
         </div>
 
         <div class="input-field col s12">
           <%= fin.label :street, class: "active" %>
-          <%= fin.text_field :street, input_html: {id: "address_street"} %>
+          <%= fin.text_field :street, id: "address_street", class: "validate" %>
         </div>
 
         <div class="input-field col s12">
           <%= fin.label :building, class: "active" %>
-          <%= fin.text_field :building, input_html: {id: "address_building"} %>
+          <%= fin.text_field :building, id: "address_building", class: "validate" %>
         </div>
 
     <% end %>
@@ -113,7 +113,7 @@
 
 <div class="row">
   <div class="col s12">
-    <p><%= link_to "診察券作成", :new_clinic_card %></p>
+    <p><%= link_to "診察券作成", :new_clinic_card, class: "btn waves-effect waves-light btn" %></p>
   </div>
 </div>
 
