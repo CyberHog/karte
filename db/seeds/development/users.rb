@@ -81,3 +81,23 @@
         street: "5-5-26",
         building: "ライオンズマンション三郷市第五 1101"
         )
+
+ user = User.create(
+    last_name: "武蔵",
+    first_name: "小杉",
+    phone: "09012345678",
+    email: "kosugi@example.com",
+    birthday: "1981-12-01",
+    gender: 0,
+    practice: true,
+    password: "password",
+    password_confirmation: "password"
+    )
+    Address.create(
+        user: user,
+        postcode: "2110063",
+        prefecture: "神奈川県",
+        city: "川崎市中原区小杉町",
+        street: "3-492",
+        building: ""
+        )

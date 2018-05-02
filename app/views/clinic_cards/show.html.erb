@@ -1,0 +1,32 @@
+<%  @page_title = "診察券詳細" %>
+
+<h1><%=  @page_title %></h1>
+
+<div class="row">
+
+<p><%= link_to "診察券一覧", :clinic_cards %> | <%= link_to "編集", [:edit, @clnic_card] %></p>
+
+<table class="highlight">
+
+  <%= @clinic_card.id %>
+  <% @clinic_card.each do |card| %>
+  <tr>
+    <th>治療院名</th>
+    <td><%= card.clinic.name %></td>
+  </tr>
+  <tr>
+    <th>診察券番号</th>
+    <td><%= card.card_number.number %></td>
+  </tr>
+  <tr>
+    <th>保有ポイント</th>
+    <td><%= card.patient.holding_point %></td>
+  </tr>
+  <tr>
+    <th>最終来院日</th>
+    <td><%= card.joins(:receipt).select("receipt.payday").last.attributes %></td>
+  </tr>
+  <% end %>
+</table>
+
+</div>

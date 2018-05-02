@@ -1,0 +1,10 @@
+<tr class="nested-fields">
+    <td>
+      <%= f.hidden_field :id %>
+      <%= f.hidden_field :clinic_card_id %>
+      <%= f.text_field :number, class: 'form-control' %>
+    </td>
+    <td>
+      <%= link_to_remove_association '-', f, class: "btn waves-effect waves-light red hoverable" %>
+    </td>
+</tr>
