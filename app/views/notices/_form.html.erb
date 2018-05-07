@@ -14,7 +14,7 @@
       <%= form.label :released_at %>
     </th>
     <td>
-      <%= form.date_field :released_at, class: "validate datepicker", autocomplete: "expired_at" %>
+      <%= form.date_field :released_at, class: "validate", autocomplete: "expired_at" %>
     </td>
   </tr>
   <tr>
@@ -22,7 +22,7 @@
     <td>
       <%= form.check_box :no_expiration, id: "notice_no_expiration", for: "notice_expired_at" %>
       <%= form.label :no_expiration %>
-      <%= form.date_field :expired_at, id: "notice_expired_at", class: "validate datepicker", autocomplete: "expired_at" %>
+      <%= form.date_field :expired_at, id: "notice_expired_at", class: "validate", autocomplete: "expired_at" %>
     </td>
   </tr>
   <tr>

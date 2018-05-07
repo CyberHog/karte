@@ -1,0 +1,22 @@
+<%  @page_title = "クリニックの詳細" %>
+
+<h1><%=  @page_title %></h1>
+
+<div class="row">
+
+<p><%= link_to "クリニック一覧に戻る", :clinics %></p>
+
+<p><%= link_to "アカウント詳細", current_user %> | <%= link_to "編集", [:edit, @clinic] %></p>
+
+<table class="highlight">
+  <tr>
+    <th width="150px">治療院名等</th>
+    <td><%= @clinic.name %></td>
+  </tr>
+  <tr>
+    <th>ホームページ</th>
+    <td><a href="<%= @clinic.hp_url %>"><%= @clinic.hp_url %></a></td>
+  </tr>
+</table>
+
+</div>

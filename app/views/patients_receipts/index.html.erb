@@ -6,20 +6,24 @@
 
 <% if @patients_receipts.present? %>
 <table class="highlight">
+  <% @patients_receipts.each do |patients_receipt| %>
   <tr>
     <th>支払日</th>
     <th>氏名</th>
+  </tr>
+  <tr>
+    <td><%= link_to patients_receipt.payday, patients_receipt %></td>
+    <td><%= patients_receipt.payee %></td>
+  </tr>
+  <tr>
     <th>サービス名</th>
     <th>取得ポイント</th>
     <th>支払金額</th>
     <th>支払方法</th>
     <th>操作</th>
   </tr>
-  <% @patients_receipts.each do |patients_receipt| %>
-    <% patients_receipt.receipts.each do |receipt| %>
+  <% patients_receipt.receipts.each do |receipt| %>
   <tr>
-    <td><%= link_to receipt.payday, patients_receipt %></td>
-    <td><%= receipt.payee %></td>
     <td><%= receipt.service %></td>
     <td style= "text-align: right"><%= receipt.gained_point %></td>
     <td style= "text-align: right"><%= receipt.payment %></td>
@@ -30,7 +34,7 @@
             data: { confirm: "本当に削除しますか?" } %>
     </td>
   </tr>
-    <% end %>
+  <% end %>
   <% end %>
 </table>
 <% else %>

@@ -1,17 +1,17 @@
 class ClinicCardsController < ApplicationController
   # 一覧
   def index
-    @clinic_cards = ClinicCard.find(params[:id])
+    @user = User.find(params[:id])
+    @clinic_cards = @user.clinic_cards
   end
 
   # 詳細
   def show
- 	  @clinic_card = CLinicCard.find(params[:id])
+ 	  @clinic_card = ClinicCard.find(params[:id])
   end
 
   # 登録
   def new
-    @user = User.find(params[:patient_id])
   	@clinic_card = ClinicCard.new
   end
 
@@ -19,7 +19,7 @@ class ClinicCardsController < ApplicationController
   def create
   	@clinic_card = ClinicCard.new(clinic_card_params)
   	if @clinic_card.save
-  	  redirect_to user_path(@user), notice: "診察券を作成しました"
+  	  redirect_to @clinic_card, notice: "診察券を作成しました"
   	else
   	  render "new"
   	end

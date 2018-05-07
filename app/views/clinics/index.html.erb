@@ -1,0 +1,29 @@
+<%  @page_title = "クリニック一覧" %>
+<h1><%=  @page_title %></h1>
+
+<p><%= link_to "アカウント詳細へ戻る", current_user %></p>
+
+<% if @clinics.present? %>
+
+<table class="highlight">
+  <tr>
+    <th>治療院名等</th>
+    <th>ホームページ</th>
+    <th>操作</th>
+  </tr>
+  <% @clinics.each do |clinic| %>
+  <tr>
+    <td><%= clinic.name %></td>
+    <td><a href="<%= clinic.hp_url %>"><%= clinic.hp_url %></a></td>
+    <td>
+      <%= link_to "編集", [:edit, clinic] %> |
+      <%= link_to "削除", clinic, method: :delete,
+            data: { confirm: "本当に削除しますか?" } %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+
+<% else %>
+<p>クリニック情報がありません。</p>
+<% end %>

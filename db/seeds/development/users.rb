@@ -85,7 +85,7 @@ user.save!
         prefecture: "埼玉県",
         city: "三郷早稲田",
         street: "5-5-26",
-        building: "ライオンズマンション三郷市第五 1101"
+        building: "ライオンズマンション三郷第五 1101"
         )
 user.skip_confirmation!
 user.save!
@@ -109,5 +109,19 @@ user.save!
         street: "3-492",
         building: ""
         )
+user.skip_confirmation!
+user.save!
+
+ user = User.create(
+    last_name: "代々木",
+    first_name: "上原",
+    phone: "09012345678",
+    email: "yoyogi@example.com",
+    birthday: "1981-12-01",
+    gender: 0,
+    practice: false,
+    password: "password",
+    password_confirmation: "password"
+    )
 user.skip_confirmation!
 user.save!

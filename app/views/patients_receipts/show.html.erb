@@ -9,15 +9,15 @@
 <table class="highlight">
 
   <%= @patients_receipt.id %>
-  <% @patients_receipt.receipts.each do |receipt| %>
   <tr>
     <th>支払日</th>
-    <td><%= receipt.payday %></td>
+    <td><%= @patients_receipt.payday %></td>
   </tr>
   <tr>
     <th>支払う人</th>
-    <td><%= receipt.payee %></td>
+    <td><%= @patients_receipt.payee %></td>
   </tr>
+  <% @patients_receipt.receipts.each do |receipt| %>
   <tr>
     <th>サービス名</th>
     <td><%= receipt.service %></td>

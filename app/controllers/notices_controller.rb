@@ -18,7 +18,7 @@ class NoticesController < ApplicationController
   	@notice = Notice.readable_for(current_user).find(params[:id])
   end
 
-  # 新規陽徳フォーム
+  # 新規作成フォーム
   def new
     @notice = Notice.new(expired_at: Time.current)
   end

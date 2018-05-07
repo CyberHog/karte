@@ -30,6 +30,16 @@
 
   <% if @user.practice? %>
 
+  <% if @user.clinic.present? %>
+  <tr>
+    <th>治療院名等</th>
+    <td><%= @user.clinic.name %></td>
+  </tr>
+  <tr>
+    <th>ホームページ</th>
+    <td><a href="<%= @user.clinic.hp_url %>"><%= @user.clinic.hp_url %></a></td>
+  </tr>
+  <% end %>
   <tr>
     <th>郵便番号</th>
     <td><%= @user.address.postcode %></td>

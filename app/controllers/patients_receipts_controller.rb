@@ -1,8 +1,7 @@
 class PatientsReceiptsController < ApplicationController
   # テーブル一覧
   def index
-  	@patients_receipts = PatientsReceipt.joins(:receipts).includes(:receipts).order("receipts.payday")
-      .page(params[:page]).per(10)
+  	@patients_receipts = PatientsReceipt.order(:payday).page(params[:page]).per(10)
   end
 
   # 詳細
@@ -12,7 +11,7 @@ class PatientsReceiptsController < ApplicationController
 
   # 登録
   def new
-  	@patients_receipt = PatientsReceipt.new
+  	@patients_receipt = PatientsReceipt.new(payday: Time.current)
     @patients_receipt.receipts.build
   end
 
@@ -51,6 +50,6 @@ class PatientsReceiptsController < ApplicationController
 
   private
   def patients_receipt_params
-  	params.require(:patients_receipt).permit(receipts_attributes: [:id, :patients_receipt_id, :payday, :service, :payment, :gained_point, :payment_method, :payee, :_destroy])
+  	params.require(:patients_receipt).permit(:id, :payday, :payee, receipts_attributes: [:id, :patients_receipt_id, :service, :payment, :gained_point, :payment_method, :_destroy])
   end
 end

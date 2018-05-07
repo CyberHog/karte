@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20180501002252) do
   end
 
   create_table "clinics", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "user_id", null: false
     t.string "name", default: "", null: false
     t.string "hp_url", default: ""
     t.datetime "created_at", null: false
@@ -116,6 +116,8 @@ ActiveRecord::Schema.define(version: 20180501002252) do
 
   create_table "patients_receipts", force: :cascade do |t|
     t.integer "clinic_card_id"
+    t.date "payday"
+    t.string "payee"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_card_id"], name: "index_patients_receipts_on_clinic_card_id"
@@ -123,11 +125,9 @@ ActiveRecord::Schema.define(version: 20180501002252) do
 
   create_table "receipts", force: :cascade do |t|
     t.integer "patients_receipt_id"
-    t.date "payday"
     t.string "service"
     t.integer "payment"
     t.integer "gained_point"
-    t.string "payee"
     t.integer "payment_method", limit: 3, default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

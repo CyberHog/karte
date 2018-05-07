@@ -1,0 +1,12 @@
+<%= render "shared/errors", obj: @clinic %>
+
+<table class="highlight">
+  <tr>
+    <th><%= form.label :name %></th>
+    <td><%= form.text_field :name, placeholder: "入力例　カルテ治療院" %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :hp_url %></th>
+    <td><%= form.text_field :hp_url, placeholder: "入力例　http://www.example.com/" %></td>
+  </tr>
+</table>
