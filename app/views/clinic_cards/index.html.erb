@@ -1,7 +1,9 @@
 <%  @page_title = "診察券" %>
 <h1><%=  @page_title %></h1>
 
-<% if @clinic_card.number.present? %>
+<p><%= link_to "アカウント詳細へ戻る", @user %> | <%= link_to "新規作成", new_clinic_card_url %></p>
+
+<% if @clinic_card.present? %>
 
 <div class="row">
 <div class="col s9">
@@ -10,11 +12,12 @@
 
   <% @clinic_cards.each do |clinic_card| %>
     <li class="collection-item avatar">
-      <%= image_tag user.avatar.url, class: "circle" %>
-      <p>治療院名<br>
-       <%= clinic_card.clinic.name %>
+      <%= image_tag clinic_card.publisher.avatar.url, class: "circle" %>
+      <p>
+       <%= clinic_card.publisher.name %><br>
+       <%= link_to clinic_card.number, clinic_card %>
       </p>
-      <span class="title"><%= link_to clinic_card.number,  %></span>
+      <span class="title"><%= clnic_card.holding_point %></span>
       <p class="secondary-content">
         <%= link_to "編集", [:edit, clinic_card] %> |
         <%= link_to "削除", clinic_card, method: :delete,
@@ -22,8 +25,6 @@
       </p>
     </li>
   <% end %>
-
-<% end %>
 
 </ul>
 
