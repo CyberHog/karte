@@ -28,8 +28,10 @@ ActiveRecord::Schema.define(version: 20180501002252) do
     t.integer "user_id"
     t.integer "clinic_id"
     t.integer "patient_id"
-    t.string "number", default: ""
+    t.integer "publisher_id"
+    t.integer "holder_id"
     t.integer "holding_point"
+    t.string "number", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_clinic_cards_on_clinic_id"
@@ -107,13 +109,6 @@ ActiveRecord::Schema.define(version: 20180501002252) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_notices_on_user_id"
-  end
-
-  create_table "patients", force: :cascade do |t|
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_patients_on_user_id"
   end
 
   create_table "patients_receipts", force: :cascade do |t|

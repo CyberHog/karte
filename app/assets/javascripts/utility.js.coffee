@@ -1,4 +1,4 @@
-$(document).on "ready page:load", ->
+$(document).on "ready turbolinks:load", ->
   change_expired_at = ->
     if $("#notice_no_expiration").prop("checked")
       $("#notice_expired_at").hide()

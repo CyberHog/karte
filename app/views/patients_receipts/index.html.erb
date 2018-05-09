@@ -10,20 +10,22 @@
   <tr>
     <th>支払日</th>
     <th>氏名</th>
-  </tr>
-  <tr>
-    <td><%= link_to patients_receipt.payday, patients_receipt %></td>
-    <td><%= patients_receipt.payee %></td>
-  </tr>
-  <tr>
     <th>サービス名</th>
     <th>取得ポイント</th>
     <th>支払金額</th>
     <th>支払方法</th>
     <th>操作</th>
   </tr>
-  <% patients_receipt.receipts.each do |receipt| %>
   <tr>
+    <td><%= link_to patients_receipt.payday, patients_receipt %></td>
+    <td><%= patients_receipt.payee %></td>
+   <% second_repeat = false %>
+   <% patients_receipt.receipts.each do |receipt| %>
+   <% if second_repeat %>
+     <td></td><td></td>
+   <% else %>
+     <% second_repeat = true %>
+   <% end %>
     <td><%= receipt.service %></td>
     <td style= "text-align: right"><%= receipt.gained_point %></td>
     <td style= "text-align: right"><%= receipt.payment %></td>

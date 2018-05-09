@@ -1,4 +1,4 @@
-$(document).on "ready page:load", ->
+$(document).on "ready turbolinks:load", ->
   change_practice = ->
     if $("#clinic").prop("checked")
       $("#private_user").show()

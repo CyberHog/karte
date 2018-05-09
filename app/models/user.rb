@@ -6,11 +6,10 @@ class User < ApplicationRecord
   acts_as_followable # フォロワー機能
   acts_as_follower   # フォロー機能
 
-  has_one :patient, dependent: :nullify
   has_one :clinic, dependent: :nullify
   has_one :address, dependent: :destroy
-  has_many :clinic_cards, through: :clinic
-  has_many :clinic_cards, through: :patient
+  has_many :published_card, class_name: "ClinicCard", foreign_key: "publisher_id"
+  has_many :held_card, class_name: "ClinicCard", foreign_key: "holder_id"
   accepts_nested_attributes_for :address, allow_destroy: true
   has_many :notices, dependent: :destroy
 

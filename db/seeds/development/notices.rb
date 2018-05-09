@@ -3,7 +3,7 @@ body =
 	"本日、自費治療を受けて頂いた方限定！" +
   "お会計時１０％OFFとなります。" +
   "ご予約はお早めに！。"
-%w(Taro Jiro Hana).each do |name|
+%w(佐々木 井上 侍).each do |name|
   user = User.find_by(last_name: name)
   0.upto(9) do |idx|
     Notice.create(
