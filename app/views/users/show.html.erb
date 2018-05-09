@@ -2,24 +2,25 @@
 
 <h1><%=  @page_title %></h1>
 
-<p><%= link_to "一覧に戻る", users_url %>  |
-  <% if @curren_user %>
-    <%= link_to "アカウント編集", edit_user_registration_path %>
-  <% else %>
-    <%= link_to "アカウント編集", [:edit, @user] %>
+<p><%= link_to "一覧に戻る", users_url %>
+  <% if current_user && (@user.id == current_user.id) %>
+      | <%= link_to "アカウント編集", edit_user_registration_path %>
+    <% else %>
   <% end %></p>
 
 <% unless @user.id == current_user.id %>
+  <% unless @user.practice? %>
   <div class="row">
     <div class="col s12">
       <p><%= link_to "診察券作成", new_clinic_card_url(@user), class: "btn waves-effect waves-light btn" %></p>
     </div>
   </div>
+  <% end %>
 <% end %>
 
   <div class="row">
     <div class="col s12">
-      <% if @user == current_user %>
+      <% if (@user == current_user) && (@user.practice?) %>
         <% if @user.clinic.present? == false %>
           <p><%= link_to "クリニック登録", new_clinic_url(@user), class: "btn waves-effect waves-light btn" %></p>
         <% else %>

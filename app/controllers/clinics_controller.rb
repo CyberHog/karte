@@ -49,7 +49,7 @@ class ClinicsController < ApplicationController
 
   # 削除
   def destroy
-  	@clinic = current_user.clinic.find(params[:id])
+  	@clinic = current_user.clinic
   	@clinic.destroy
   	redirect_to :clinics, notice: "クリニックを削除しました"
   end

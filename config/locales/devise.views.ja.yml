@@ -22,17 +22,21 @@
   activerecord:
     models:
       user: "ユーザ"
-      practice: "治療院を開業しています"
       address: "住所"
+      clinic: "治療院"
+      patients_receipt: "お会計"
       medical_chart: "カルテ"
       menu: "メニュー"
       notice: "お知らせ"
       receipt: "お会計情報"
       staff: "スタッフ"
       clinic_card: "診察券"
-      card_number: "診察券番号"
+      coupon: "回数券"
+      patient: "患者"
+      admin: "管理ページ"
     attributes:
       user:
+        practice: "治療院を開業しています"
         avatar: "画像"
         remove_avatar: "画像を削除"
         last_name: "苗字"
@@ -66,8 +70,9 @@
         cc: "主訴"
         tx_comment: "施術内容"
         comment: "コメント"
-      card_number:
+      clinic_card:
         number: "診察券番号"
+        holding_point: "保有ポイント"
       menu:
         content_id: "コースID"
         content_name: "コース名"
@@ -84,8 +89,10 @@
         status_draft: "下書き"
         status_member_only: "会員限定"
         status_public: "公開"
-      receipt:
+      patients_receipt: 
         payday: "支払日"
+        payee: "支払者"
+      receipt:
         payment_method: "支払方法"
         method_0: "現金"
         method_1: "カード"

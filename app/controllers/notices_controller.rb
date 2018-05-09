@@ -20,7 +20,7 @@ class NoticesController < ApplicationController
 
   # 新規作成フォーム
   def new
-    @notice = Notice.new(expired_at: Time.current)
+    @notice = Notice.new(released_at: Time.current)
   end
 
   # 編集フォーム

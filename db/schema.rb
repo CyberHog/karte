@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20180501002252) do
   end
 
   create_table "clinic_cards", force: :cascade do |t|
+    t.integer "user_id"
     t.integer "clinic_id"
     t.integer "patient_id"
     t.string "number", default: ""
@@ -33,6 +34,7 @@ ActiveRecord::Schema.define(version: 20180501002252) do
     t.datetime "updated_at", null: false
     t.index ["clinic_id"], name: "index_clinic_cards_on_clinic_id"
     t.index ["patient_id"], name: "index_clinic_cards_on_patient_id"
+    t.index ["user_id"], name: "index_clinic_cards_on_user_id"
   end
 
   create_table "clinics", force: :cascade do |t|

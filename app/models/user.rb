@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_one :patient, dependent: :nullify
   has_one :clinic, dependent: :nullify
   has_one :address, dependent: :destroy
+  has_many :clinic_cards, through: :clinic
+  has_many :clinic_cards, through: :patient
   accepts_nested_attributes_for :address, allow_destroy: true
   has_many :notices, dependent: :destroy
 

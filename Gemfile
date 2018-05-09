@@ -32,6 +32,8 @@ gem 'carrierwave', '~> 1.2', '>= 1.2.2'
 gem 'mini_magick', '~> 4.8'
 gem 'cocoon', '~> 1.2', '>= 1.2.11'
 gem "acts_as_follower", github: "tcocca/acts_as_follower"
+gem 'cancancan', '~> 2.2'
+gem 'rails_admin', '~> 1.3'
 
 gem 'materialize-sass'
 

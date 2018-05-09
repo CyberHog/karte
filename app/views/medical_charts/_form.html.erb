@@ -7,9 +7,7 @@
   </tr>
   <tr>
     <th><%= form.label :visited_at %></th>
-    <td width="800px"><%= form.date_select :visited_at,
-              start_year: 2000, end_year: Time.now.year + 1,
-              use_month_numbers: true %></td>
+    <td width="800px"><%= form.date_field :visited_at, class: "validate", autocomplete: "visited_at" %></td>
   </tr>
   <tr>
     <th><%= form.label :service %></th>

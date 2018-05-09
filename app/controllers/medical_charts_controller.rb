@@ -12,7 +12,7 @@ class MedicalChartsController < ApplicationController
 
   # 新規登録フォーム
   def new
-  	@medical_chart = MedicalChart.new
+  	@medical_chart = MedicalChart.new(visited_at: Time.current)
   end
 
   # 編集フォーム

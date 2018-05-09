@@ -59,6 +59,8 @@
           <%= f.label :gender_1, for: "icon_wc_1" %>
     </div>
 
+    <% if @user.practice? %>
+
     <div class="col s6">
       <i class="material-icons prefix">verified_user</i>
       <%= f.check_box :practice, id: "clinic" %>
@@ -97,6 +99,8 @@
     <% end %>
 
   </div>
+
+  <% end %>
 
     <div class="input-field col s12">
       <i class="material-icons prefix">vpn_lock</i>

@@ -1,6 +1,6 @@
 <p><%= current_user.clinic.name %> >> <%=  %></p>
 
-<%= form_for(@clinic_card) do |f| %>
+<%= form_for @clinic_card do |f| %>
 ...
   <table class="table table-striped table-bordered table-hover" width="350px">
       <tr>
@@ -9,9 +9,9 @@
       <tr>
           <td width=350px>
             <%= f.hidden_field :id %>
-  <%= f.fields_for :clinic_card do |c| %>
-            <%= c.hidden_field :clinic_card_id %>
-  <% end %>
+            <%= f.hidden_field :clinic_id %>
+            <%= f.hidden_field :patient_id %>
+            <%= f.hidden_field :user_id %>
             <%= f.text_field :number, class: "validate" %>
           </td>
       </tr>
