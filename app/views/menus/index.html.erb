@@ -6,7 +6,7 @@
   <%= button_tag "検索", class: "btn waves-effect waves-light btn", type: "button", onclick: "submit();" %></p>
 <% end %>
 
-<p><%= link_to "メニュー新規作成", :new_menu %></p>
+<p><%= link_to "メニュー新規作成", :new_menu, class: "btn waves-effect waves-light btn blue" %></p>
 
 <% if @menus.present? %>
 <table class="highlight">

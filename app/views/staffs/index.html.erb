@@ -7,7 +7,7 @@
   <%= button_tag "検索", class: "btn waves-effect waves-light btn", type: "button", onclick: "submit();" %></p>
 <% end %>
 
-<p><%= link_to "スタッフ新規登録", :new_staff %></p>
+<p><%= link_to "スタッフ新規登録", :new_staff, class: "btn waves-effect waves-light btn blue" %></p>
 
 <% if @staffs.present? %>
 
