@@ -4,11 +4,9 @@
 
 <p><%= link_to "アカウント詳細に戻る", current_user %></li></p>
 
-<p><%= link_to "クリニック一覧に戻る", :clinics %></p>
-
 <div class="row">
 
-  <%= form_for @clinic do |form| %>
+  <%= form_for [@user, @clinic], url: user_clinic_url(id: @clinic.user_id) do |form| %>
 
   <%= render "form", form: form %>
 

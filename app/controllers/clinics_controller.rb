@@ -12,11 +12,13 @@ class ClinicsController < ApplicationController
 
   # 詳細
   def show
-  	@clinic = Clinic.find(params[:id])
+    @user = User.find(params[:user_id])
+  	@clinic = @user.clinic
   end
 
   # 新規作成フォーム
   def new
+    @user = User.find(params[:user_id])
     @clinic = Clinic.new
   end
 
@@ -25,7 +27,7 @@ class ClinicsController < ApplicationController
     @clinic = Clinic.new(clinic_params)
     @clinic.owner = current_user
     if @clinic.save
-      redirect_to @clinic, notice: "クリニックを登録しました"
+      redirect_to user_clinic_url(id: @clinic.user_id), notice: "クリニックを登録しました"
     else
       render "new"
     end
@@ -33,6 +35,7 @@ class ClinicsController < ApplicationController
 
   # 編集
   def edit
+    @user = User.find(params[:user_id])
   	@clinic = current_user.clinic
   end
 
@@ -41,7 +44,7 @@ class ClinicsController < ApplicationController
   	@clinic = current_user.clinic
   	@clinic.assign_attributes(clinic_params)
   	if @clinic.save
-  	  redirect_to @clinic, notice: "クリニックの情報を更新しました"
+  	  redirect_to user_clinic_url(id: @clinic.user_id), notice: "クリニックの情報を更新しました"
   	else
       render "edit"
     end
@@ -51,7 +54,7 @@ class ClinicsController < ApplicationController
   def destroy
   	@clinic = current_user.clinic
   	@clinic.destroy
-  	redirect_to :clinics, notice: "クリニックを削除しました"
+  	redirect_to current_user, notice: "クリニックを削除しました"
   end
 
   private

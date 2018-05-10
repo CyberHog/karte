@@ -8,10 +8,8 @@
       </tr>
       <tr>
           <td width=350px>
-            <%= f.hidden_field :id %>
-            <%= f.hidden_field :clinic_id %>
-            <%= f.hidden_field :patient_id %>
-            <%= f.hidden_field :user_id %>
+            <%= f.hidden_field :publisher_id, value: current_user.id %>
+            <%= f.hidden_field :holder_id, value: @user %>
             <%= f.text_field :number, class: "validate" %>
           </td>
       </tr>
