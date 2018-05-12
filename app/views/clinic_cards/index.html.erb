@@ -1,7 +1,7 @@
 <%  @page_title = "診察券" %>
 <h1><%=  @page_title %></h1>
 
-<p><%= link_to "アカウント詳細へ戻る", @user %> | <%= link_to "新規作成", new_clinic_card_url %></p>
+<p><%= link_to "アカウント詳細へ戻る", @user %> | <%= link_to "新規作成", new_user_clinic_card_url(@user) %></p>
 
 <% if @clinic_card.present? %>
 
@@ -19,8 +19,8 @@
       </p>
       <span class="title"><%= clnic_card.holding_point %></span>
       <p class="secondary-content">
-        <%= link_to "編集", [:edit, clinic_card] %> |
-        <%= link_to "削除", clinic_card, method: :delete,
+        <%= link_to "編集", edit_user_clinic_card_url(id: clinic_card.user_id) %> |
+        <%= link_to "削除", user_clinic_card_url(id: clinic_card.user_id), method: :delete,
           data: { confirm: "本当に削除しますか?" } %>
       </p>
     </li>

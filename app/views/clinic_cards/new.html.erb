@@ -2,10 +2,17 @@
 
 <h1><%= @page_title %></h1>
 
-<p><%= link_to "一覧に戻る", :clinic_cards %></p>
+<p><%= link_to "一覧に戻る", user_clinic_cards_url(id: @clinic_card.user_id) %></p>
 
 <div class="row">
 
-<%= render "form" %>
+<%= form_with ([@user, @clinic_card]), url: user_clinic_card_url(id: @clinic_card.user_id) do |form| %>
+
+<%= render "form", form: form %>
 
 </div>
+
+<div class="col s2">
+<%= button_tag '作成する', class: "btn waves-effect waves-light btn", type: "button", onclick: "submit();" %>
+</div>
+<% end %>

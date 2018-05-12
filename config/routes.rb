@@ -22,26 +22,33 @@ Rails.application.routes.draw do
     collection { get "search" }
     resource :clinic do
       collection { get "search" }
+      resources :menus do
+        collection { get "search" }
+      end
+      resources :staffs do
+        collection { get "search" }
+      end
+      resources :medical_charts
     end
-    resources :patients
+    resources :medical_charts
     resources :notices, only: [:index]
     resources :addresses
-    resources :receipts
+    resources :clinic_cards
+    resources :patients_receipts do
+      resources :receipts
+    end
     resources :follows
   end
-  resources :patients do
-    resources :clinic_cards
+
+  resources :clinics do
+    collection { get "search" }
   end
-  resources :clinic_cards do
-    resources :patients_receipts
-  end
+
   resources :patients_receipts do
     resources :receipts
     resources :menus
   end
-  resources :receipts do
-    resources :menus
-  end
+
   resources :menus do
     collection { get "search" }
   end
@@ -49,10 +56,9 @@ Rails.application.routes.draw do
     collection { get "search" }
   end
   resources :medical_charts do
-    resources :staffs
   end
   resources :notices
-  resources :receipts
+
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: '/letter_opener'

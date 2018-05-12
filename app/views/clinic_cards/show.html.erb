@@ -4,7 +4,7 @@
 
 <div class="row">
 
-<p><%= link_to "診察券一覧", :clinic_cards %> | <%= link_to "編集", [:edit, @clinic_card] %></p>
+<p><%= link_to "診察券一覧", user_clinic_cards_url(id: @clinic_card.user_id) %> | <%= link_to "編集", edit_user_clinic_card_url %></p>
 
 <table class="highlight">
 

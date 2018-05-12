@@ -12,7 +12,7 @@
   <% unless @user.practice? %>
   <div class="row">
     <div class="col s12">
-      <p><%= link_to "診察券作成", new_clinic_card_url(@user), class: "btn waves-effect waves-light blue" %></p>
+      <p><%= link_to "診察券作成", new_user_clinic_card_url(@user), class: "btn waves-effect waves-light blue" %></p>
     </div>
   </div>
   <% end %>

@@ -1,6 +1,5 @@
 <p><%= current_user.clinic.name %> >> <%=  %></p>
 
-<%= form_for @clinic_card do |f| %>
 ...
   <table class="table table-striped table-bordered table-hover" width="350px">
       <tr>
@@ -8,16 +7,9 @@
       </tr>
       <tr>
           <td width=350px>
-            <%= f.hidden_field :publisher_id, value: current_user.id %>
-            <%= f.hidden_field :holder_id, value: @user %>
-            <%= f.text_field :number, class: "validate" %>
+            <%= form.hidden_field :publisher_id, value: current_user.id %>
+            <%= form.hidden_field :holder_id, value: @user.id %>
+            <%= form.text_field :number, class: "validate" %>
           </td>
       </tr>
   </table>
-
-
-      <div class="col s2">
-      <%= button_tag '作成する', class: "btn waves-effect waves-light btn", type: "button", onclick: "submit();" %>
-      </div>
-
-<% end %>

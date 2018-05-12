@@ -12,11 +12,13 @@ class ClinicCardsController < ApplicationController
 
   # 詳細
   def show
- 	  @clinic_card = ClinicCard.find(params[:id])
+    @user = User.find(params[:user_id])
+ 	  @clinic_card = @user.clinic_card
   end
 
   # 登録
   def new
+    @user = User.find(params[:user_id])
   	@clinic_card = ClinicCard.new
   end
 
@@ -25,7 +27,7 @@ class ClinicCardsController < ApplicationController
   	@clinic_card = ClinicCard.new(clinic_card_params)
     @clinic_card.holder = @user
   	if @clinic_card.save
-  	  redirect_to @clinic_card, notice: "診察券を作成しました"
+  	  redirect_to user_clinic_card_url(id: @clinic_card.user_id), notice: "診察券を作成しました"
   	else
   	  render "new"
   	end
@@ -33,15 +35,16 @@ class ClinicCardsController < ApplicationController
 
   # 編集
   def edit
+    @user = User.find(params[:user_id])
   	@clinic_card = holder.clinic_card
   end
 
   # 更新
   def  update
-  	@clinic_card = holder.clinic_cards.find(params[:id])
+  	@clinic_card = holder.clinic_card
   	@clinic_card.assign_attributes(clinic_card_params)
   	if @clinic_card.save
-  		redirect_to @clinic_card, notice: "診察券を更新しました"
+  		redirect_to user_clinic_cards_url(id: @clinic_card.user_id), notice: "診察券を更新しました"
   	else
   		render "edit"
   	end
@@ -49,7 +52,7 @@ class ClinicCardsController < ApplicationController
 
   # 削除
   def destroy
-  	@clinic_card = holder.clinic_cards.find(params[:id])
+  	@clinic_card = holder.clinic_card
   	@clinic_card.destroy
   	redirect_to :clinic_cards, notice: "診察券を削除しました"
   end
