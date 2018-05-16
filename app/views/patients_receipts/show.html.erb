@@ -11,27 +11,25 @@
   <%= @patients_receipt.id %>
   <tr>
     <th>支払日</th>
-    <td><%= @patients_receipt.payday %></td>
-  </tr>
-  <tr>
-    <th>支払う人</th>
-    <td><%= @patients_receipt.payee %></td>
-  </tr>
-  <% @patients_receipt.receipts.each do |receipt| %>
-  <tr>
+    <th>氏名</th>
     <th>サービス名</th>
-    <td><%= receipt.service %></td>
-  </tr>
-  <tr>
     <th>取得ポイント</th>
-    <td><%= receipt.gained_point %></td>
-  </tr>
-  <tr>
     <th>支払金額</th>
-    <td><%= receipt.payment %></td>
+    <th>支払方法</th>
   </tr>
   <tr>
-    <th>支払方法</th>
+    <td><%= @patients_receipt.payday %></td>
+    <td><%= @patients_receipt.payee %></td>
+  <% second_repeat = false %>
+  <% @patients_receipt.receipts.each do |receipt| %>
+  <% if second_repeat %>
+    <td></td><td></td>
+  <% else %>
+    <% second_repeat = true %>
+  <% end %>
+    <td><%= receipt.service %></td>
+    <td><%= receipt.gained_point %></td>
+    <td><%= receipt.payment %></td>
     <td><%= receipt.payment_method %></td>
   </tr>
   <% end %>

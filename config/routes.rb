@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     put 'users/follow/:user_id' => 'users#follow'
     put 'users/unfollow/:user_id' => 'users#unfollow'
 
+
   resources :users do
     collection { get "search" }
     resource :clinic do

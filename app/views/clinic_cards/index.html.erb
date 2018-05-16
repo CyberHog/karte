@@ -1,7 +1,7 @@
 <%  @page_title = "診察券" %>
 <h1><%=  @page_title %></h1>
 
-<p><%= link_to "アカウント詳細へ戻る", @user %> | <%= link_to "新規作成", new_user_clinic_card_url(@user) %></p>
+<p><%= link_to "アカウント詳細へ戻る", @user %> | <%= link_to "新規作成", new_user_clinic_card_url([@usre, @clinic_card]) %></p>
 
 <% if @clinic_card.present? %>
 
@@ -10,7 +10,7 @@
 
 <ul class="collection hoverable">
 
-  <% @clinic_cards.each do |clinic_card| %>
+  <% @user.clinic_cards.each do |clinic_card| %>
     <li class="collection-item avatar">
       <%= image_tag clinic_card.publisher.avatar.url, class: "circle" %>
       <p>

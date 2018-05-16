@@ -8,8 +8,10 @@ class User < ApplicationRecord
 
   has_one :clinic, dependent: :nullify
   has_one :address, dependent: :destroy
-  has_many :published_card, class_name: "ClinicCard", foreign_key: "publisher_id"
-  has_many :held_card, class_name: "ClinicCard", foreign_key: "holder_id"
+  has_many :published_cards, class_name: "ClinicCard", foreign_key: "publisher_id"
+  has_many :holders, through: :published_cards
+  has_many :held_cards, class_name: "ClinicCard", foreign_key: "holder_id"
+  has_many :publishers, through: :held_cards
   accepts_nested_attributes_for :address, allow_destroy: true
   has_many :notices, dependent: :destroy
 

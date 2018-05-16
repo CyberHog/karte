@@ -10,4 +10,5 @@ class ClinicCard < ApplicationRecord
               message: :invalid_card_number },
     length: { minimum: 1, maximum: 20 }
   validates :holding_point, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :publisher_id, :holder_id, presence: true
 end

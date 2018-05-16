@@ -1,9 +1,9 @@
 class ClinicCardsController < ApplicationController
   # 一覧
   def index
-    if params[:holder_id]
-      @user = User.find(params[:holder_id])
-      @clinic_cards = @user.clinic_cards
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+      @clinic_cards = @user.held_cards
     else
       @clinic_cards = ClinicCard.all
     end
@@ -13,17 +13,20 @@ class ClinicCardsController < ApplicationController
   # 詳細
   def show
     @user = User.find(params[:user_id])
- 	  @clinic_card = @user.clinic_card
+    @publisher = @user.clinic
+    @clinic_card = @user.held_cards
   end
 
   # 登録
   def new
     @user = User.find(params[:user_id])
   	@clinic_card = ClinicCard.new
+    @clinic_card.user_id = @user.id
   end
 
   # 作成
   def create
+    @user = User.find(params[:user_id])
   	@clinic_card = ClinicCard.new(clinic_card_params)
     @clinic_card.holder = @user
   	if @clinic_card.save

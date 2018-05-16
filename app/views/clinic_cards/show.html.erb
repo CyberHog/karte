@@ -4,14 +4,13 @@
 
 <div class="row">
 
-<p><%= link_to "診察券一覧", user_clinic_cards_url(id: @clinic_card.user_id) %> | <%= link_to "編集", edit_user_clinic_card_url %></p>
+<p><%= link_to "診察券一覧", :user_clinic_cards %> | <%= link_to "編集", edit_user_clinic_card_url %></p>
 
 <table class="highlight">
 
-  <%= @clinic_card.id %>
   <tr>
     <th>治療院名</th>
-    <td><%= @clinic_card.publisher.name %></td>
+    <td><%= @clinic_card.user.clinic.name %></td>
   </tr>
   <tr>
     <th>診察券番号</th>
