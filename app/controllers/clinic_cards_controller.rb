@@ -22,6 +22,7 @@ class ClinicCardsController < ApplicationController
     @user = User.find(params[:user_id])
   	@clinic_card = ClinicCard.new
     @clinic_card.user_id = @user.id
+    @cardid = ClinicCard.count + 1
   end
 
   # 作成
@@ -30,7 +31,7 @@ class ClinicCardsController < ApplicationController
   	@clinic_card = ClinicCard.new(clinic_card_params)
     @clinic_card.holder = @user
   	if @clinic_card.save
-  	  redirect_to user_clinic_card_url(id: @clinic_card.user_id), notice: "診察券を作成しました"
+  	  redirect_to user_clinic_card_url(id: @clinic_card.id), notice: "診察券を作成しました"
   	else
   	  render "new"
   	end

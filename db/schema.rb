@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20180501002252) do
     t.integer "clinic_id"
     t.integer "publisher_id"
     t.integer "holder_id"
-    t.integer "holding_point"
+    t.integer "holding_point", default: 0
     t.string "number", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

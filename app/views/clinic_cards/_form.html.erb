@@ -8,7 +8,6 @@
       <tr>
           <td width=350px>
             <%= form.hidden_field :publisher_id, value: current_user.id %>
-            <%= form.hidden_field :holder_id, value: @clinic_card.holder_id %>
             <%= form.text_field :number, class: "validate" %>
           </td>
       </tr>

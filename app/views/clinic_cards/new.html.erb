@@ -6,7 +6,7 @@
 
 <div class="row">
 
-<%= form_for [@user, @clinic_card], url: user_clinic_card_url(id: @clinic_card.user_id) do |form| %>
+<%= form_for [@user, @clinic_card] do |form| %>
 
 <%= render "form", form: form %>
 
