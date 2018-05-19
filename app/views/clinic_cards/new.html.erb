@@ -2,7 +2,7 @@
 
 <h1><%= @page_title %></h1>
 
-<p><%= link_to "一覧に戻る", user_clinic_cards_url(id: @clinic_card.user_id) %></p>
+<p><%= link_to "カード一覧に戻る", user_clinic_cards_url(id: @user.id) %></p>
 
 <div class="row">
 
@@ -12,7 +12,4 @@
 
 </div>
 
-<div class="col s2">
-<%= button_tag '作成する', class: "btn waves-effect waves-light btn", type: "button", onclick: "submit();" %>
-</div>
 <% end %>

@@ -4,13 +4,14 @@
 
 <div class="row">
 
-<p><%= link_to "診察券一覧", :user_clinic_cards %> | <%= link_to "編集", edit_user_clinic_card_url %></p>
+<p><%= link_to "診察券一覧", user_clinic_cards_url %> | <%= link_to "編集", edit_user_clinic_card_url %> | <%= link_to "削除", user_clinic_card_url(@user, @clinic_card), method: :delete,
+  data: { confirm: "本当に削除しますか?" } %></p>
 
 <table class="highlight">
 
   <tr>
     <th>治療院名</th>
-    <td><%= @clinic_card.user.clinic.name %></td>
+    <td><%= @clinic_card.publisher.clinic.name %></td>
   </tr>
   <tr>
     <th>診察券番号</th>
@@ -22,7 +23,8 @@
   </tr>
   <tr>
     <th>最終来院日</th>
-    <td><%= @clinic_card.holder.joins(:patients_receipt).select("patients_receipt.payday").last.attributes %></td>
+    <td>
+    </td>
   </tr>
 </table>
 

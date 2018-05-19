@@ -2,7 +2,9 @@
 
 <h1><%= @page_title %></h1>
 
-<p><%= link_to "一覧に戻る", :patients_receipts %></p>
+<p><%= current_user.clinic.name %> >> <%= @user.full_name %></p>
+
+<p><%= link_to "ユーザー一覧に戻る", users_url %> | <%= link_to "会計一覧", user_patients_receipts_url(id: @user.id) %></p>
 
 <div class="row">
 

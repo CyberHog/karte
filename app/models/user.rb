@@ -12,6 +12,12 @@ class User < ApplicationRecord
   has_many :holders, through: :published_cards
   has_many :held_cards, class_name: "ClinicCard", foreign_key: "holder_id"
   has_many :publishers, through: :held_cards
+  has_many :issued_receipts, class_name: "PatientsReceipt", foreign_key: "seller_id"
+  has_many :buyers, through: :issued_receipts
+  has_many :received_receipts, class_name: "PatientsReceipt", foreign_key: "buyer_id"
+  has_many :sellers, through: :received_receipts
+  has_many :clinic_cards
+  has_many :patients_receipts, through: :clinic_cards
   accepts_nested_attributes_for :address, allow_destroy: true
   has_many :notices, dependent: :destroy
 

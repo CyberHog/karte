@@ -26,10 +26,12 @@
        <%= user.id %>
     </p>
     <span class="title"><%= link_to user.full_name, user %></span>
+    <% unless user.practice? %>
     <p class="secondary-content">
-        <%= link_to "削除", user, method: :delete,
-          data: { confirm: "本当に削除しますか?" } %>
+      <%= link_to "お会計", new_user_patients_receipt_path(user, @clinic_card), class: "btn waves-effect waves-light blue"
+       %>
     </p>
+    <% end %>
   </li>
 
 <% end %>

@@ -110,12 +110,16 @@ ActiveRecord::Schema.define(version: 20180501002252) do
   end
 
   create_table "patients_receipts", force: :cascade do |t|
+    t.integer "user_id"
     t.integer "clinic_card_id"
+    t.integer "seller_id"
+    t.integer "buyer_id"
     t.date "payday"
-    t.string "payee"
+    t.string "payer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_card_id"], name: "index_patients_receipts_on_clinic_card_id"
+    t.index ["user_id"], name: "index_patients_receipts_on_user_id"
   end
 
   create_table "receipts", force: :cascade do |t|

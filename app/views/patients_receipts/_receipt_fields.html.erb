@@ -1,4 +1,4 @@
-<tr class="nested-fields">
+<tr class="nested-fields" width="1200px">
     <td width="240px">
       <%= f.select :service, Menu.all.map(&:content_name), id: "receipt_service",:include_blank => "選択して下さい" %>
     </td>
@@ -17,7 +17,7 @@
     <td width="240px">
       <%= f.select :payment_method, Receipt.payment_methods.keys %>
     </td>
-    <td>
+    <td width="240px">
       <%= link_to_remove_association '-', f, class: "btn waves-effect waves-light red hoverable" %>
     </td>
 </tr>

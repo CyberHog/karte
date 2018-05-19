@@ -4,7 +4,8 @@
 
 <div class="row">
 
-<p><%= link_to "お会計一覧", :patients_receipts %> | <%= link_to "編集", [:edit, @patients_receipt] %></p>
+<p><%= link_to "お会計一覧", user_patients_receipts_url %> | <%= link_to "編集", edit_user_patients_receipt_url %> | <%= link_to "削除", user_patients_receipt_url(@user, @patients_receipt), method: :delete,
+      data: { confirm: "本当に削除しますか?" } %></p>
 
 <table class="highlight">
 
@@ -19,7 +20,7 @@
   </tr>
   <tr>
     <td><%= @patients_receipt.payday %></td>
-    <td><%= @patients_receipt.payee %></td>
+    <td><%= @patients_receipt.payer %></td>
   <% second_repeat = false %>
   <% @patients_receipt.receipts.each do |receipt| %>
   <% if second_repeat %>

@@ -30,7 +30,6 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.assign_attributes(user_update_params)
-
     if @user.save 
       redirect_to @user, notice: "会員情報を更新しました"
     else

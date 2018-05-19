@@ -4,15 +4,12 @@
 
 <div class="row">
 
-<p><%= link_to "診察券詳細に戻る", user_clinic_card_url(id: @clinic_card.user_id) %></p>
+<p><%= link_to "診察券詳細に戻る", user_clinic_card_url %></p>
 
-<%= form_for ([@user, @clinic_card]) do |f| %>
+<%= form_for [@user, @clinic_card] do |form| %>
 
-<%= render "form" %>
+<%= render "form", form: form %>
 
 </div>
 
-<div class="col s2">
-<%= button_tag '更新する', class: "btn waves-effect waves-light btn", type: "button", onclick: "submit();" %>
-</div>
 <% end %>

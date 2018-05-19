@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     resources :addresses
     resources :clinic_cards
     resources :patients_receipts do
+      collection { get "search" }
       resources :receipts
     end
     resources :follows
