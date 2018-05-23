@@ -8,7 +8,8 @@
   <tr>
     <th width="100px"><%= form.label :card_number %></th>
     <td width="300px">
-        <%= form.text_field :card_number %>
+      <% value_number = @user.held_cards.find_by( publisher_id:current_user.id ).number %>
+      <%= form.text_field :card_number, value: value_number %>
     </td>
   </tr>
   <tr>

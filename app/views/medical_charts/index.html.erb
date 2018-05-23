@@ -1,6 +1,7 @@
 <% @page_title = "カルテ一覧" %>
 <h1><%= @user.full_name %>さんのカルテ</h1>
-<h3>診察券ID　<%=  %></h2>
+<% value_number = @user.held_cards.find_by( publisher_id:current_user.id ).number %>
+<h3>診察券ID　<%=  value_number %></h2>
 
 <p><%= link_to "患者一覧", users_url %></p>
 
