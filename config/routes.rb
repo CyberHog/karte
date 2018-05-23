@@ -23,15 +23,18 @@ Rails.application.routes.draw do
     collection { get "search" }
     resource :clinic do
       collection { get "search" }
-      resources :menus do
-        collection { get "search" }
       end
       resources :staffs do
         collection { get "search" }
       end
       resources :medical_charts
-    end
     resources :medical_charts
+    resources :menus do
+      collection { get "search" }
+    end
+    resources :staffs do
+      collection { get "search" }
+    end
     resources :notices, only: [:index]
     resources :addresses
     resources :clinic_cards
@@ -57,8 +60,7 @@ Rails.application.routes.draw do
   resources :staffs do
     collection { get "search" }
   end
-  resources :medical_charts do
-  end
+  resources :medical_charts
   resources :notices
 
 

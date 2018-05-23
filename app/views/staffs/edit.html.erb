@@ -4,11 +4,11 @@
 
 <div class="row">
 
-<p><%= link_to "スタッフ一覧に戻る", :staffs %></p>
+<p><%= link_to "スタッフ一覧に戻る", user_staffs_url(@staff) %></p>
 
-<%= form_for @staff do |form| %>
+<%= form_for [@user, @staff] do |form| %>
 <%= render "form", form: form %>
-<p><%= button_tag "更新", class: "btn waves-effect waves-light btn", type: "button", onclick: "submit();" %></p>
+<p><%= button_tag "更新", class: "btn waves-effect waves-light", type: "button", onclick: "submit();" %></p>
 <% end %>
 
 </div>

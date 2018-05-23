@@ -12,7 +12,7 @@
     <%= link_to "もっと読む", notice %></p>
     <%= render "footer", notice: notice %>
     <% end %>
-    <%= paginate @notices, class: "pagination" %>
+    <%= paginate @notices %>
     <% else %>
     <p>記事がありません</p>
     <% end %>

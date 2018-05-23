@@ -1,16 +1,16 @@
 <tr class="nested-fields" width="1200px">
     <td width="240px">
-      <%= f.select :service, Menu.all.map(&:content_name), id: "receipt_service",:include_blank => "選択して下さい" %>
+      <%= f.select :service, Menu.where(user_id: current_user.id).pluck(:content_name), id: "receipt_service",　include_blank: "選択して下さい" %>
     </td>
     <td width="240px">
       <%= javascript_tag do %>
-        point = <%= Menu.pluck(:attached_point) %>
+        point = <% Menu.where(user_id: current_user.id).pluck(:attached_point) %>
       <% end %>
       <%= f.text_field :gained_point, id: "receipt_point", class: "right-align" %>
     </td>
     <td width="240px">
       <%= javascript_tag do %>
-        payment = <%= Menu.pluck(:price) %>;
+        payment = <% Menu.where(user_id: current_user.id).pluck(:price) %>;
       <% end %>
     <%= f.text_field :payment, id: "receipt_payment", class: "right-align" %>
     </td>

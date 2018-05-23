@@ -1,8 +1,12 @@
 class MedicalChart < ApplicationRecord
-  has_many :clinics, through: :receipts, dependent: :nullify
+  # ユーザー
+  belongs_to :therapist, class_name: "User", optional: true
+  belongs_to :patient, class_name: "User", optional: true
+
   has_many :menus
   has_many :staffs
-  has_many :receipts
+  has_many :patients_receipts
+  has_many :clinic_cards
   
 
   validates :cc, :tx_comment, :comment, :visited_at, presence: true

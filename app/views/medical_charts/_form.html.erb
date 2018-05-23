@@ -1,9 +1,15 @@
 <%= render "shared/errors", obj: @medical_chart %>
 
+<%= form_for [@user, @medical_chart] do |form| %>
+
+<%= form.hidden_field :therapist_id, value: current_user.id %>
+
 <table class="highlight">
   <tr>
-    <th width="50px"><%= form.label :card_number %></th>
-    <td width="300px"><%= form.text_field :card_number %></td>
+    <th width="100px"><%= form.label :card_number %></th>
+    <td width="300px">
+        <%= form.text_field :card_number %>
+    </td>
   </tr>
   <tr>
     <th><%= form.label :visited_at %></th>
@@ -11,11 +17,11 @@
   </tr>
   <tr>
     <th><%= form.label :service %></th>
-    <td><%= form.select :service, Menu.all.map(&:content_name) %></td>
+    <td><%= form.select :service, Menu.where(user_id: current_user.id).pluck(:content_name) %></td>
   </tr>
   <tr>
     <th><%= form.label :staff_name %></th>
-    <td><%= form.select :staff_name, Staff.all.map(&:staff_name) %></td>
+    <td><%= form.select :staff_name, Staff.where(user_id: current_user.id, staff_suspension: false).pluck(:staff_name) %></td>
   </tr>
   <tr>
     <th><%= form.label :cc %></th>
@@ -30,3 +36,9 @@
     <td><%= form.text_area :comment, class: "materialize-textarea" %></td>
   </tr>
 </table>
+
+<div class="col s2">
+  <%= form.submit class: "btn waves-effect waves-light btn" %>
+</div>
+
+<% end %>

@@ -1,21 +1,22 @@
-<%  @page_title = "お会計管理" %>
+<%  @page_title = @user.full_name + "さんのお会計一覧" %>
 <h1><%=  @page_title %></h1>
 
 <p><%= current_user.clinic.name %> >> <%= @user.full_name %></p>
 
-<p><%= link_to "お会計登録", new_user_patients_receipt_url(@user, @patients_receipt), class: "waves-effect waves-light btn blue" %></p>
+<P><%= link_to "患者一覧へ", users_url %></P>
+<p><%= link_to "お会計新規登録", new_user_patients_receipt_url(@user, @patients_receipt), class: "waves-effect waves-light btn blue" %></p>
 
 <% if @user.received_receipts.present? %>
 <table class="highlight">
   <% @patients_receipts.each do |patients_receipt| %>
   <% if patients_receipt.buyer.id == @user.id %>
   <tr>
-    <th>支払日</th>
-    <th>氏名</th>
-    <th>サービス名</th>
-    <th>取得ポイント</th>
-    <th>支払金額</th>
-    <th>支払方法</th>
+    <th width="200px">支払日</th>
+    <th width="200px">氏名</th>
+    <th width="200px">サービス名</th>
+    <th width="200px">取得ポイント</th>
+    <th width="200px">支払金額</th>
+    <th width="200px">支払方法</th>
   </tr>
   <tr>
     <td><%= link_to patients_receipt.payday, user_patients_receipt_url(id: patients_receipt.id) %></td>
@@ -28,11 +29,11 @@
      <% second_repeat = true %>
    <% end %>
     <td><%= receipt.service %></td>
-    <td style= "text-align: right"><%= receipt.gained_point %></td>
-    <td style= "text-align: right"><%= receipt.payment %></td>
+    <td><%= receipt.gained_point %></td>
+    <td><%= receipt.payment %></td>
     <td><%= receipt.payment_method %></td>
-    <% end %>
   </tr>
+  <% end %>
   <% end %>
   <% end %>
 </table>

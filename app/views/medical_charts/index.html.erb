@@ -1,8 +1,10 @@
 <% @page_title = "カルテ一覧" %>
-<h1><%= current_user.full_name %>さんのカルテ</h1>
-<h3>診察券ID　10000</h2>
+<h1><%= @user.full_name %>さんのカルテ</h1>
+<h3>診察券ID　<%=  %></h2>
 
-<p><%= link_to "新規作成", :new_medical_chart, class: "btn waves-effect waves-light btn blue" %></p>
+<p><%= link_to "患者一覧", users_url %></p>
+
+<p><%= link_to "新規作成", [:new, @user, :medical_chart], class: "btn waves-effect waves-light blue" %></p>
 
 <div class="row">
 
@@ -16,23 +18,20 @@
       <th>主訴</th>
       <th>施術内容</th>
       <th>コメント</th>
-      <th>操作</th>
     </tr>
     <% @medical_charts.each do |medical_chart| %>
+    <% if medical_chart.patient.id == @user.id %>
     <tr>
-      <td><%= medical_chart.visited_at.strftime("%Y/%m/%d") %></td>
+      <td><%= link_to medical_chart.visited_at.strftime("%Y/%m/%d"), user_medical_chart_url(id: medical_chart.id) %></td>
       <td><%= medical_chart.service %></td>
       <td><%= medical_chart.staff_name %></td>
-      <td><%= link_to medical_chart.cc, medical_chart %></td>
+      <td><%= medical_chart.cc %></td>
       <td><%= truncate(medical_chart.tx_comment,:length => 12) %>
-        <%= link_to "全て表示", medical_chart %></td>
+        <%= link_to "全て表示", user_medical_chart_url(id: medical_chart.id) %></td>
       <td><%= truncate(medical_chart.comment,:length => 12) %>
-        <%= link_to "全て表示", medical_chart %></td>
-      <td>
-        <%= link_to "編集", [:edit, medical_chart] %> |
-        <%= link_to "削除",  medical_chart, method: :delete, data: { confirm: "本当に削除しますか？" } %>
-      </td>
+        <%= link_to "全て表示", user_medical_chart_url(id: medical_chart.id) %></td>
     </tr>
+    <% end %>
     <% end %>
   </table>
   <%= paginate @medical_charts %>

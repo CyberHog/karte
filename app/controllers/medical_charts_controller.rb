@@ -1,33 +1,45 @@
 class MedicalChartsController < ApplicationController
   # 記事一覧
   def index
-  	@medical_charts = MedicalChart.order(visited_at: :desc)
-  		.reverse_order.page(params[:page]).per(10)
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+  	  @medical_charts = @user.received_charts
+    else
+      @medical_charts = MedicalChart.all
+    end
+    @medical_charts = MedicalChart.order(visited_at: :desc)
+      .reverse_order.page(params[:page]).per(10)
   end
 
   # カルテ詳細
   def show
+    @user = User.find(params[:user_id])
   	@medical_chart = MedicalChart.find(params[:id])
   end
 
   # 新規登録フォーム
   def new
+    @user = User.find(params[:user_id])
   	@medical_chart = MedicalChart.new(visited_at: Time.current)
-  end
-
-  # 編集フォーム
-  def edit
-  	@medical_chart = MedicalChart.find(params[:id])
+    @medical_chart.user_id = @user.id
   end
 
   # 新規作成フォーム
   def create
+    @user = User.find(params[:user_id])
   	@medical_chart = MedicalChart.new(medical_chart_params)
+    @medical_chart.patient = @user
   	if @medical_chart.save
-  		redirect_to @medical_chart, notice: "カルテを登録しました"
+  		redirect_to user_medical_chart_url(id: @medical_chart.id), notice: "カルテを登録しました"
   	else
   		render "new"
   	end
+  end
+
+  # 編集フォーム
+  def edit
+    @user = User.find(params[:user_id])
+    @medical_chart = MedicalChart.find(params[:id])
   end
 
   # 更新
@@ -35,7 +47,7 @@ class MedicalChartsController < ApplicationController
   	@medical_chart = MedicalChart.find(params[:id])
   	@medical_chart.assign_attributes(medical_chart_params)
   	if @medical_chart.save
-  		redirect_to @medical_chart, notice: "カルテを更新しました"
+  		redirect_to user_medical_charts_url(id: @medical_chart.id), notice: "カルテを更新しました"
   	else
   		render "edit"
   	end
@@ -45,7 +57,7 @@ class MedicalChartsController < ApplicationController
   def destroy
   	@medical_chart = MedicalChart.find(params[:id])
   	@medical_chart.destroy
-  	redirect_to @medical_charts
+  	redirect_to user_medical_charts_url(id: @medical_chart.id), notice: "カルテを削除しました"
   end
 
   def br(str) 
@@ -54,6 +66,6 @@ class MedicalChartsController < ApplicationController
 
   private
   def medical_chart_params
-    params.require(:medical_chart).permit(:card_number, :visited_at, :service, :staff_name, :cc, :tx_comment, :comment)
+    params.require(:medical_chart).permit(:id, :user_id, :therapist_id, :patient_id, :card_number, :visited_at, :service, :staff_name, :cc, :tx_comment, :comment)
   end
 end

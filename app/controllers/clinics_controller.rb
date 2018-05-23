@@ -27,7 +27,7 @@ class ClinicsController < ApplicationController
     @clinic = Clinic.new(clinic_params)
     @clinic.owner = current_user
     if @clinic.save
-      redirect_to user_clinic_url(id: @clinic.user_id), notice: "クリニックを登録しました"
+      redirect_to user_clinic_url(id: @clinic.id), notice: "クリニックを登録しました"
     else
       render "new"
     end

@@ -1,8 +1,14 @@
 class StaffsController < ApplicationController
   # スタッフ一覧
   def index
-  	@staffs = Staff.order("staff_number")
-  end
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+      @staffs = @user.staffs
+    else
+      @staffs = Staff.all
+    end
+  	  @staffs = Staff.order("staff_number")
+    end
 
   # 検索
   def search
@@ -12,22 +18,25 @@ class StaffsController < ApplicationController
 
   # 新規作成フォーム
   def new
+    @user = User.find(params[:user_id])
   	@staff = Staff.new
-  end
-
-  # 更新フォーム
-  def edit
-  	@staff = Staff.find(params[:id])
   end
 
   # スタッフ新規登録
   def create
   	@staff = Staff.new(staff_params)
+    @staff.owner = current_user
   	if @staff.save
-  		redirect_to :staffs, notice: "スタッフを登録しました"
+  		redirect_to user_staffs_url(id: @staff.id), notice: "スタッフを登録しました"
   	else
   		render "new"
   	end
+  end
+
+  # 更新フォーム
+  def edit
+    @user = User.find(params[:user_id])
+    @staff = Staff.find(params[:id])
   end
 
   # スタッフ情報の更新
@@ -35,7 +44,7 @@ class StaffsController < ApplicationController
   	@staff = Staff.find(params[:id])
   	@staff.assign_attributes(staff_params)
   	if @staff.save
-  		redirect_to :staffs, notice: "スタッフを更新しました"
+  		redirect_to user_staffs_url(id: @staff.id), notice: "スタッフを更新しました"
   	else
   		render "edit"
   	end
@@ -45,11 +54,11 @@ class StaffsController < ApplicationController
   def destroy
   	@staff = Staff.find(params[:id])
   	@staff.destroy
-  	redirect_to :staffs, notice: "スタッフを削除しました"
+  	redirect_to user_staffs_url(id: @staff.id), notice: "スタッフを削除しました"
   end
 
   private
   def staff_params
-  	params.require(:staff).permit(:staff_number, :staff_name, :staff_suspension)
+  	params.require(:staff).permit(:user_id, :staff_number, :staff_name, :staff_suspension)
   end
 end

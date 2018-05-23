@@ -2,16 +2,14 @@
 
 <h1><%= @page_title %></h1>
 
-<p><%= link_to "一覧に戻る", :medical_charts %></p>
+<p><%= current_user.clinic.name %> >> <%= @user.full_name %></p>
+
+<p><%= link_to "患者一覧", users_url %> | <%= link_to "カルテ一覧", [@user, :medical_charts] %></p>
 
 <div class="row">
+  <div class="col s10">
 
-  <%= form_for @medical_chart do |form| %>
+  <%= render "form" %>
 
-    <%= render "form", form: form %>
-
-    <p><%= button_tag '登録', class: "btn waves-effect waves-light btn", type: "button", onclick: "submit();" %></p>
-    
-  <% end %>
-
+  </div>
 </div>

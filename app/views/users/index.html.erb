@@ -1,4 +1,4 @@
-<%  @page_title = "ユーザー一覧" %>
+<%  @page_title = "患者一覧" %>
 <h1><%=  @page_title %></h1>
 
 <div class="row">
@@ -28,7 +28,8 @@
     <span class="title"><%= link_to user.full_name, user %></span>
     <% unless user.practice? %>
     <p class="secondary-content">
-      <%= link_to "お会計", new_user_patients_receipt_path(user, @clinic_card), class: "btn waves-effect waves-light blue"
+      <%= link_to "カルテ", user_medical_charts_path(user, @medical_cahart), class: "btn waves-effect waves-light blue" %>
+      <%= link_to "お会計", user_patients_receipts_path(user, @clinic_card), class: "btn waves-effect waves-light blue"
        %>
     </p>
     <% end %>

@@ -3,11 +3,11 @@ class ClinicCardsController < ApplicationController
   def index
     if params[:user_id]
       @user = User.find(params[:user_id])
-      @clinic_cards = @user.held_cards
+      @clinic_cards = @user.published_cards
     else
       @clinic_cards = ClinicCard.all
     end
-    @clinic_cards = ClinicCard.order(":id").reverse_order.page(params[:page]).per(10)
+    @clinic_cards = ClinicCard.order(:id).reverse_order.page(params[:page]).per(10)
   end
 
   # 詳細
@@ -55,7 +55,7 @@ class ClinicCardsController < ApplicationController
 
   # 削除
   def destroy
-  	@clinic_card = holder.clinic_card
+    @clinic_card = ClinicCard.find(params[:id])
   	@clinic_card.destroy
   	redirect_to user_clinic_cards_url(id: @clinic_card.id), notice: "診察券を削除しました"
   end

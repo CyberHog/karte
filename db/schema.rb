@@ -73,6 +73,9 @@ ActiveRecord::Schema.define(version: 20180501002252) do
   end
 
   create_table "medical_charts", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "therapist_id"
+    t.integer "patient_id"
     t.integer "card_number"
     t.date "visited_at"
     t.string "service"
@@ -82,10 +85,11 @@ ActiveRecord::Schema.define(version: 20180501002252) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_medical_charts_on_user_id"
   end
 
   create_table "menus", force: :cascade do |t|
-    t.integer "clinic_id"
+    t.integer "user_id"
     t.integer "receipt_id"
     t.integer "content_id"
     t.string "content_name"
@@ -93,8 +97,8 @@ ActiveRecord::Schema.define(version: 20180501002252) do
     t.integer "attached_point"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["clinic_id"], name: "index_menus_on_clinic_id"
     t.index ["receipt_id"], name: "index_menus_on_receipt_id"
+    t.index ["user_id"], name: "index_menus_on_user_id"
   end
 
   create_table "notices", force: :cascade do |t|
@@ -134,15 +138,15 @@ ActiveRecord::Schema.define(version: 20180501002252) do
   end
 
   create_table "staffs", force: :cascade do |t|
-    t.integer "clinic_id"
+    t.integer "user_id"
     t.integer "medical_chart_id"
     t.integer "staff_number", null: false
     t.string "staff_name", null: false
     t.boolean "staff_suspension", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["clinic_id"], name: "index_staffs_on_clinic_id"
     t.index ["medical_chart_id"], name: "index_staffs_on_medical_chart_id"
+    t.index ["user_id"], name: "index_staffs_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,7 +1,8 @@
 class ClinicCard < ApplicationRecord
-  belongs_to :clinic, optional: true
+  # ユーザー
   belongs_to :publisher, class_name: "User", optional: true
   belongs_to :holder, class_name: "User", optional: true
+  
   has_many :patients_receipts, dependent: :nullify
   has_many :receipts, through: :patients_receipts
 

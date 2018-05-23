@@ -1,6 +1,6 @@
 <%= form_for [@user, @patients_receipt] do |f| %>
 ...
-  <table class="table table-striped table-bordered table-hover">
+  <table class="table table-striped table-bordered table-hover highlight">
     <tbody>
       <%= f.hidden_field :seller_id, value: current_user.id %>
       <tr>

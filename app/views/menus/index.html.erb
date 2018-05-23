@@ -1,14 +1,20 @@
 <%  @page_title = "メニュー管理" %>
 <h1><%=  @page_title %></h1>
 
-<%= form_tag :search_menus, method: :get do %>
+<div class="row">
+<div class="col s8">
+<%= form_tag :search_user_menus, method: :get do %>
   <p><%= text_field_tag "q", params[:q] %>
-  <%= button_tag "検索", class: "btn waves-effect waves-light btn", type: "button", onclick: "submit();" %></p>
+  <%= button_tag "検索", class: "btn waves-effect waves-light", type: "button", onclick: "submit();" %></p>
 <% end %>
 
-<p><%= link_to "メニュー新規作成", :new_menu, class: "btn waves-effect waves-light btn blue" %></p>
+<p><%= link_to "メニュー新規作成", [:new, @user, :menu], class: "btn waves-effect waves-light blue" %></p>
 
-<% if @menus.present? %>
+</div>
+</div>
+
+
+<% if current_user.menus.present? %>
 <table class="highlight">
   <tr>
     <th>コースID</th>
@@ -18,17 +24,19 @@
     <th>操作</th>
   </tr>
   <% @menus.each do |menu| %>
+  <% if menu.user_id == current_user.id %>
   <tr>
     <td><%= menu.content_id %></td>
-    <td><%= link_to menu.content_name, menu %></td>
+    <td><%= link_to menu.content_name, user_menu_url(id: menu.id) %></td>
     <td><%= menu.price %></td>
     <td><%= menu.attached_point %></td>
     <td>
-      <%= link_to "編集", [:edit, menu] %> |
-      <%= link_to "削除", menu, method: :delete,
+      <%= link_to "編集", edit_user_menu_url(id: menu.id) %> |
+      <%= link_to "削除",user_menu_url(id: menu.id), method: :delete,
             data: { confirm: "本当に削除しますか?" } %>
     </td>
   </tr>
+  <% end %>
   <% end %>
 </table>
 <% else %>

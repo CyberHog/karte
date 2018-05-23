@@ -4,19 +4,25 @@
 
 <div class="row">
 
-<p><%= link_to "お会計一覧", user_patients_receipts_url %> | <%= link_to "編集", edit_user_patients_receipt_url %> | <%= link_to "削除", user_patients_receipt_url(@user, @patients_receipt), method: :delete,
-      data: { confirm: "本当に削除しますか?" } %></p>
+<p>
+  <%= link_to "お会計一覧", user_patients_receipts_url %> | <%= link_to "編集", edit_user_patients_receipt_url %>
+</p>
+<p>
+  <%= link_to "会計情報の削除", user_patients_receipt_url(@user, @patients_receipt), class: "btn waves-effect waves-light red", method: :delete,
+      data: { confirm: "本当に削除しますか?" } %>
+  <%= link_to "カルテ入力", new_user_medical_chart_path(@user, @medical_cahart), class: "btn waves-effect waves-light blue" %>
+</p>
 
 <table class="highlight">
 
   <%= @patients_receipt.id %>
   <tr>
-    <th>支払日</th>
-    <th>氏名</th>
-    <th>サービス名</th>
-    <th>取得ポイント</th>
-    <th>支払金額</th>
-    <th>支払方法</th>
+    <th width="200px">支払日</th>
+    <th width="200px">氏名</th>
+    <th width="200px">サービス名</th>
+    <th width="200px">取得ポイント</th>
+    <th width="200px">支払金額</th>
+    <th width="200px">支払方法</th>
   </tr>
   <tr>
     <td><%= @patients_receipt.payday %></td>

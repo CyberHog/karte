@@ -1,6 +1,12 @@
 class MenusController < ApplicationController
   # メニュー一覧
   def index
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+      @menus = @user.menus
+    else
+      @menus = Menu.all
+    end
   	@menus = Menu.order("content_id")
   end
 
@@ -12,27 +18,31 @@ class MenusController < ApplicationController
 
   # メニュー詳細
   def show
+    @user = User.find(params[:user_id])
   	@menu = Menu.find(params[:id])
   end
 
   # 新規作成フォーム
   def new
+    @user = User.find(params[:user_id])
  	  @menu = Menu.new
-  end
-
-  # 更新フォーム
-  def edit
- 	  @menu = Menu.find(params[:id])
   end
 
   # メニュー新規登録
   def create
  	  @menu = Menu.new(menu_params)
+    @menu.owner = current_user
  	  if @menu.save
- 	    redirect_to @menu, notice: "メニューを登録しました"
+ 	    redirect_to user_menu_url(id: @menu.id), notice: "メニューを登録しました"
  	  else
  	    render "new"
  	  end
+  end
+
+  # 更新フォーム
+  def edit
+    @user = User.find(params[:user_id])
+    @menu = Menu.find(params[:id])
   end
 
   # メニュー情報の更新
@@ -40,7 +50,7 @@ class MenusController < ApplicationController
   	@menu = Menu.find(params[:id])
   	@menu.assign_attributes(menu_params)
   	if @menu.save
-  	  redirect_to @menu, notice: "メニューを更新しました"
+  	  redirect_to user_menus_url(id: @menu.id), notice: "メニューを更新しました"
   	else
   	  render "edit"
   	end
@@ -50,11 +60,11 @@ class MenusController < ApplicationController
   def destroy
   	@menu = Menu.find(params[:id])
   	@menu.destroy
-  	redirect_to :menus, notice: "メニューを削除しました"
+  	redirect_to user_menus_url(id: @menu.id), notice: "メニューを削除しました"
   end
 
   private
   def menu_params
-    params.require(:menu).permit(:content_id, :content_name, :price, :attached_point)
+    params.require(:menu).permit(:user_id, :content_id, :content_name, :price, :attached_point)
   end
 end
