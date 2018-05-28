@@ -24,13 +24,15 @@ Rails.application.routes.draw do
     resource :clinic do
       collection { get "search" }
     end
-      resources :medical_charts
     resources :medical_charts
     resources :menus do
       collection { get "search" }
     end
     resources :staffs do
       collection { get "search" }
+    end
+    resources :coupons do
+      collection { get "search"}
     end
     resources :notices, only: [:index]
     resources :addresses

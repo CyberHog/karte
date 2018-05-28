@@ -19,6 +19,7 @@
   <% end %>
 
   <% unless @user.id == current_user.id %>
+    <% if current_user.practice? %>
     <% unless @user.practice? %>
       <% if creatable %>
       <div class="row">
@@ -29,6 +30,7 @@
       <div class="col s12">
         <%= link_to "診察券一覧", user_clinic_cards_url(@user) %></div></div>
       <% end %>
+    <% end %>
     <% end %>
   <% end %>
 

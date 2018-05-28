@@ -19,6 +19,7 @@ class MedicalChartsController < ApplicationController
 
   # 新規登録フォーム
   def new
+    @staff_name = Staff.where(user_id: current_user.id, staff_suspension: false).pluck(:staff_name)
     @user = User.find(params[:user_id])
   	@medical_chart = MedicalChart.new(visited_at: Time.current)
     @medical_chart.user_id = @user.id
@@ -38,6 +39,7 @@ class MedicalChartsController < ApplicationController
 
   # 編集フォーム
   def edit
+    @staff_name = Staff.where(user_id: current_user.id, staff_suspension: false).pluck(:staff_name)
     @user = User.find(params[:user_id])
     @medical_chart = MedicalChart.find(params[:id])
   end

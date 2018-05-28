@@ -1,0 +1,40 @@
+<%  @page_title = "クーポン一覧" %>
+<h1><%= @user.full_name + "さんの" + @page_title %></h1>
+
+<div class="row">
+<div class="col s8">
+<%= form_tag :search_user_menus, method: :get do %>
+  <p><%= text_field_tag "q", params[:q] %>
+  <%= button_tag "検索", class: "btn waves-effect waves-light", type: "button", onclick: "submit();" %></p>
+<% end %>
+
+</div>
+</div>
+
+
+<% if @user.received_coupons.present? %>
+<div class="row">
+<div class="col s8">
+
+<ul class="collection hoverable">
+
+  <% @coupons.each do |coupon| %>
+  <% if coupon.buyer.id == @user.id %>
+    <li class="collection-item avatar">
+      <%= image_tag coupon.seller.avatar.url, class: "circle" %>
+      <p><%= coupon.seller.clinic.name %><br>
+          <%= link_to coupon.name, user_coupon_url(id: coupon.id) %>
+      </p>
+      <span class="title">残り回数<%= coupon.remaining %></span>
+      <p class="secondary-content">有効期限<%= coupon.holding_point %>P</p>
+    </li>
+  <% end %>
+  <% end %>
+</ul>
+
+</div>
+</div>
+
+<% else %>
+<p>現在診察券を保有していません。</p>
+<% end %>

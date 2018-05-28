@@ -7,10 +7,17 @@ class Menu < ApplicationRecord
   validates :content_id, presence: true,
 		numericality: { only_integer: true,
 		greater_than: 0, allow_blank: true}
+  validates :coupon, inclusion: { in: [true, false] }
   validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :attached_point, presence: true,
   		numericality: { only_integer: true,
   			allow_blank: true }
+  validates :count, :validity_period, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, if: :coupon?
+
+
+  def coupon?
+    coupon == true
+  end
 
   class << self
   	def search(query)

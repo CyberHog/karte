@@ -5,9 +5,19 @@
 
   <div class="row">
 
-    <div class="col s12">
-      <%= f.file_field :avatar %>
-      <%= f.hidden_field :avatar_cache %>
+    <div  class="col s8">
+    <form action="#">
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>ファイルを選択</span>
+          <%= f.file_field :avatar %>
+          <%= f.hidden_field :avatar_cache %>
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+      </div>
+    </form>
     </div>
 
     <div class="input-field col s6">

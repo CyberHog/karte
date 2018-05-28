@@ -1,16 +1,16 @@
 <tr class="nested-fields" width="1200px">
     <td width="240px">
-      <%= f.select :service, Menu.where(user_id: current_user.id).pluck(:content_name), id: "receipt_service",　include_blank: "選択して下さい" %>
+      <%= f.select :service, @menu_name, {include_blank: "選択して下さい"}, id: "receipt_service" %>
     </td>
     <td width="240px">
       <%= javascript_tag do %>
-        point = <% Menu.where(user_id: current_user.id).pluck(:attached_point) %>
+        point = <%= @menu_point %>;
       <% end %>
       <%= f.text_field :gained_point, id: "receipt_point", class: "right-align" %>
     </td>
     <td width="240px">
       <%= javascript_tag do %>
-        payment = <% Menu.where(user_id: current_user.id).pluck(:price) %>;
+        payment = <%= @menu_price %>;
       <% end %>
     <%= f.text_field :payment, id: "receipt_payment", class: "right-align" %>
     </td>
@@ -20,4 +20,18 @@
     <td width="240px">
       <%= link_to_remove_association '-', f, class: "btn waves-effect waves-light red hoverable" %>
     </td>
+    <%= javascript_tag do %>
+      name = <%= raw @menu_name %>;
+      count = <%= Menu.where(user_id: current_user.id).pluck(:count) %>;
+      validity = <%= Menu.where(user_id: current_user.id).pluck(:validity_period) %>
+      time = <%= Time.now %>
+      expiration_date = time + <%= hidden_field_tag id: "validity" %> * 60 * 60 * 24
+    <% end %>
+    <%= f.fields_for :coupons do |c| %>
+    <%= c.text_field :seller_id, value: current_user.id %>
+    <%= c.text_field :buyer_id, value: @user.id %>
+    <%= c.text_field :name, id: "coupon_name" %>
+    <%= c.text_field :remaining, id: "coupon_remaining" %>
+    <%= c.date_field :expiration_date, id: "coupon_life" %>
+    <% end %>
 </tr>

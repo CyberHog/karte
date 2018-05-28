@@ -24,6 +24,11 @@ class User < ApplicationRecord
   has_many :patients, through: :completed_charts
   has_many :received_charts, class_name: "MedicalChart", foreign_key: "patient_id"
   has_many :therapists, through: :received_charts
+  # クーポン
+  has_many :issued_coupons, class_name: "Coupon", foreign_key: "seller_id"
+  has_many :buyers, through: :issued_coupons
+  has_many :received_coupons, class_name: "Coupon", foreign_key: "buyer_id"
+  has_many :sellers, through: :received_coupons
 
   has_many :clinic_cards
   has_many :patients_receipts, through: :clinic_cards

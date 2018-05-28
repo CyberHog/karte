@@ -65,6 +65,6 @@ class MenusController < ApplicationController
 
   private
   def menu_params
-    params.require(:menu).permit(:user_id, :content_id, :content_name, :price, :attached_point)
+    params.require(:menu).permit(:user_id, :content_id, :content_name, :price, :attached_point, :coupon, :count, :validity_period)
   end
 end

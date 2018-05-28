@@ -47,15 +47,17 @@ ActiveRecord::Schema.define(version: 20180501002252) do
   end
 
   create_table "coupons", force: :cascade do |t|
-    t.integer "patient_id"
-    t.integer "clinic_id"
+    t.integer "user_id"
     t.integer "menu_id"
+    t.integer "seller_id"
+    t.integer "buyer_id"
+    t.string "name"
     t.integer "remaining"
+    t.time "expiration_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["clinic_id"], name: "index_coupons_on_clinic_id"
     t.index ["menu_id"], name: "index_coupons_on_menu_id"
-    t.index ["patient_id"], name: "index_coupons_on_patient_id"
+    t.index ["user_id"], name: "index_coupons_on_user_id"
   end
 
   create_table "follows", force: :cascade do |t|
@@ -95,6 +97,9 @@ ActiveRecord::Schema.define(version: 20180501002252) do
     t.string "content_name"
     t.integer "price"
     t.integer "attached_point"
+    t.boolean "coupon", default: false
+    t.integer "count"
+    t.integer "validity_period"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["receipt_id"], name: "index_menus_on_receipt_id"

@@ -1,0 +1,15 @@
+<% @page_title = "クーポンの編集" %>
+
+<h1><%= @page_title %></h1>
+
+<div class="row">
+
+<p><%= link_to "クーポンの詳細に戻る", user_coupon_url(@coupon) %></p>
+
+<%= form_for [@user, @coupon] do |form| %>
+
+<%= render "form", form: form %>
+
+</div>
+
+<% end %>

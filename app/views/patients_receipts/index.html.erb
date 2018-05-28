@@ -1,12 +1,18 @@
 <%  @page_title = @user.full_name + "さんのお会計一覧" %>
 <h1><%=  @page_title %></h1>
 
-<p><%= current_user.clinic.name %> >> <%= @user.full_name %></p>
+<p>
+  <% if current_user.clinic.present? %>
+    <%= current_user.clinic.name %>
+  <% else %>
+    <%= current_user.full_name %>
+  <% end %>
+   >> <%= @user.full_name %></p>
 
 <P><%= link_to "患者一覧へ", users_url %></P>
 <p><%= link_to "お会計新規登録", new_user_patients_receipt_url(@user, @patients_receipt), class: "waves-effect waves-light btn blue" %></p>
 
-<% if @user.received_receipts.present? %>
+<% if @user.received_receipts.where(seller_id: current_user.id).present? %>
 <table class="highlight">
   <% @patients_receipts.each do |patients_receipt| %>
   <% if patients_receipt.buyer.id == @user.id %>

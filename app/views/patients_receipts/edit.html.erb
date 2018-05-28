@@ -2,7 +2,13 @@
 
 <h1><%= @page_title %></h1>
 
-<p><%= current_user.clinic.name %> >> <%= @user.full_name %></p>
+<p>
+  <% if current_user.clinic.present? %>
+    <%= current_user.clinic.name %>
+  <% else %>
+    <%= current_user.full_name %>
+  <% end %>
+   >> <%= @user.full_name %></p>
 
 <div class="row">
 

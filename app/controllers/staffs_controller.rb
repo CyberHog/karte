@@ -12,6 +12,7 @@ class StaffsController < ApplicationController
 
   # 検索
   def search
+    @user = User.find(params[:user_id])
   	@staffs = Staff.search(params[:q])
   	render "index"
   end

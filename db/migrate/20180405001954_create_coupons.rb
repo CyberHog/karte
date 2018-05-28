@@ -1,10 +1,13 @@
 class CreateCoupons < ActiveRecord::Migration[5.1]
   def change
     create_table :coupons do |t|
-      t.references :patient, foreign_key: true	# patientモデルへの外部キー
-      t.references :clinic, foreign_key: true	# clinicモデルへの外部キー
-      t.references :menu, foreign_key: true		# menuモデルへの外部キー
-      t.integer :remaining						# 残り回数
+      t.references :user, foreign_key: true	# userモデルへの外部キー
+      t.references :menu, foreign_key: true	# menuモデルへの外部キー
+      t.integer :seller_id					        # クーポン発行者のID
+      t.integer :buyer_id					          # クーポン購入者のID
+      t.string :name                        # クーポン名
+      t.integer :remaining					        # 残り回数
+      t.time :expiration_date               # 有効期限 年月日
 
       t.timestamps
     end

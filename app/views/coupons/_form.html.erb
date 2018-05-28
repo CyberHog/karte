@@ -1,0 +1,27 @@
+<%= render "shared/errors", obj: @coupon %>
+
+<p>
+  <% if current_user.clinic.present? %>
+    <%= current_user.clinic.name %>
+  <% else %>
+    <%= current_user.full_name %>
+  <% end %>
+    >> <%= @user.full_name %></p>
+
+<%= form.hidden_field :seller_id, value: current_user.id %>
+<%= form.hidden_field :buyer_id, value: @user.id %>
+
+<table class="highlight">
+  <tr>
+    <th><%= form.label :name %></th>
+    <td><%= form.text_field :name  %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :remaining %></th>
+    <td><%= form.text_field :remaining %></td>
+  </tr>
+</table>
+
+<div class="col s2">
+  <%= form.submit class: "btn waves-effect waves-light btn" %>
+</div>

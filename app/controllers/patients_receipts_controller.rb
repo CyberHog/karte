@@ -18,10 +18,15 @@ class PatientsReceiptsController < ApplicationController
 
   # 登録
   def new
+    @menu_name = Menu.where(user_id: current_user.id).pluck(:content_name)
+    @menu_point = Menu.where(user_id: current_user.id).pluck(:attached_point)
+    @menu_price = Menu.where(user_id: current_user.id).pluck(:price)
     @user = User.find(params[:user_id])
   	@patients_receipt = PatientsReceipt.new(payday: Time.current)
     @patients_receipt.user_id = @user.id
     @patients_receipt.receipts.build
+    @coupon = Coupon.new
+    @coupon.user_id = @user.id
   end
 
   # 作成
@@ -34,10 +39,21 @@ class PatientsReceiptsController < ApplicationController
     else
       render "new"
     end
+
+    @coupon = Coupon.new(coupon_params)
+    @coupon.buyer = @user
+    if @coupon.save
+      recirect_to user_patients_receipt_url(id: @patients_receipt.id), notice: "登録完了しました"
+    else
+      render "new"
+    end
   end
 
   # 編集
   def edit
+    @menu_name = Menu.where(user_id: current_user.id).pluck(:content_name)
+    @menu_point = Menu.where(user_id: current_user.id).pluck(:attached_point)
+    @menu_price = Menu.where(user_id: current_user.id).pluck(:price)
     @user = User.find(params[:user_id])
   	@patients_receipt = PatientsReceipt.find(params[:id])
   end
@@ -62,6 +78,11 @@ class PatientsReceiptsController < ApplicationController
 
   private
   def patients_receipt_params
-  	params.require(:patients_receipt).permit(:id, :user_id, :seller_id, :buyer_id, :payday, :payer, receipts_attributes: [:id, :patients_receipt_id, :service, :payment, :gained_point, :payment_method, :_destroy])
+  	params.require(:patients_receipt).permit(:id, :user_id, :seller_id, :buyer_id, :payday, :payer,
+     receipts_attributes: [:id, :patients_receipt_id, :service, :payment, :gained_point, :payment_method, :_destroy])
+  end
+
+  def coupon_params
+    params.require(:coupon).permit(:id, :user_id, :seller_id, :buyer_id, :name, :remaining, :expiration_date)
   end
 end

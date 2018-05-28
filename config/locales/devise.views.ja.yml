@@ -78,6 +78,9 @@
         content_name: "コース名"
         price: "価格"
         attached_point: "ポイント"
+        coupon: "回数券"
+        count: "利用可能回数"
+        validity_period: "有効日数"
       notice:
         title: "タイトル"
         body: "本文"
@@ -105,6 +108,10 @@
         staff_number: "スタッフID"
         staff_name: "名前"
         staff_suspension: "状態"
+      coupon:
+        name: "クーポン名"
+        remaining: "残り回数"
+        expiration_date: "有効期限"
   views:
     pagination:
       first: "&laquo; 最初"

@@ -1,7 +1,10 @@
 <% @page_title = "カルテ一覧" %>
 <h1><%= @user.full_name %>さんのカルテ</h1>
+
+<% if @user.held_cards.find_by( publisher_id:current_user.id ).present? %>
 <% value_number = @user.held_cards.find_by( publisher_id:current_user.id ).number %>
 <h3>診察券ID　<%=  value_number %></h2>
+<% end %>
 
 <p><%= link_to "患者一覧", users_url %></p>
 
@@ -9,7 +12,7 @@
 
 <div class="row">
 
-<% if @medical_charts.present? %>
+<% if @user.received_charts.where(therapist_id: current_user.id).present? %>
 <%= paginate @medical_charts %>
   <table class="highlight">
     <tr>
