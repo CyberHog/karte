@@ -7,6 +7,11 @@
 <p>
   <%= link_to "お会計一覧", user_patients_receipts_url %> | <%= link_to "編集", edit_user_patients_receipt_url %>
 </p>
+
+<% if @selected_menu.coupon %>
+<p><%= link_to "お会計新規登録", new_user_coupon_url(@user, @coupon), class: "waves-effect waves-light btn blue" %></p>
+<% end %>
+
 <p>
   <%= link_to "会計情報の削除", user_patients_receipt_url(@user, @patients_receipt), class: "btn waves-effect waves-light red", method: :delete,
       data: { confirm: "本当に削除しますか?" } %>

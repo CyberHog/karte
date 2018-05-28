@@ -2,17 +2,40 @@ class CouponsController < ApplicationController
   def index
   	if params[:user_id]
   	  @user = User.find(params[:user_id])
-  	  @coupons = @user.coupons
+  	  @coupons = @user.issued_coupons
   	else
   	  @coupons = Coupon.all
   	end
-  	@coupons = Coupon.order("id")
+  	@coupons = Coupon.order(:id)
   end
 
   def show
   	@user = User.find(params[:user_id])
   	@coupon = Coupon.find(params[:id])
   end
+
+  def new
+    @patients_receipt = PatintsReceipt.find(params[:patients_receipt_id])
+    selected_menu = Menu.where(user_id: current_user.id, content_name: @patients_receipt.service)
+    @remaining = selected_menu.remaining
+    validity_period = selected_menu.validity_period
+    @expiration_date = @patients_receipt.created_at + validity_period * 60 * 24
+    @coupon_life = ( @expiration_date - Time.now )/(60 * 60 * 24).to_i
+    @user = User.find(params[:user_id])
+    @coupon = Coupon.new
+    @coupon.user_id = @user.id
+  end
+
+  def create
+    @user = User.fidn(params[:user_id])
+    @patients_receipt = PatientsReceipt.find(params[:patients_receip_id])
+    @coupon = Coupon.new(coupon_params)
+    @coupon.buyer = @user
+    if @coupon.save
+      recirect_to user_patients_receipts_url(id: @patients_receipt.id), notice: "登録完了しました"
+    else
+      render "new"
+    end
 
   def edit
   	@user = User.find(prams[:user_id])
@@ -37,5 +60,5 @@ class CouponsController < ApplicationController
 
   private
   def coupon_params
-  	params.require(:coupon).premit(:name, :remaining, :expiration_date)
+  	params.require(:coupon).premit(:seller_id, :buyer_id, :name, :remaining, :expiration_date)
 end

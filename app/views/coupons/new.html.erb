@@ -1,0 +1,19 @@
+<% @page_title = "クーポンの新規登録" %>
+
+<h1><%= @page_title %></h1>
+
+<p>
+  <% if current_user.clinic.present? %>
+    <%= current_user.clinic.name %>
+  <% else %>
+    <%= current_user.full_name %>
+  <% end %>
+   >> <%= @user.full_name %></p>
+
+<p><%= link_to "会計一覧", user_patients_receipts_url(id: @user.id) %> | <%= link_to "所有クーポン一覧", user_coupons_url(id: @user.id) %></p>
+
+<div class="row">
+
+<%= render "form" %>
+
+</div>

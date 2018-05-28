@@ -20,18 +20,4 @@
     <td width="240px">
       <%= link_to_remove_association '-', f, class: "btn waves-effect waves-light red hoverable" %>
     </td>
-    <%= javascript_tag do %>
-      name = <%= raw @menu_name %>;
-      count = <%= Menu.where(user_id: current_user.id).pluck(:count) %>;
-      validity = <%= Menu.where(user_id: current_user.id).pluck(:validity_period) %>
-      time = <%= Time.now %>
-      expiration_date = time + <%= hidden_field_tag id: "validity" %> * 60 * 60 * 24
-    <% end %>
-    <%= f.fields_for :coupons do |c| %>
-    <%= c.text_field :seller_id, value: current_user.id %>
-    <%= c.text_field :buyer_id, value: @user.id %>
-    <%= c.text_field :name, id: "coupon_name" %>
-    <%= c.text_field :remaining, id: "coupon_remaining" %>
-    <%= c.date_field :expiration_date, id: "coupon_life" %>
-    <% end %>
 </tr>
