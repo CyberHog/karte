@@ -14,7 +14,7 @@
 <table class="highlight">
   <tr>
     <th><%= form.label :name %></th>
-    <td><%= form.text_field :name, value: @paticents_receipt.service  %></td>
+    <td><%= form.text_field :name, value: @course %></td>
   </tr>
   <tr>
     <th><%= form.label :remaining %></th>
@@ -22,7 +22,7 @@
   </tr>
   <tr>
     <th><%= form.label :expiration_date %></th>
-    <td><%= form.text_field :remaining, value: @expiration_date %><p>残り<%= @coupon_life %>日</p></td>
+    <td><%= form.text_field :remaining, value: simple_time(@expiration_date) %>残り<%= @coupon_life %>日</td>
   </tr>
 </table>
 
