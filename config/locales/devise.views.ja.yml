@@ -65,7 +65,6 @@
       medical_chart:
         card_number: "診察券ID"
         visited_at: "施術日"
-        service: "コース名"
         staff_name: "担当者"
         cc: "主訴"
         tx_comment: "施術内容"
@@ -73,6 +72,8 @@
       clinic_card:
         number: "診察券番号"
         holding_point: "保有ポイント"
+      karte_menu:
+        course: "コース名"
       menu:
         content_id: "コースID"
         content_name: "コース名"

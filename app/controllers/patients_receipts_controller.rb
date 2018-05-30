@@ -14,8 +14,10 @@ class PatientsReceiptsController < ApplicationController
   def show
     @user = User.find(params[:user_id])
   	@patients_receipt = PatientsReceipt.find(params[:id])
-    @receipt = Receipt.where(patients_receipt_id: @patients_receipt.id)
-    @selected_menu = Menu.where(user_id: current_user.id, content_name: @receipt.service)
+    @patients_receipt.receipts.each do |receipt|
+      @course = receipt.service
+    end
+    @selected_menu = Menu.where(user_id: current_user.id, content_name: @course.to_s)
   end
 
   # 登録

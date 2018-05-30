@@ -12,7 +12,7 @@ class Menu < ApplicationRecord
   validates :attached_point, presence: true,
   		numericality: { only_integer: true,
   			allow_blank: true }
-  validates :count, :validity_period, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, if: :coupon?
+  validates :counting, :validity_period, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, if: :coupon?
 
 
   def coupon?

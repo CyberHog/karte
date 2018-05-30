@@ -15,11 +15,14 @@ class CouponsController < ApplicationController
   end
 
   def new
-    @patients_receipt = PatintsReceipt.find(params[:patients_receipt_id])
-    selected_menu = Menu.where(user_id: current_user.id, content_name: @patients_receipt.service)
-    @remaining = selected_menu.remaining
-    validity_period = selected_menu.validity_period
-    @expiration_date = @patients_receipt.created_at + validity_period * 60 * 24
+    @patients_receipt = PatientsReceipt.find(params[:patients_receipt_id])
+    @patients_receipt.receipts.each do |receipt|
+      @course = receipt.service
+    end
+    selected_menu = Menu.where(user_id: current_user.id, content_name: @course.to_s)
+    @remaining = selected_menu.select("counting")
+    validity = selected_menu.select("validity_period")
+    @expiration_date = @patients_receipt.created_at + validity*(60*60*24)
     @coupon_life = ( @expiration_date - Time.now )/(60 * 60 * 24).to_i
     @user = User.find(params[:user_id])
     @coupon = Coupon.new
@@ -36,6 +39,7 @@ class CouponsController < ApplicationController
     else
       render "new"
     end
+  end
 
   def edit
   	@user = User.find(prams[:user_id])
@@ -60,5 +64,6 @@ class CouponsController < ApplicationController
 
   private
   def coupon_params
-  	params.require(:coupon).premit(:seller_id, :buyer_id, :name, :remaining, :expiration_date)
+  	params.require(:coupon).premit(:patients_receipt_id, :seller_id, :buyer_id, :name, :remaining, :expiration_date)
+  end
 end

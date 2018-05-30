@@ -15,6 +15,16 @@
     <th>コース名</th>
     <td><%= @menu.content_name %></td>
   </tr>
+  <% if @menu.coupon %>
+  <tr>
+    <th>使用可能回数</th>
+    <td><%= @menu.counting %>回</td>
+  </tr>
+  <tr>
+    <th>有効期間</th>
+    <td><%= @menu.validity_period %>日間</td>
+  </tr>
+  <% end %>
   <tr>
     <th>価格</th>
     <td><%= @menu.price %></td>

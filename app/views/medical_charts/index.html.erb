@@ -15,25 +15,33 @@
 <% if @user.received_charts.where(therapist_id: current_user.id).present? %>
 <%= paginate @medical_charts %>
   <table class="highlight">
+    <% @medical_charts.each do |medical_chart| %>
+    <% if medical_chart.patient.id == @user.id %>
     <tr>
       <th>日付</th>
-      <th>コース</th>
       <th>担当者</th>
       <th>主訴</th>
       <th>施術内容</th>
       <th>コメント</th>
+      <th>コース</th>
     </tr>
-    <% @medical_charts.each do |medical_chart| %>
-    <% if medical_chart.patient.id == @user.id %>
     <tr>
       <td><%= link_to medical_chart.visited_at.strftime("%Y/%m/%d"), user_medical_chart_url(id: medical_chart.id) %></td>
-      <td><%= medical_chart.service %></td>
       <td><%= medical_chart.staff_name %></td>
       <td><%= medical_chart.cc %></td>
       <td><%= truncate(medical_chart.tx_comment,:length => 12) %>
         <%= link_to "全て表示", user_medical_chart_url(id: medical_chart.id) %></td>
       <td><%= truncate(medical_chart.comment,:length => 12) %>
         <%= link_to "全て表示", user_medical_chart_url(id: medical_chart.id) %></td>
+        <% second_repeat = false %>
+        <% medical_chart.karte_menus.each do |karte_menu| %>
+        <td><%= karte_menu.course %>
+        <% if second_repeat %>
+          <td></td><td></td><td></td><td></td><td></td>
+        <% else %>
+          <% second_repeat = true %>
+        <% end %>
+        <% end %>
     </tr>
     <% end %>
     <% end %>

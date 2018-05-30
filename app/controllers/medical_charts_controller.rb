@@ -1,4 +1,4 @@
-class MedicalChartsController < ApplicationController
+ class MedicalChartsController < ApplicationController
   # 記事一覧
   def index
     if params[:user_id]
@@ -23,6 +23,7 @@ class MedicalChartsController < ApplicationController
     @user = User.find(params[:user_id])
   	@medical_chart = MedicalChart.new(visited_at: Time.current)
     @medical_chart.user_id = @user.id
+    @medical_chart.karte_menus.build
   end
 
   # 新規作成フォーム
@@ -68,6 +69,7 @@ class MedicalChartsController < ApplicationController
 
   private
   def medical_chart_params
-    params.require(:medical_chart).permit(:id, :user_id, :therapist_id, :patient_id, :card_number, :visited_at, :service, :staff_name, :cc, :tx_comment, :comment)
+    params.require(:medical_chart).permit(:id, :user_id, :therapist_id, :patient_id, :card_number, :visited_at, :service, :staff_name, :cc, :tx_comment, :comment,
+      karte_menus_attributes: [:id, :medical_chart_id, :course, :_destroy])
   end
 end

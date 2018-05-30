@@ -1,0 +1,11 @@
+<tr class="nested-fields">
+  <th width="150px">
+    <%= f.label :course %>
+  </th>
+  <td width="400px">
+    <%= f.select :course, Menu.where(user_id: current_user.id).pluck(:content_name), class: "browser-default", id: "select" %>
+  </td>
+  <td width="200px">
+    <%= link_to_remove_association '-', f, class: "btn waves-effect waves-light red hoverable" %>
+  </td>
+</tr>

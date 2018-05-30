@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180501002252) do
+ActiveRecord::Schema.define(version: 20180528120353) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "user_id"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20180501002252) do
     t.integer "user_id"
     t.integer "menu_id"
     t.integer "patients_receipt_id"
+    t.integer "receipt_id"
     t.integer "seller_id"
     t.integer "buyer_id"
     t.string "name"
@@ -59,6 +60,7 @@ ActiveRecord::Schema.define(version: 20180501002252) do
     t.datetime "updated_at", null: false
     t.index ["menu_id"], name: "index_coupons_on_menu_id"
     t.index ["patients_receipt_id"], name: "index_coupons_on_patients_receipt_id"
+    t.index ["receipt_id"], name: "index_coupons_on_receipt_id"
     t.index ["user_id"], name: "index_coupons_on_user_id"
   end
 
@@ -74,6 +76,14 @@ ActiveRecord::Schema.define(version: 20180501002252) do
     t.index ["followable_type", "followable_id"], name: "index_follows_on_followable_type_and_followable_id"
     t.index ["follower_id", "follower_type"], name: "fk_follows"
     t.index ["follower_type", "follower_id"], name: "index_follows_on_follower_type_and_follower_id"
+  end
+
+  create_table "karte_menus", force: :cascade do |t|
+    t.integer "medical_chart_id"
+    t.string "course"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["medical_chart_id"], name: "index_karte_menus_on_medical_chart_id"
   end
 
   create_table "medical_charts", force: :cascade do |t|
@@ -100,7 +110,7 @@ ActiveRecord::Schema.define(version: 20180501002252) do
     t.integer "price"
     t.integer "attached_point"
     t.boolean "coupon", default: false
-    t.integer "count"
+    t.integer "counting"
     t.integer "validity_period"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

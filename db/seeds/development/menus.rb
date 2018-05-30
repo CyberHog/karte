@@ -61,7 +61,7 @@ menu = Menu.create(
 	price: "30000",
 	attached_point: "300",
 	coupon: true,
-	count: 6,
+	counting: 6,
 	validity_period: "180"
 	)
 menu = Menu.create(
@@ -78,7 +78,7 @@ menu = Menu.create(
 	price: "30000",
 	attached_point: "300",
 	coupon: true,
-	count: 12,
+	counting: 12,
 	validity_period: "180"
 	)
 menu = Menu.create(
@@ -119,6 +119,6 @@ menu = Menu.create(
 	price: "50000",
 	attached_point: "500",
 	coupon: true,
-	count: "6",
+	counting: 6,
 	validity_period: "210"
 	)

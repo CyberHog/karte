@@ -1,3 +1,4 @@
+
 <%= render "shared/errors", obj: @medical_chart %>
 
 <%= form_for [@user, @medical_chart] do |form| %>
@@ -6,9 +7,10 @@
 <%= form.hidden_field :patient_id, value: @user.id %>
 
 <table class="highlight">
+  <tbody>
   <tr>
-    <th width="100px"><%= form.label :card_number %></th>
-    <td width="300px">
+    <th width="150px"><%= form.label :card_number %></th>
+    <td width="500px">
       <% if @user.held_cards.find_by( publisher_id:current_user.id ).present? %>
         <% value_number = @user.held_cards.find_by( publisher_id:current_user.id ).number %>
       <%= form.text_field :card_number, value: value_number %>
@@ -18,10 +20,6 @@
   <tr>
     <th><%= form.label :visited_at %></th>
     <td><%= form.date_field :visited_at, class: "validate", autocomplete: "visited_at" %></td>
-  </tr>
-  <tr>
-    <th><%= form.label :service %></th>
-    <td><%= form.select :service, Menu.where(user_id: current_user.id).pluck(:content_name) %></td>
   </tr>
   <tr>
     <th><%= form.label :staff_name %></th>
@@ -39,8 +37,16 @@
     <th><%= form.label :comment %></th>
     <td><%= form.text_area :comment, class: "materialize-textarea" %></td>
   </tr>
-</table>
+  <%= form.fields_for :karte_menus do |q| %>
 
+    <%= render "karte_menu_fields", f: q %></th>
+
+  <% end %>
+  </tbody>
+</table>
+<div class="links col s10">
+<%= link_to_add_association '+', form, :karte_menus, class: "btn waves-effect waves-light green hoverable" %>
+</div>
 <div class="col s2">
   <%= form.submit class: "btn waves-effect waves-light btn" %>
 </div>

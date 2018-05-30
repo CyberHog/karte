@@ -21,7 +21,11 @@
   </tr>
   <tr>
     <th>コース</th>
-    <td><%= @medical_chart.service %></td>
+    <td>
+      <% @medical_chart.karte_menus.each do |karte_menu| %>
+      <%= karte_menu.course %>
+      <% end %>
+    </td>
   </tr>
   </tr>
   <tr>

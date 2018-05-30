@@ -8,7 +8,7 @@ class CreateMenus < ActiveRecord::Migration[5.1]
       t.integer :price							              # 価格
       t.integer :attached_point					          # ポイント
       t.boolean :coupon, default: false           # 回数券?
-      t.integer :count                            # 使用可能回数
+      t.integer :counting                         # 使用可能回数
       t.integer :validity_period                  # 有効期間　〜日間
 
       t.timestamps

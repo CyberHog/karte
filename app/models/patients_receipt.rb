@@ -4,6 +4,7 @@ class PatientsReceipt < ApplicationRecord
   belongs_to :buyer, class_name: "User", optional: true		# 支払人
   has_many :receipts, dependent: :destroy, inverse_of: :patients_receipt
   accepts_nested_attributes_for :receipts, allow_destroy: true
+  has_many :coupons, through: :receipts
 
   validates :payday, :payer, presence: true
 end

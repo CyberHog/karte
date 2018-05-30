@@ -17,7 +17,6 @@ medical_chart = MedicalChart.create(
 	patient_id: "5",
 	card_number: "1235",
     visited_at: "2018-5-22",
-    service: "鍼60",
     staff_name: "佐藤",
     cc: "腰部痛",
     tx_comment: "腰部から臀部、下肢を中心に施術を行いました。
@@ -31,7 +30,6 @@ medical_chart = MedicalChart.create(
     patient_id: "6",
     card_number: "A0005",
     visited_at: "2018-4-29",
-    service: "オイルマッサージ90分",
     staff_name: "笑福亭",
     cc: "腹部の痩身",
     tx_comment: "腹部周りの脂肪を中心に揉みほぐしていきました。長年溜め込んだ脂肪がかなり固まっておりましたが、90分でなんとかほぐれてきました。
