@@ -20,8 +20,8 @@ class CouponsController < ApplicationController
       @course = receipt.service
     end
     selected_menu = Menu.where(user_id: current_user.id, content_name: @course.to_s)
-    @remaining = selected_menu.select("counting")
-    validity = selected_menu.select("validity_period")
+    @remaining = selected_menu.select("counting").to_s.to_i
+    validity = selected_menu.select("validity_period").to_s.to_i
     @expiration_date = @patients_receipt.created_at + validity*(60*60*24)
     @coupon_life = ( @expiration_date - Time.now )/(60 * 60 * 24).to_i
     @user = User.find(params[:user_id])

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   }
 
     root "users#index"
+    get "users/search"
     get "users/:id", to: "users#show"
     get "users/edit"
     get "users/followers/:user_id", to: "users#followers", as: "users_followers"

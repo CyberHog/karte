@@ -80,7 +80,7 @@
         price: "価格"
         attached_point: "ポイント"
         coupon: "回数券"
-        count: "利用可能回数"
+        counting: "利用可能回数"
         validity_period: "有効日数"
       notice:
         title: "タイトル"

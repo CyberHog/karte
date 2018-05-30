@@ -1,5 +1,5 @@
 // 価格とポイントの自動入力
-$(function () {
+document.addEventListener('turbolinks:load', function () {
     $('select').on('change', function () {
         var i = $("#receipt_service").prop("selectedIndex");
         // 初期値に「選択して下さい」が入っているため -1
