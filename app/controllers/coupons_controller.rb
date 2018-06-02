@@ -12,6 +12,7 @@ class CouponsController < ApplicationController
   def show
   	@user = User.find(params[:user_id])
   	@coupon = Coupon.find(params[:id])
+    @coupon_life = (( @coupon.expiration_date - Time.now )/(60 * 60 * 24)).to_i
   end
 
   def new
