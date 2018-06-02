@@ -26,7 +26,7 @@
           <%= link_to coupon.name, user_coupon_url(id: coupon.id) %>
       </p>
       <span class="title">残り回数<%= coupon.remaining %></span>
-      <p class="secondary-content">有効期限<%= coupon.holding_point %>P</p>
+      <p class="secondary-content">有効期限<%= simple_time(coupon.expiration_date) %>残り<%= @coupon_life %>日</p>
     </li>
   <% end %>
   <% end %>

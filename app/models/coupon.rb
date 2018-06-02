@@ -1,5 +1,4 @@
 class Coupon < ApplicationRecord
-  belongs_to :receipt, optional: true
   belongs_to :menu, optional: true
   belongs_to :patients_receipt, optional: true
   belongs_to :seller, class_name: "User", optional: true	# クリニック

@@ -15,13 +15,14 @@ class CouponsController < ApplicationController
   end
 
   def new
+    require 'time'
     @patients_receipt = PatientsReceipt.find(params[:patients_receipt_id])
     @patients_receipt.receipts.each do |receipt|
       @course = receipt.service
     end
-    selected_menu = Menu.where(user_id: current_user.id, content_name: @course.to_s)
-    @remaining = selected_menu.select("counting").to_s.to_i
-    validity = selected_menu.select("validity_period").to_s.to_i
+    selected_menu = Menu.find_by(user_id: current_user.id, content_name: @course.to_s)
+    @remaining = selected_menu.counting
+    validity = selected_menu.validity_period
     @expiration_date = @patients_receipt.created_at + validity*(60*60*24)
     @coupon_life = (( @expiration_date - Time.now )/(60 * 60 * 24)).to_i
     @user = User.find(params[:user_id])
@@ -30,12 +31,11 @@ class CouponsController < ApplicationController
   end
 
   def create
-    @user = User.fidn(params[:user_id])
-    @patients_receipt = PatientsReceipt.find(params[:patients_receip_id])
+    @user = User.find(params[:user_id])
     @coupon = Coupon.new(coupon_params)
     @coupon.buyer = @user
     if @coupon.save
-      recirect_to user_patients_receipts_url(id: @patients_receipt.id), notice: "登録完了しました"
+      redirect_to user_patients_receipts_url(:patients_receipt_id => @coupon.patients_receipt_id), notice: "登録完了しました"
     else
       render "new"
     end
@@ -64,6 +64,6 @@ class CouponsController < ApplicationController
 
   private
   def coupon_params
-  	params.require(:coupon).premit(:patients_receipt_id, :seller_id, :buyer_id, :name, :remaining, :expiration_date)
+  	params.require(:coupon).permit(:patients_receipt_id, :seller_id, :buyer_id, :name, :remaining, :expiration_date)
   end
 end

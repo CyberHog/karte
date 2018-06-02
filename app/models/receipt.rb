@@ -2,6 +2,7 @@ class Receipt < ApplicationRecord
   belongs_to :medical_chart, optional: true
   belongs_to :patients_receipt, optional: true
   has_many :menus, dependent: :nullify
+  has_many :coupons, dependent: :nullify
 
   enum payment_method: { 現金: 0, カード: 1, クーポン: 2, ポイント: 3 }
 

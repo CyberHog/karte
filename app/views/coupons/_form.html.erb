@@ -10,6 +10,9 @@
 
 <%= form.hidden_field :seller_id, value: current_user.id %>
 <%= form.hidden_field :buyer_id, value: @user.id %>
+<%= form.hidden_field :patients_receipt_id, value: @patients_receipt.id %>
+
+<%= @menu %>
 
 <table class="highlight">
   <tr>
@@ -18,11 +21,12 @@
   </tr>
   <tr>
     <th><%= form.label :remaining %></th>
-    <td><%= form.text_field :remaining, value: @remaining %></td>
+    <td><%= form.text_field :remaining, value: @remaining.to_s %></td>
   </tr>
   <tr>
     <th><%= form.label :expiration_date %></th>
-    <td><%= form.text_field :remaining, value: simple_time(@expiration_date) %>残り<%= @coupon_life %>日</td>
+    <td><%= form.text_field :expiration_date, value: simple_time(@expiration_date) %>残り<%= @coupon_life %>日
+    </td>
   </tr>
 </table>
 
