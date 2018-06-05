@@ -38,11 +38,11 @@ class PatientsReceiptsController < ApplicationController
     @patients_receipt.buyer = @user
     if @patients_receipt.save
       @patients_receipt.receipts.each do |receipt|
-        @coupon = receipt.payment_method  # @coupon,支払い方法
+        @payment = receipt.payment_method  # @payment,支払い方法
         @point = receipt.gained_point
       end
       # 支払いがクーポンの場合
-      if @coupon == "クーポン"  
+      if @payment == "クーポン"  
         @user.received_coupons.each do |coupon|
           @count = coupon.remaining # @count,クーポンの残り回数
         end
@@ -66,7 +66,7 @@ class PatientsReceiptsController < ApplicationController
       @clinic_card.assign_attributes(holding_point: added)
       @clinic_card.save
       # 支払いがポイントの場合
-      if @coupon == "ポイント"
+      if @payment == "ポイント"
         used_point = @clinic_card.holding_point - @point
         @clinic_card.assign_attributes(holding_point: used_point)
         @clinic_card.save
