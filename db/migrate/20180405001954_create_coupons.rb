@@ -8,7 +8,7 @@ class CreateCoupons < ActiveRecord::Migration[5.1]
       t.integer :buyer_id					          # クーポン購入者のID
       t.string :name                        # クーポン名
       t.integer :remaining					        # 残り回数
-      t.time :expiration_date               # 有効期限 年月日
+      t.datetime :expiration_date               # 有効期限 年月日
 
       t.timestamps
     end

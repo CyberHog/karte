@@ -2,7 +2,7 @@
 clinic_card = ClinicCard.create(
 	publisher_id: "1",
 	holder_id: "4",
-	holding_point: "0",
+	holding_point: "3000",
     number: "1234"
     )
 

@@ -1,6 +1,5 @@
 class Menu < ApplicationRecord
   belongs_to :owner, class_name: "User", foreign_key: "user_id", optional: true
-  belongs_to :receipt, optional: true
   belongs_to :medical_chart, optional: true
   has_many :coupons, dependent: :nullify
 

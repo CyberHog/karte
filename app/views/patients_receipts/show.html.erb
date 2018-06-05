@@ -8,7 +8,7 @@
   <%= link_to "お会計一覧", user_patients_receipts_url %> | <%= link_to "編集", edit_user_patients_receipt_url %>
 </p>
 
-
+<% if @selected_menu.coupon %>
 <% @coupon = Coupon.find_by(patients_receipt_id: @patients_receipt.id) %>
 <% unless @coupon.present? %>
   <p><%= link_to "クーポン登録", new_user_coupon_path(@user, @coupon, :patients_receipt_id => @patients_receipt.id), class: "waves-effect waves-light btn blue" %></p>
@@ -16,6 +16,7 @@
   <p>
     <%= link_to "クーポン詳細", user_coupon_url(@coupon, user_id: @user.id) %>
   </p>
+<% end %>
 <% end %>
 
 

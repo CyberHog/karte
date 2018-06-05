@@ -17,7 +17,7 @@ class PatientsReceiptsController < ApplicationController
     @patients_receipt.receipts.each do |receipt|
       @course = receipt.service
     end
-    @selected_menu = Menu.where(user_id: current_user.id, content_name: @course.to_s)
+    @selected_menu = Menu.find_by(user_id: current_user.id, content_name: @course.to_s)
   end
 
   # 登録
@@ -27,7 +27,7 @@ class PatientsReceiptsController < ApplicationController
     @menu_price = Menu.where(user_id: current_user.id).pluck(:price)
     @user = User.find(params[:user_id])
   	@patients_receipt = PatientsReceipt.new(payday: Time.current)
-    @patients_receipt.user_id = @user.id
+    @patients_receipt.buyer_id = @user.id
     @patients_receipt.receipts.build
   end
 
@@ -37,6 +37,40 @@ class PatientsReceiptsController < ApplicationController
     @patients_receipt = PatientsReceipt.new(patients_receipt_params)
     @patients_receipt.buyer = @user
     if @patients_receipt.save
+      @patients_receipt.receipts.each do |receipt|
+        @coupon = receipt.payment_method  # @coupon,支払い方法
+        @point = receipt.gained_point
+      end
+      # 支払いがクーポンの場合
+      if @coupon == "クーポン"  
+        @user.received_coupons.each do |coupon|
+          @count = coupon.remaining # @count,クーポンの残り回数
+        end
+        @using_coupon = Coupon.find_by(seller_id: current_user.id, buyer_id: @user.id)
+      # 使用可能回数が残っている場合
+        if @count >= 1
+          used = @using_coupon.remaining - 1 
+          @using_coupon.assign_attributes(remaining: used)
+          if @using_coupon.remaining == 0
+            @using_coupon.destroy
+          else
+            @using_coupon.save
+          end
+        else
+          render "new", notice: "クーポンは使用済みです"
+        end
+      end
+      # ポイント加算
+      @clinic_card = ClinicCard.find_by(publisher_id: current_user.id, holder_id: @user.id)
+      added = @clinic_card.holding_point + @point
+      @clinic_card.assign_attributes(holding_point: added)
+      @clinic_card.save
+      # 支払いがポイントの場合
+      if @coupon == "ポイント"
+        used_point = @clinic_card.holding_point - @point
+        @clinic_card.assign_attributes(holding_point: used_point)
+        @clinic_card.save
+      end
       redirect_to user_patients_receipt_url(id: @patients_receipt.id), notice: "登録完了しました"
     else
       render "new"
@@ -72,7 +106,7 @@ class PatientsReceiptsController < ApplicationController
 
   private
   def patients_receipt_params
-  	params.require(:patients_receipt).permit(:id, :user_id, :seller_id, :buyer_id, :payday, :payer,
+  	params.require(:patients_receipt).permit(:id, :seller_id, :buyer_id, :payday, :payer,
      receipts_attributes: [:id, :patients_receipt_id, :service, :payment, :gained_point, :payment_method, :_destroy])
   end
 end

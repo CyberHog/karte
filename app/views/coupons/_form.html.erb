@@ -21,11 +21,11 @@
   </tr>
   <tr>
     <th><%= form.label :remaining %></th>
-    <td><%= form.text_field :remaining, value: @remaining.to_s %></td>
+    <td><%= form.text_field :remaining, value: @remaining %></td>
   </tr>
   <tr>
     <th><%= form.label :expiration_date %></th>
-    <td><%= form.text_field :expiration_date, value: simple_time(@expiration_date) %>残り<%= @coupon_life %>日
+    <td><%= form.date_field :expiration_date %>残り<%= @coupon_life %>日
     </td>
   </tr>
 </table>

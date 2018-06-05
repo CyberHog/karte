@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20180528120353) do
     t.integer "buyer_id"
     t.string "name"
     t.integer "remaining"
-    t.time "expiration_date"
+    t.datetime "expiration_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["menu_id"], name: "index_coupons_on_menu_id"
@@ -102,7 +102,6 @@ ActiveRecord::Schema.define(version: 20180528120353) do
 
   create_table "menus", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "receipt_id"
     t.integer "content_id"
     t.string "content_name"
     t.integer "price"
@@ -112,7 +111,6 @@ ActiveRecord::Schema.define(version: 20180528120353) do
     t.integer "validity_period"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["receipt_id"], name: "index_menus_on_receipt_id"
     t.index ["user_id"], name: "index_menus_on_user_id"
   end
 
@@ -129,7 +127,6 @@ ActiveRecord::Schema.define(version: 20180528120353) do
   end
 
   create_table "patients_receipts", force: :cascade do |t|
-    t.integer "user_id"
     t.integer "clinic_card_id"
     t.integer "seller_id"
     t.integer "buyer_id"
@@ -138,7 +135,6 @@ ActiveRecord::Schema.define(version: 20180528120353) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clinic_card_id"], name: "index_patients_receipts_on_clinic_card_id"
-    t.index ["user_id"], name: "index_patients_receipts_on_user_id"
   end
 
   create_table "receipts", force: :cascade do |t|

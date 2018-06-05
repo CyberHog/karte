@@ -5,7 +5,7 @@ module ApplicationHelper
 		title
 	end
 
-	def simple_time(time)
-		time.strftime("%Y年%m月%d日 %H:%M ")
+	def simple_time(datetime)
+		datetime.strftime("%Y/%m/%d")
 	end
 end
