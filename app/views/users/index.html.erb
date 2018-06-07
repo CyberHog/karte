@@ -11,7 +11,6 @@
 </div>
 
 <% if @users.present? %>
-<%= paginate @users %>
 
 <div class="row">
 <div class="col s9">
@@ -19,7 +18,6 @@
 <ul class="collection hoverable">
 
 <% @users.each do |user| %>
-<% unless user.id == current_user.id %>
 <% unless user.practice? %>
 
 
@@ -33,6 +31,8 @@
        <% end %><br>
        <% if user.held_cards.find_by( publisher_id: current_user.id ).present? %>
         保有ポイント<%= user.held_cards.find_by( publisher_id: current_user.id).holding_point %>
+       <% else %>
+        保有ポイント 0
        <% end %>
     </p>
     <span class="title"><%= link_to user.full_name, user %></span>
@@ -47,14 +47,12 @@
 
 <% end %>
 <% end %>
-<% end %>
 
 </ul>
 
 </div>
 </div>
 
-<%= paginate @users %>
 <% else %>
 <p>患者が登録されていません</p>
 <% end %>

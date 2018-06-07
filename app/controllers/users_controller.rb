@@ -3,8 +3,8 @@ class UsersController < ApplicationController
 
   # 会員一覧
   def index
-    @users = User.order(current_user.id)
-      .page(params[:page]).per(10)
+    @users = current_user.all_following
+      
   end
 
   # 会員情報の詳細

@@ -36,44 +36,64 @@ class PatientsReceiptsController < ApplicationController
     @user = User.find(params[:user_id])
     @patients_receipt = PatientsReceipt.new(patients_receipt_params)
     @patients_receipt.buyer = @user
-    if @patients_receipt.save
-      @patients_receipt.receipts.each do |receipt|
-        @payment = receipt.payment_method  # @payment,支払い方法
-        @point = receipt.gained_point
+
+    # @payment支払い金額,@payment_method支払い方法,@point取得ポイント
+    @payer = patients_receipt_params[:payer]
+    puts "debug----"
+    puts @payer
+    puts "debug/---"
+    @payment = patients_receipt_params[:receipts][0][:payment]
+    @payment_method = patients_receipt_params[:receipts][0][:payment_method]
+    @point = patients_receipt_params[:receipts][0][:gained_point]
+    save_valid = true
+    # 支払いがクーポンの場合
+    if @payment_method == "クーポン"  
+      @user.received_coupons.each do |coupon|
+        @count = coupon.remaining # @count,クーポンの残り回数
       end
-      # 支払いがクーポンの場合
-      if @payment == "クーポン"  
-        @user.received_coupons.each do |coupon|
-          @count = coupon.remaining # @count,クーポンの残り回数
-        end
-        @using_coupon = Coupon.find_by(seller_id: current_user.id, buyer_id: @user.id)
+      @using_coupon = Coupon.find_by(seller_id: current_user.id, buyer_id: @user.id)
       # 使用可能回数が残っている場合
-        if @count >= 1
-          used = @using_coupon.remaining - 1 
-          @using_coupon.assign_attributes(remaining: used)
-          if @using_coupon.remaining == 0
-            @using_coupon.destroy
-          else
-            @using_coupon.save
-          end
+      if @count
+        used = @using_coupon.remaining - 1 
+        @using_coupon.assign_attributes(remaining: used)
+        if @using_coupon.remaining == 0
+          @using_coupon.destroy
         else
-          render "new", notice: "クーポンは使用済みです"
+          @using_coupon.save
         end
+      else
+        save_valid = false
+        render "new", notice: "クーポンは使用済みです"
       end
-      # ポイント加算
+    # 支払が現金またはカードの場合
+    elsif @payment_method == "現金" || @payment_method == "カード"
       @clinic_card = ClinicCard.find_by(publisher_id: current_user.id, holder_id: @user.id)
+      @holding_point = @clinic_card.holding_point
       added = @clinic_card.holding_point + @point
       @clinic_card.assign_attributes(holding_point: added)
       @clinic_card.save
-      # 支払いがポイントの場合
-      if @payment == "ポイント"
-        used_point = @clinic_card.holding_point - @point
+    # 支払いがポイントの場合
+    elsif @payment_method == "ポイント"
+      if @holding_point >= @payment
+        used_point = @clinic_card.holding_point - @payment
         @clinic_card.assign_attributes(holding_point: used_point)
         @clinic_card.save
+      else
+        save_valid = false
+        render "new", notice: "ポイントが不足しています。"
       end
-      redirect_to user_patients_receipt_url(id: @patients_receipt.id), notice: "登録完了しました"
-    else
-      render "new"
+    end
+    if save_valid
+      if @patients_receipt.save
+        puts "debug-------"
+        puts @payment_method
+        puts @payment
+        puts @point
+        puts "/debug------"
+        redirect_to user_patients_receipt_url(id: @patients_receipt.id), notice: "登録完了しました"
+      else
+        render "new"
+      end
     end
   end
 
