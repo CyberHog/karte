@@ -48,7 +48,6 @@ ActiveRecord::Schema.define(version: 20180528120353) do
 
   create_table "coupons", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "menu_id"
     t.integer "patients_receipt_id"
     t.integer "seller_id"
     t.integer "buyer_id"
@@ -57,7 +56,6 @@ ActiveRecord::Schema.define(version: 20180528120353) do
     t.datetime "expiration_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["menu_id"], name: "index_coupons_on_menu_id"
     t.index ["patients_receipt_id"], name: "index_coupons_on_patients_receipt_id"
     t.index ["user_id"], name: "index_coupons_on_user_id"
   end
