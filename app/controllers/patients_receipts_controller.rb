@@ -38,13 +38,11 @@ class PatientsReceiptsController < ApplicationController
     @patients_receipt.buyer = @user
 
     # @payment支払い金額,@payment_method支払い方法,@point取得ポイント
-    @payer = patients_receipt_params[:payer]
-    puts "debug----"
-    puts @payer
-    puts "debug/---"
-    @payment = patients_receipt_params[:receipts][0][:payment]
-    @payment_method = patients_receipt_params[:receipts][0][:payment_method]
-    @point = patients_receipt_params[:receipts][0][:gained_point]
+    @patients_receipt.receipts.each do |receipt|
+      @payment = receipt.payment
+      @payment_method = receipt.payment_method
+      @point = receipt.gained_point
+    end
     save_valid = true
     # 支払いがクーポンの場合
     if @payment_method == "クーポン"  
@@ -74,6 +72,8 @@ class PatientsReceiptsController < ApplicationController
       @clinic_card.save
     # 支払いがポイントの場合
     elsif @payment_method == "ポイント"
+      @clinic_card = ClinicCard.find_by(publisher_id: current_user.id, holder_id: @user.id)
+      @holding_point = @clinic_card.holding_point
       if @holding_point >= @payment
         used_point = @clinic_card.holding_point - @payment
         @clinic_card.assign_attributes(holding_point: used_point)
@@ -85,15 +85,12 @@ class PatientsReceiptsController < ApplicationController
     end
     if save_valid
       if @patients_receipt.save
-        puts "debug-------"
-        puts @payment_method
-        puts @payment
-        puts @point
-        puts "/debug------"
         redirect_to user_patients_receipt_url(id: @patients_receipt.id), notice: "登録完了しました"
       else
         render "new"
       end
+    else
+      render "new"
     end
   end
 
