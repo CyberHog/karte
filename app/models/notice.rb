@@ -1,6 +1,8 @@
 class Notice < ApplicationRecord
   belongs_to :author, class_name: "User", foreign_key: "user_id"
 
+  class << self; undef :open; end
+
   STATUS_VALUES = %w(draft member_only public)
 
   validates :title, presence: true, length: { maximum: 200 }
