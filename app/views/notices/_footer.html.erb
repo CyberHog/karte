@@ -7,6 +7,12 @@
       data: { confirm: "本当に削除しますか？" } %> |
   <% end %>
 <% end %>
-by <%= link_to notice.author.full_name, [notice.author, :notices] %> |
+by
+<% if notice.author.clinic.present? %>
+  <%= link_to notice.author.clinic.name, [notice.author, :notices] %>
+<% else %>
+  <%= link_to notice.author.full_name, [notice.author, :notices] %>
+<% end %>
+  |
 <%= notice.released_at.strftime("%Y/%m/%d") %>
 </P>

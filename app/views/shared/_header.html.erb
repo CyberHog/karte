@@ -9,18 +9,27 @@
     <a href="#!" class="brand-logo">Karte</a>
     <ul class="right hide-on-med-and-down">
       <% if user_signed_in? %>
-        <li><a href="#"><i class="material-icons">search</i></a></li>
-        <li><%= link_to current_user.full_name, current_user %></li>
-        <li><a href="<%= users_path %>"><i class="material-icons">supervisor_account</i></a></li>
-        <li><%= link_to "お知らせ", :notices %></li>
-        <li><%= link_to "メニュー管理", user_menus_url(current_user, @menu) %></li>
-        <li><%= link_to "スタッフ管理", user_staffs_url(current_user, @staff) %></li>
-        <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-        <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+        <% if current_user.practice? %>
+          <li><%= link_to current_user.full_name, current_user %></li>
+          <li><a href="<%= users_path %>"><i class="material-icons">supervisor_account</i></a></li>
+          <li><%= link_to "お知らせ", :notices %></li>
+          <li><%= link_to "メニュー管理", user_menus_url(current_user, @menu) %></li>
+          <li><%= link_to "スタッフ管理", user_staffs_url(current_user, @staff) %></li>
+          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+        <% else %>
+          <li><%= link_to current_user.full_name, current_user %></li>
+          <li><a href="<%= users_path %>"><i class="material-icons">local_hospital</i></a></li>
+          <li><%= link_to "カルテ", [current_user, :medical_charts] %></li>
+          <li><%= link_to "お会計履歴", [current_user, :patients_receipts] %></li>
+          <li><%= link_to "お知らせ", :notices %></li>
+          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+        <% end %>
       <% else %>
         <li><%= link_to 'アカウント作成', new_user_registration_path %></li>
         <li><%= link_to 'ログイン', new_user_session_path %></li>
-      <% end %>
+     <% end %>
     </ul>
   </div>
 </nav>

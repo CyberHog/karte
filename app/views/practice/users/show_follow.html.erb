@@ -1,0 +1,30 @@
+<% unless @user.follow_count == 0 %>
+    <div class="row">
+    <div class="col s9">
+      <ul class="collection hoverable">
+
+      <% @user.all_following.each do |user| %>
+        <li class="collection-item avatar">
+          <%= image_tag user.avatar.url, class: "circle" %>
+          <p>カルテ番号<br>
+            <% if user.held_cards.find_by( publisher_id: current_user.id ).present? %>
+             <%= user.held_cards.find_by( publisher_id: current_user.id ).number %>
+             <% else %>
+              診察券未作成
+             <% end %>
+          </p>
+          <span class="title"><%= link_to user.full_name, user %></span>
+          <p class="secondary-content">
+          <%= link_to "編集", [:edit, user] %> |
+          <%= link_to "削除", user, method: :delete,
+                data: { confirm: "本当に削除しますか?" } %>
+          </p>
+        </li>
+      <% end %>
+
+      </ul>
+    </div>
+    </div>
+<% else %>
+  <p>フォロー中の人はいません</p>
+<% end %>

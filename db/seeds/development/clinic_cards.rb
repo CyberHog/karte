@@ -33,3 +33,10 @@ clinic_card = ClinicCard.create(
     holding_point: "0",
     number: "1236"
     )
+
+clinic_card = ClinicCard.create(
+    publisher_id: "2",
+    holder_id: "6",
+    holding_point: "0",
+    number: "A0005"
+    )

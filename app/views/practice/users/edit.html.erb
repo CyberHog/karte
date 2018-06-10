@@ -1,0 +1,126 @@
+<h2>アカウント更新</h2>
+
+<%= form_for @user do |f| %>
+
+  <div class="row">
+
+    <% if @user.avatar.url.present? %>
+      <div class="col s12">
+        <%= image_tag(@user.avatar.url) %>
+        <%= f.label :remove_avatar do %>
+          <%= f.check_box :remove_avatar %>
+          <%= f.label :remove_avatar %>
+          <%= f.hidden_field :id %>
+        <% end %>
+      </div>
+    <% end %>
+      <div class="col s12">
+        <%= f.file_field :avatar %>
+        <%= f.hidden_field :avatar_cache %>
+      </div>
+
+    <div class="input-field col s6">
+      <i class="material-icons prefix">account_circle</i>
+        <%= f.text_field :last_name, id: "icon_prefix", class: "validate" %>
+      <label class="active" for="icon_prefix">名字</label>
+    </div>
+
+    <div class="input-field col s6">
+      <%= f.text_field :first_name, id: "first_name",  class: "validate" %>
+      <label class="active" for="first_name">名前</label>
+    </div>
+
+    <div class="input-field col s12">
+      <i class="material-icons prefix">phone</i>
+        <%= f.text_field :phone, id: "icon_telephone", class: "validate", autocomplete: "phone" %>
+      <label class="active" for="icon_telephone">電話</label>
+    </div>
+
+    <div class="input-field col s12">
+      <i class="material-icons prefix">email</i>
+        <%= f.email_field :email, id: "icon_email", class: "validate", autocomplete: "email" %>
+      <label class="active" for="icon_email">メールアドレス</label>
+    </div>
+
+    <div class="input-field col s12">
+      <i class="material-icons prefix">cake</i>
+        <%= f.date_field :birthday, id: "icon_cake", autocomplete: "birthday" %>
+        <label class="active" for="icon_cake">生年月日</label>
+    </div>
+
+    <div class="col s2">
+      <i class="material-icons prefix">wc</i>
+      <%= f.label :gender %>
+    </div>
+    <div class="col s4">
+          <%= f.radio_button :gender, 0, id: "icon_wc_0", class: "with-gap" %>
+          <%= f.label :gender_0, for: "icon_wc_0" %>
+          <%= f.radio_button :gender, 1, id: "icon_wc_1", class: "with-gap" %>
+          <%= f.label :gender_1, for: "icon_wc_1" %>
+    </div>
+
+    <% if @user.practice? %>
+
+    <div class="col s6">
+      <i class="material-icons prefix">verified_user</i>
+      <%= f.check_box :practice, id: "clinic" %>
+      <label for="clinic">開業しています</label>
+    </div>
+
+    <div id="private_user">
+
+    <%= f.fields_for :address do |fin| %>
+
+        <div class="input-field col s6">
+          <%= fin.label :postcode, class: "active"  %>
+          <%= fin.text_field :postcode, id: "address_zipcode", class: "validate" %>
+        </div>
+
+        <div class="input-field col s12">
+          <%= fin.label :prefecture, class: "active" %>
+          <%= fin.text_field :prefecture, id: "address_prefecture_name", class: "validate" %>
+        </div>
+
+        <div class="input-field col s12">
+          <%= fin.label :city, class: "active" %>
+          <%= fin.text_field :city, id: "address_city", class: "validate" %>
+        </div>
+
+        <div class="input-field col s12">
+          <%= fin.label :street, class: "active" %>
+          <%= fin.text_field :street, id: "address_street", class: "validate" %>
+        </div>
+
+        <div class="input-field col s12">
+          <%= fin.label :building, class: "active" %>
+          <%= fin.text_field :building, id: "address_building", class: "validate" %>
+        </div>
+
+    <% end %>
+
+  </div>
+
+  <% end %>
+
+    <div class="input-field col s12">
+      <i class="material-icons prefix">vpn_lock</i>
+        <%= f.password_field :current_password, id: "icon_password", class: "validate", autocomplete: "off" %>
+      <label for="icon_password">現在のパスワード<i>(変更を反映するには現在のパスワードを入力して下さい)</i></label>
+    </div>
+
+    <div class="col s6">
+      <%= button_tag '更新', class: "btn waves-effect waves-light btn", type: "button", onclick: "submit();" %>
+    </div>
+
+</div>
+<% end %>
+
+  <div class="row col s12">
+
+    <h3>アカウント削除</h3>
+
+    <p>お気に召しませんか? <%= button_to "削除", @user, data: { confirm: "本当に良いですか?" }, method: :delete, :class => "btn waves-effect waves-light" %></p>
+
+    <%= link_to "戻る", :back %>
+
+  </div>

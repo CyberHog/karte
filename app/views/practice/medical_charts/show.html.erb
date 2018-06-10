@@ -1,0 +1,50 @@
+<%  @page_title = @medical_chart.cc %>
+<h1><%=  @medical_chart.cc %></h1>
+
+<div class="row">
+  <div class="col s9">
+
+<p><%= link_to "カルテ一覧", user_medical_charts_url %> | <%= link_to "編集", edit_user_medical_chart_url %></p>
+<p>
+  <%= link_to "削除", [@user, @medical_chart], class: "btn waves-effect waves-light red", method: :delete,
+  data: { confirm: "本当に削除しますか?" } %>
+</p>
+
+<table class="highlight">
+  <tr>
+    <th>診察券ID</th>
+    <td><%= @medical_chart.card_number %></td>
+  </tr>
+  <tr>
+    <th>施術日</th>
+    <td><%= @medical_chart.visited_at.strftime("%Y/%m/%d") %></td>
+  </tr>
+  <tr>
+    <th>コース</th>
+    <td>
+      <% @medical_chart.karte_menus.each do |karte_menu| %>
+      <%= karte_menu.course %>
+      <% end %>
+    </td>
+  </tr>
+  </tr>
+  <tr>
+    <th>担当者</th>
+    <td><%= @medical_chart.staff_name %></td>
+  </tr>
+  <tr>
+    <th width="150px">主訴</th>
+    <td><%= @medical_chart.cc %></td>
+  </tr>
+  <tr>
+    <th height="200">施術内容</th>
+    <td height="200" overflow-wrap="break-word"><%= @medical_chart.tx_comment.gsub(/\r\n|\r|\n/, "<br />").html_safe %></td>
+  </tr>
+  <tr>
+    <th>コメント</th>
+    <td><%= @medical_chart.comment %></td>
+  </tr>
+</table>
+
+  </div>
+</div>

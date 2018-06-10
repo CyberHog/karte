@@ -23,12 +23,12 @@ class UsersController < ApplicationController
 
   # 編集
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   # 更新
   def update
-    @user = User.find(params[:id])
+    @user = current_user
     @user.assign_attributes(user_update_params)
     if @user.save 
       redirect_to @user, notice: "会員情報を更新しました"
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
 
   # 会員の削除
   def destroy
-    @user = User.find(params[:id])
+    @user = current_user
     @user.destroy
     redirect_to :users, notice: "会員を削除しました。"
   end

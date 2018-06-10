@@ -1,10 +1,6 @@
 <% @page_title = @user? @user.full_name + "さんの投稿" : "お知らせ" %>
 <h1><%= @page_title %></h1>
 
-<% if current_user %>
-<p><%= link_to "お知らせの作成", :new_notice, class: "btn waves-effect waves-light btn blue" %></p>
-<% end %>
-
 <% if @notices.present? %>
   <% @notices.each do |notice| %>
   <h2><%=  notice.title %></h2>

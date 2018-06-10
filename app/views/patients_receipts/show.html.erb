@@ -5,7 +5,7 @@
 <div class="row">
 
 <p>
-  <%= link_to "お会計一覧", user_patients_receipts_url %> | <%= link_to "編集", edit_user_patients_receipt_url %>
+  <%= link_to "お会計一覧", user_patients_receipts_url %>
 </p>
 
 <% if @selected_menu.coupon %>
@@ -19,14 +19,6 @@
 <% end %>
 <% end %>
 
-
-
-<p>
-  <%= link_to "会計情報の削除", user_patients_receipt_url(@user, @patients_receipt), class: "btn waves-effect waves-light red", method: :delete,
-      data: { confirm: "本当に削除しますか?" } %>
-  <%= link_to "カルテ入力", new_user_medical_chart_path(@user, @medical_cahart), class: "btn waves-effect waves-light blue" %>
-</p>
-
 <table class="highlight">
 
   <%= @patients_receipt.id %>
@@ -37,6 +29,7 @@
     <th width="200px">取得ポイント</th>
     <th width="200px">支払金額</th>
     <th width="200px">支払方法</th>
+    <th width="300px">支払先</th>
   </tr>
   <tr>
     <td><%= @patients_receipt.payday %></td>
@@ -52,6 +45,13 @@
     <td><%= receipt.gained_point %></td>
     <td><%= receipt.payment %></td>
     <td><%= receipt.payment_method %></td>
+    <td>
+      <% if @user.clinic.present? %>
+        <%= @user.clinic.name %>
+      <% else %>
+        <%= @user.full_name %>
+      <% end %>
+    </td>
   </tr>
   <% end %>
 </table>

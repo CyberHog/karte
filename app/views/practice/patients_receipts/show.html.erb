@@ -1,0 +1,59 @@
+<%  @page_title = "お会計の詳細" %>
+
+<h1><%=  @page_title %></h1>
+
+<div class="row">
+
+<p>
+  <%= link_to "お会計一覧", user_patients_receipts_url %> | <%= link_to "編集", edit_user_patients_receipt_url %>
+</p>
+
+<% if @selected_menu.coupon %>
+<% @coupon = Coupon.find_by(patients_receipt_id: @patients_receipt.id) %>
+<% unless @coupon.present? %>
+  <p><%= link_to "クーポン登録", new_user_coupon_path(@user, @coupon, :patients_receipt_id => @patients_receipt.id), class: "waves-effect waves-light btn blue" %></p>
+<% else %>
+  <p>
+    <%= link_to "クーポン詳細", user_coupon_url(@coupon, user_id: @user.id) %>
+  </p>
+<% end %>
+<% end %>
+
+
+
+<p>
+  <%= link_to "会計情報の削除", user_patients_receipt_url(@user, @patients_receipt), class: "btn waves-effect waves-light red", method: :delete,
+      data: { confirm: "本当に削除しますか?" } %>
+  <%= link_to "カルテ入力", new_user_medical_chart_path(@user, @medical_cahart), class: "btn waves-effect waves-light blue" %>
+</p>
+
+<table class="highlight">
+
+  <%= @patients_receipt.id %>
+  <tr>
+    <th width="200px">支払日</th>
+    <th width="200px">氏名</th>
+    <th width="200px">サービス名</th>
+    <th width="200px">取得ポイント</th>
+    <th width="200px">支払金額</th>
+    <th width="200px">支払方法</th>
+  </tr>
+  <tr>
+    <td><%= @patients_receipt.payday %></td>
+    <td><%= @patients_receipt.payer %></td>
+  <% second_repeat = false %>
+  <% @patients_receipt.receipts.each do |receipt| %>
+  <% if second_repeat %>
+    <td></td><td></td>
+  <% else %>
+    <% second_repeat = true %>
+  <% end %>
+    <td><%= receipt.service %></td>
+    <td><%= receipt.gained_point %></td>
+    <td><%= receipt.payment %></td>
+    <td><%= receipt.payment_method %></td>
+  </tr>
+  <% end %>
+</table>
+
+</div>

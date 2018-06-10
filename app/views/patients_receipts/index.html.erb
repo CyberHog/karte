@@ -1,22 +1,13 @@
 <%  @page_title = @user.full_name + "さんのお会計一覧" %>
 <h1><%=  @page_title %></h1>
 
-<p>
-  <% if current_user.clinic.present? %>
-    <%= current_user.clinic.name %>
-  <% else %>
-    <%= current_user.full_name %>
-  <% end %>
-   >> <%= @user.full_name %></p>
-
-<P><%= link_to "患者一覧へ", users_url %>
-  <% if @user.received_coupons.where(seller_id: current_user.id).present? %>
-   | <%= link_to "クーポン一覧", user_coupons_path(@user, @coupon) %></P>
+<P><%= link_to "マイクリニックリストへ", users_path %>
+  <% if current_user.received_coupons.where(buyer_id: current_user.id).present? %>
+   | <%= link_to "クーポン一覧", user_coupons_path(current_user, @coupon) %></P>
    <% end %>
 </p>
-<p><%= link_to "お会計新規登録", new_user_patients_receipt_url(@user, @patients_receipt), class: "waves-effect waves-light btn blue" %></p>
 
-<% if @user.received_receipts.where(seller_id: current_user.id).present? %>
+<% if current_user.received_receipts.where(buyer_id: current_user.id).present? %>
 <table class="highlight">
   <% @patients_receipts.each do |patients_receipt| %>
   <% if patients_receipt.buyer.id == @user.id %>

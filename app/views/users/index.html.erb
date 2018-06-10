@@ -1,4 +1,4 @@
-<%  @page_title = "患者一覧" %>
+<%  @page_title = "マイクリニックリスト" %>
 <h1><%=  @page_title %></h1>
 
 <div class="row">
@@ -18,33 +18,28 @@
 <ul class="collection hoverable">
 
 <% @users.each do |user| %>
-<% unless user.practice? %>
+<% if user.practice? %>
 
 
   <li class="collection-item avatar">
     <%= image_tag user.avatar.url, class: "circle" %>
     <p>
-       <% if user.held_cards.find_by( publisher_id: current_user.id ).present? %>
-         カルテ番号 <%= user.held_cards.find_by( publisher_id: current_user.id ).number %>
-       <% else %>
-         診察券未作成
-       <% end %><br>
-       <% if user.held_cards.find_by( publisher_id: current_user.id ).present? %>
-        保有ポイント<%= user.held_cards.find_by( publisher_id: current_user.id).holding_point %>
-       <% else %>
-        保有ポイント 0
-       <% end %>
+      <% if user.clinic.present? %>
+        <%= link_to user.clinic.name, user %>
+      <% else %>
+        <%= link_to user.full_name, user %>
+      <% end %>
+        <br>
+      <% if user.clinic.present? %>
+       <%= user.clinic.hp_url %>
+      <% else %>
+        <%= %>
+      <% end %>
     </p>
-    <span class="title"><%= link_to user.full_name, user %></span>
-    <% unless user.practice? %>
-    <p class="secondary-content">
-      <%= link_to "カルテ", user_medical_charts_path(user, @medical_cahart), class: "btn waves-effect waves-light blue" %>
-      <%= link_to "お会計", user_patients_receipts_path(user, @clinic_card), class: "btn waves-effect waves-light blue"
-       %>
-    </p>
-    <% end %>
+    <span class="title" data-href="tel:<%= user.phone %>"><%= user.phone %></span>
   </li>
-
+<% else %>
+  <p>ユーザー名が一致しません</p>
 <% end %>
 <% end %>
 
@@ -54,5 +49,5 @@
 </div>
 
 <% else %>
-<p>患者が登録されていません</p>
+<p>マイクリニックが登録されていません</p>
 <% end %>

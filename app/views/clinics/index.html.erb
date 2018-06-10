@@ -9,17 +9,11 @@
   <tr>
     <th>治療院名等</th>
     <th>ホームページ</th>
-    <th>操作</th>
   </tr>
   <% @clinics.each do |clinic| %>
   <tr>
     <td><%= clinic.name %></td>
     <td><a href="<%= clinic.hp_url %>"><%= clinic.hp_url %></a></td>
-    <td>
-      <%= link_to "編集", edit_user_clinic_url(id: clinic.user_id) %> |
-      <%= link_to "削除", user_clinic_url(id: clinic.user_id), method: :delete,
-            data: { confirm: "本当に削除しますか?" } %>
-    </td>
   </tr>
   <% end %>
 </table>

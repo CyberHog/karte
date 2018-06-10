@@ -1,0 +1,41 @@
+<%  @page_title = "スタッフ管理" %>
+<h1><%=  @page_title %></h1>
+
+<div class="row">
+<div class="col s8">
+<%= form_tag :search_user_staffs, method: :get do %>
+  <p><%= text_field_tag "q", params[:q] %>
+  <%= button_tag "検索", class: "btn waves-effect waves-light", type: "button", onclick: "submit();" %></p>
+<% end %>
+
+<p><%= link_to "スタッフ新規登録", [:new, @user, :staff], class: "btn waves-effect waves-light blue" %></p>
+
+</div>
+</div>
+
+<% if current_user.staffs.present? %>
+<table class="highlight">
+  <tr>
+    <th>スタッフID</th>
+    <th>名前</th>
+    <th>状態</th>
+    <th>操作</th>
+  </tr>
+  <% @staffs.each do |staff| %>
+  <% if staff.user_id == current_user.id %>
+  <tr>
+    <td><%= staff.staff_number %></td>
+    <td><%= staff.staff_name %></td>
+    <td><%= staff.staff_suspension? ? "停止中" : "使用中" %></td>
+    <td>
+      <%= link_to "編集", edit_user_staff_url(id: staff.id) %> |
+      <%= link_to "削除", user_staff_url(id: staff.id), method: :delete,
+            data: { confirm: "本当に削除しますか?" } %>
+    </td>
+  </tr>
+  <% end %>
+  <% end %>
+</table>
+<% else %>
+<p>スタッフが登録されていません。</p>
+<% end %>
