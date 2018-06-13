@@ -5,16 +5,16 @@
 <div class="row">
 
 <p>
-  <%= link_to "お会計一覧", user_patients_receipts_url %> | <%= link_to "編集", edit_user_patients_receipt_url %>
+  <%= link_to "お会計一覧", practice_user_patients_receipts_url(@user, @patients_receipt) %> | <%= link_to "編集", edit_practice_user_patients_receipt_url %>
 </p>
 
 <% if @selected_menu.coupon %>
 <% @coupon = Coupon.find_by(patients_receipt_id: @patients_receipt.id) %>
 <% unless @coupon.present? %>
-  <p><%= link_to "クーポン登録", new_user_coupon_path(@user, @coupon, :patients_receipt_id => @patients_receipt.id), class: "waves-effect waves-light btn blue" %></p>
+  <p><%= link_to "クーポン登録", new_practice_user_coupon_path(@user, @coupon, :patients_receipt_id => @patients_receipt.id), class: "waves-effect waves-light btn blue" %></p>
 <% else %>
   <p>
-    <%= link_to "クーポン詳細", user_coupon_url(@coupon, user_id: @user.id) %>
+    <%= link_to "クーポン詳細", practice_user_coupon_url(@coupon, user_id: @user.id) %>
   </p>
 <% end %>
 <% end %>
@@ -22,9 +22,9 @@
 
 
 <p>
-  <%= link_to "会計情報の削除", user_patients_receipt_url(@user, @patients_receipt), class: "btn waves-effect waves-light red", method: :delete,
+  <%= link_to "会計情報の削除", practice_user_patients_receipt_url(@user, @patients_receipt), class: "btn waves-effect waves-light red", method: :delete,
       data: { confirm: "本当に削除しますか?" } %>
-  <%= link_to "カルテ入力", new_user_medical_chart_path(@user, @medical_cahart), class: "btn waves-effect waves-light blue" %>
+  <%= link_to "カルテ入力", new_practice_user_medical_chart_path(@user, @medical_cahart), class: "btn waves-effect waves-light blue" %>
 </p>
 
 <table class="highlight">

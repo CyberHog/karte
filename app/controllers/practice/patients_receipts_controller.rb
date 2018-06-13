@@ -26,6 +26,7 @@ class Practice::PatientsReceiptsController < Practice::Base
     @menu_point = Menu.where(user_id: current_user.id).pluck(:attached_point)
     @menu_price = Menu.where(user_id: current_user.id).pluck(:price)
     @user = User.find(params[:user_id])
+    @card = ClinicCard.find_by(holder_id: @user.id, publisher_id: current_user.id)
   	@patients_receipt = PatientsReceipt.new(payday: Time.current)
     @patients_receipt.buyer_id = @user.id
     @patients_receipt.receipts.build
@@ -85,7 +86,7 @@ class Practice::PatientsReceiptsController < Practice::Base
     end
     if save_valid
       if @patients_receipt.save
-        redirect_to user_patients_receipt_url(id: @patients_receipt.id), notice: "登録完了しました"
+        redirect_to practice_user_patients_receipt_url(id: @patients_receipt.id), notice: "会計情報の登録が完了しました"
       else
         render "new"
       end
@@ -100,6 +101,7 @@ class Practice::PatientsReceiptsController < Practice::Base
     @menu_point = Menu.where(user_id: current_user.id).pluck(:attached_point)
     @menu_price = Menu.where(user_id: current_user.id).pluck(:price)
     @user = User.find(params[:user_id])
+    @card = ClinicCard.find_by(holder_id: @user.id, publisher_id: current_user.id)
   	@patients_receipt = PatientsReceipt.find(params[:id])
   end
 
@@ -108,7 +110,7 @@ class Practice::PatientsReceiptsController < Practice::Base
   	@patients_receipt = PatientsReceipt.find(params[:id])
   	@patients_receipt.assign_attributes(patients_receipt_params)
   	if @patients_receipt.save
-  		redirect_to user_patients_receipt_url(id: @patients_receipt.id), notice: "登録情報を変更しました"
+  		redirect_to practice_user_patients_receipt_url(id: @patients_receipt.id), notice: "会計情報を変更しました"
   	else
   		render "edit"
   	end
@@ -118,12 +120,12 @@ class Practice::PatientsReceiptsController < Practice::Base
   def destroy
   	@patients_receipt = PatientsReceipt.find(params[:id])
   	@patients_receipt.destroy
-  	redirect_to user_patients_receipts_url(id: @patients_receipt.id), notice: "登録除法を削除しまた"
+  	redirect_to practice_user_patients_receipts_url(id: @patients_receipt.id), notice: "会計情報を削除しまた"
   end
 
   private
   def patients_receipt_params
-  	params.require(:patients_receipt).permit(:id, :seller_id, :buyer_id, :payday, :payer,
+  	params.require(:patients_receipt).permit(:clinic_card_id, :id, :seller_id, :buyer_id, :payday, :payer,
      receipts_attributes: [:id, :patients_receipt_id, :service, :payment, :gained_point, :payment_method, :_destroy])
   end
 end

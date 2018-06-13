@@ -33,7 +33,7 @@ class Practice::MenusController < Practice::Base
  	  @menu = Menu.new(menu_params)
     @menu.owner = current_user
  	  if @menu.save
- 	    redirect_to user_menu_url(id: @menu.id), notice: "メニューを登録しました"
+ 	    redirect_to practice_user_menu_url(id: @menu.id), notice: "メニューを登録しました"
  	  else
  	    render "new"
  	  end
@@ -50,7 +50,7 @@ class Practice::MenusController < Practice::Base
   	@menu = Menu.find(params[:id])
   	@menu.assign_attributes(menu_params)
   	if @menu.save
-  	  redirect_to user_menus_url(id: @menu.id), notice: "メニューを更新しました"
+  	  redirect_to practice_user_menus_url(id: @menu.id), notice: "メニューを更新しました"
   	else
   	  render "edit"
   	end
@@ -60,11 +60,11 @@ class Practice::MenusController < Practice::Base
   def destroy
   	@menu = Menu.find(params[:id])
   	@menu.destroy
-  	redirect_to user_menus_url(id: @menu.id), notice: "メニューを削除しました"
+  	redirect_to practice_user_menus_url(id: @menu.id), notice: "メニューを削除しました"
   end
 
   private
   def menu_params
-    params.require(:menu).permit(:user_id, :content_id, :content_name, :price, :attached_point, :coupon, :counting, :validity_period)
+    params.require(:menu).permit(:id, :user_id, :content_id, :content_name, :price, :attached_point, :coupon, :counting, :validity_period)
   end
 end

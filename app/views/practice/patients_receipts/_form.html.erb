@@ -1,8 +1,8 @@
-<%= form_for [@user, @patients_receipt] do |f| %>
+<%= form_for [:practice, @user, @patients_receipt] do |f| %>
 ...
   <table class="table table-striped table-bordered table-hover highlight">
     <tbody>
-      <%= f.hidden_field :clinic_card_id, value: @user.clnic_card.id %>
+      <%= f.hidden_field :clinic_card_id, value: @card.id %>
       <%= f.hidden_field :seller_id, value: current_user.id %>
       <%= f.hidden_field :buyer_id, value: @user.id %>
       <tr>

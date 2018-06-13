@@ -4,9 +4,9 @@
 
 <div class="row">
 
-<p><%= link_to "クーポン一覧", user_coupons_url %> | <%= link_to "編集", edit_user_coupon_url %></p>
+<p><%= link_to "クーポン一覧", practice_user_coupons_url %> | <%= link_to "編集", edit_practice_user_coupon_url %></p>
 <p>
-  <%= link_to "削除", [@user, @coupon], class: "btn waves-effect waves-light red", method: :delete,
+  <%= link_to "削除", [:practice, @user, @coupon], class: "btn waves-effect waves-light red", method: :delete,
   data: { confirm: "本当に削除しますか?" } %>
 </p>
 

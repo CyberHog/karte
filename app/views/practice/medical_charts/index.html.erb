@@ -6,9 +6,9 @@
 <h3>診察券ID　<%=  value_number %></h2>
 <% end %>
 
-<p><%= link_to "患者一覧", users_url %></p>
+<p><%= link_to "患者一覧", practice_users_url %></p>
 
-<p><%= link_to "新規作成", [:new, @user, :medical_chart], class: "btn waves-effect waves-light blue" %></p>
+<p><%= link_to "新規作成", [:new, :practice, @user, :medical_chart], class: "btn waves-effect waves-light blue" %></p>
 
 <div class="row">
 
@@ -26,13 +26,13 @@
       <th>コース</th>
     </tr>
     <tr>
-      <td><%= link_to medical_chart.visited_at.strftime("%Y/%m/%d"), user_medical_chart_url(id: medical_chart.id) %></td>
+      <td><%= link_to medical_chart.visited_at.strftime("%Y/%m/%d"), practice_user_medical_chart_url(id: medical_chart.id) %></td>
       <td><%= medical_chart.staff_name %></td>
       <td><%= medical_chart.cc %></td>
       <td><%= truncate(medical_chart.tx_comment,:length => 12) %>
-        <%= link_to "全て表示", user_medical_chart_url(id: medical_chart.id) %></td>
+        <%= link_to "全て表示", practice_user_medical_chart_url(id: medical_chart.id) %></td>
       <td><%= truncate(medical_chart.comment,:length => 12) %>
-        <%= link_to "全て表示", user_medical_chart_url(id: medical_chart.id) %></td>
+        <%= link_to "全て表示", practice_user_medical_chart_url(id: medical_chart.id) %></td>
         <% second_repeat = false %>
         <% medical_chart.karte_menus.each do |karte_menu| %>
         <td><%= karte_menu.course %>

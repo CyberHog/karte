@@ -4,9 +4,9 @@
 
 <div class="row">
 
-<p><%= link_to "診察券詳細に戻る", user_clinic_card_url %></p>
+<p><%= link_to "診察券詳細に戻る", practice_user_clinic_card_path %></p>
 
-<%= form_for [@user, @clinic_card] do |form| %>
+<%= form_for [:practice, @user, @clinic_card] do |form| %>
 
 <%= render "form", form: form %>
 

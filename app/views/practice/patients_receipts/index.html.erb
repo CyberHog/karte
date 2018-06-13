@@ -9,17 +9,17 @@
   <% end %>
    >> <%= @user.full_name %></p>
 
-<P><%= link_to "患者一覧へ", users_url %>
+<P><%= link_to "患者一覧へ", practice_users_url %>
   <% if @user.received_coupons.where(seller_id: current_user.id).present? %>
-   | <%= link_to "クーポン一覧", user_coupons_path(@user, @coupon) %></P>
+   | <%= link_to "クーポン一覧", practice_user_coupons_path(@user, @coupon) %></P>
    <% end %>
 </p>
-<p><%= link_to "お会計新規登録", new_user_patients_receipt_url(@user, @patients_receipt), class: "waves-effect waves-light btn blue" %></p>
+<p><%= link_to "お会計新規登録", new_practice_user_patients_receipt_url(@user, @patients_receipt), class: "waves-effect waves-light btn blue" %></p>
 
 <% if @user.received_receipts.where(seller_id: current_user.id).present? %>
 <table class="highlight">
   <% @patients_receipts.each do |patients_receipt| %>
-  <% if patients_receipt.buyer.id == @user.id %>
+  <% if (patients_receipt.buyer.id == @user.id) && (patients_receipt.seller.id == current_user.id) %>
   <tr>
     <th width="200px">支払日</th>
     <th width="200px">氏名</th>
@@ -29,7 +29,7 @@
     <th width="200px">支払方法</th>
   </tr>
   <tr>
-    <td><%= link_to patients_receipt.payday, user_patients_receipt_url(id: patients_receipt.id) %></td>
+    <td><%= link_to patients_receipt.payday, practice_user_patients_receipt_url(id: patients_receipt.id) %></td>
     <td><%= patients_receipt.payer %></td>
    <% second_repeat = false %>
    <% patients_receipt.receipts.each do |receipt| %>

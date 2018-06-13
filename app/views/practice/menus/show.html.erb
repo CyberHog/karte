@@ -4,7 +4,10 @@
 
 <div class="row">
 
-<p><%= link_to "メニュー一覧", user_menus_url %> | <%= link_to "編集", edit_user_menu_url %></p>
+<p><%= link_to "メニュー一覧", practice_user_menus_url %> | <%= link_to "編集", edit_practice_user_menu_url %></p>
+
+<p><%= link_to "削除", practice_user_menu_url(@user, @menu), class: "btn waves-effect waves-light red", method: :delete,
+      data: { confirm: "本当に削除しますか?" } %></p>
 
 <table class="highlight">
   <tr>

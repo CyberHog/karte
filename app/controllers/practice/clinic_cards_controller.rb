@@ -3,7 +3,7 @@ class Practice::ClinicCardsController < Practice::Base
   def index
     if params[:user_id]
       @user = User.find(params[:user_id])
-      @clinic_cards = @user.published_cards
+      @clinic_cards = @user.held_cards
     else
       @clinic_cards = ClinicCard.all
     end
@@ -14,7 +14,11 @@ class Practice::ClinicCardsController < Practice::Base
   def show
     @user = User.find(params[:user_id])
     @clinic_card = ClinicCard.find(params[:id])
-    @card_receipts = ClinicCard.includes(:patients_receipts).references(:patients_receipts)
+    if PatientsReceipt.where(clinic_card_id: @clinic_card.id).present?
+      card_receipts = PatientsReceipt.where(clinic_card_id: @clinic_card.id).order(:payday)
+      @payday = card_receipts.last.payday
+    end
+
   end
 
   # 登録
@@ -30,7 +34,7 @@ class Practice::ClinicCardsController < Practice::Base
   	@clinic_card = ClinicCard.new(clinic_card_params)
     @clinic_card.holder = @user
   	if @clinic_card.save
-  	  redirect_to user_clinic_card_url(id: @clinic_card.id), notice: "診察券を作成しました"
+  	  redirect_to practice_user_clinic_card_url(id: @clinic_card.id), notice: "診察券を作成しました"
   	else
   	  render "new"
   	end
@@ -47,7 +51,7 @@ class Practice::ClinicCardsController < Practice::Base
   	@clinic_card = ClinicCard.find(params[:id])
   	@clinic_card.assign_attributes(clinic_card_params)
   	if @clinic_card.save
-  		redirect_to user_clinic_cards_url(id: @clinic_card.id), notice: "診察券を更新しました"
+  		redirect_to practice_user_clinic_cards_url(id: @clinic_card.id), notice: "診察券を更新しました"
   	else
   		render "edit"
   	end
@@ -55,9 +59,10 @@ class Practice::ClinicCardsController < Practice::Base
 
   # 削除
   def destroy
+    @user = User.find(params[:user_id])
     @clinic_card = ClinicCard.find(params[:id])
   	@clinic_card.destroy
-  	redirect_to user_clinic_cards_url(id: @clinic_card.id), notice: "診察券を削除しました"
+  	redirect_to practice_user_url(id: @user.id), notice: "診察券を削除しました"
   end
 
   private

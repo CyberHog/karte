@@ -4,9 +4,9 @@
 
 <div class="row">
 
-<p><%= link_to "アカウント詳細に戻る", current_user %></p>
+<p><%= link_to "アカウント詳細に戻る", practice_user_path(current_user) %></p>
 
-<p><%= link_to "編集", edit_user_clinic_url %> | <%= link_to "削除", user_clinic_url(id: @clinic.user_id), method: :delete,
+<p><%= link_to "編集", edit_practice_user_clinic_path %> | <%= link_to "削除", practice_user_clinic_path(id: @clinic.user_id), method: :delete,
       data: { confirm: "本当に削除しますか?" } %></p>
 
 <table class="highlight">

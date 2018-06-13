@@ -13,11 +13,9 @@
               診察券未作成
              <% end %>
           </p>
-          <span class="title"><%= link_to user.full_name, user %></span>
+          <span class="title"><%= link_to user.full_name, practice_user %></span>
           <p class="secondary-content">
-          <%= link_to "編集", [:edit, user] %> |
-          <%= link_to "削除", user, method: :delete,
-                data: { confirm: "本当に削除しますか?" } %>
+          
           </p>
         </li>
       <% end %>

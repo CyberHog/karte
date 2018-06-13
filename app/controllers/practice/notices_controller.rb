@@ -33,7 +33,7 @@ class Practice::NoticesController < Practice::Base
     @notice = Notice.new(notice_params)
     @notice.author = current_user
     if @notice.save
-      redirect_to @notice, notice: "お知らせ記事を作成しました"
+      redirect_to practice_notice_path(@notice), notice: "お知らせ記事を作成しました"
     else
       render "new"
     end
@@ -44,7 +44,7 @@ class Practice::NoticesController < Practice::Base
     @notice = current_user.notices.find(params[:id])
     @notice.assign_attributes(notice_params)
     if @notice.save
-      redirect_to @notice, notice: "お知らせ記事を更新しました"
+      redirect_to practice_notice_path(@notice), notice: "お知らせ記事を更新しました"
     end
   end
 
@@ -52,7 +52,7 @@ class Practice::NoticesController < Practice::Base
   def destroy
     @notice =  current_user.notices.find(params[:id])
     @notice.destroy
-    redirect_to :notices, notice: "お知らせ記事を削除しました"
+    redirect_to practice_notices_path(@notice), notice: "お知らせ記事を削除しました"
   end
 
   private

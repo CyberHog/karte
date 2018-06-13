@@ -3,9 +3,9 @@
 <h2><%= @notice.title %></h2>
 
 <% if current_user == @notice.author %>
-  <p><%= link_to "お知らせ一覧に戻る", :notices %> | <%= link_to "編集", [:edit, @notice] %></p>
+  <p><%= link_to "お知らせ一覧に戻る", :practice_notices %> | <%= link_to "編集", [:edit, :practice, @notice] %></p>
   <% else %>
-  <p><%= link_to "お知らせ一覧に戻る", :notices %></p>
+  <p><%= link_to "お知らせ一覧に戻る", :practice_notices %></p>
   <% end %>
 
   <%= simple_format(@notice.body) %>

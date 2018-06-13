@@ -1,6 +1,6 @@
 <h2>アカウント更新</h2>
 
-<%= form_for @user do |f| %>
+<%= form_for (:practice, @user) do |f| %>
 
   <div class="row">
 
@@ -119,7 +119,7 @@
 
     <h3>アカウント削除</h3>
 
-    <p>お気に召しませんか? <%= button_to "削除", @user, data: { confirm: "本当に良いですか?" }, method: :delete, :class => "btn waves-effect waves-light" %></p>
+    <p>お気に召しませんか? <%= button_to "削除", [:practice, @user], data: { confirm: "本当に良いですか?" }, method: :delete, :class => "btn waves-effect waves-light" %></p>
 
     <%= link_to "戻る", :back %>
 

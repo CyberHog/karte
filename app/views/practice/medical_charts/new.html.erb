@@ -10,7 +10,7 @@
   <% end %>
    >> <%= @user.full_name %></p>
 
-<p><%= link_to "患者一覧", users_url %> | <%= link_to "カルテ一覧", [@user, :medical_charts] %></p>
+<p><%= link_to "患者一覧", practice_users_url %> | <%= link_to "カルテ一覧", [:practice, @user, :medical_charts] %></p>
 
 <div class="row">
   <div class="col s10">

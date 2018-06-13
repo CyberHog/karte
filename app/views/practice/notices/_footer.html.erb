@@ -2,11 +2,11 @@
 <% if current_user %>
   <%= Notice.status_text(notice.status) %> |
   <% if current_user == notice.author %>
-    <%= link_to "編集", [:edit, notice] %> |
-    <%= link_to "削除", notice, method: :delete,
+    <%= link_to "編集", [:edit, :practice, notice] %> |
+    <%= link_to "削除", practice_notice_path(id: notice.id), method: :delete,
       data: { confirm: "本当に削除しますか？" } %> |
   <% end %>
 <% end %>
-by <%= link_to notice.author.full_name, [notice.author, :notices] %> |
+by <%= link_to notice.author.full_name, [:practice, notice.author] %> |
 <%= notice.released_at.strftime("%Y/%m/%d") %>
 </P>

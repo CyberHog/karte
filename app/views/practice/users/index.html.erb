@@ -3,7 +3,7 @@
 
 <div class="row">
 <div class="col s9">
-<%= form_tag :search_users, method: :get do %>
+<%= form_tag :search_practice_users, method: :get do %>
   <p><%= text_field_tag "q", params[:q] %>
   <%= button_tag "検索", class: "btn waves-effect waves-light", type: "button", onclick: "submit();" %></p>
 <% end %>
@@ -35,16 +35,17 @@
         保有ポイント 0
        <% end %>
     </p>
-    <span class="title"><%= link_to user.full_name, user %></span>
+    <span class="title"><%= link_to user.full_name, practice_user_path(id: user.id) %></span>
     <% unless user.practice? %>
     <p class="secondary-content">
-      <%= link_to "カルテ", user_medical_charts_path(user, @medical_cahart), class: "btn waves-effect waves-light blue" %>
-      <%= link_to "お会計", user_patients_receipts_path(user, @clinic_card), class: "btn waves-effect waves-light blue"
+      <%= link_to "カルテ", practice_user_medical_charts_path(user, @medical_cahart), class: "btn waves-effect waves-light blue" %>
+      <%= link_to "お会計", practice_user_patients_receipts_path(user, @clinic_card), class: "btn waves-effect waves-light blue"
        %>
     </p>
     <% end %>
   </li>
-
+<% else %>
+  <P>ユーザー名が一致しません</P>
 <% end %>
 <% end %>
 

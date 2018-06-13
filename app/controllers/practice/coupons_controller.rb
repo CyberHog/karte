@@ -34,6 +34,7 @@ class Practice::CouponsController < Practice::Base
     selected_menu = Menu.find_by(user_id: current_user.id, content_name: @course.to_s)
     @remaining = selected_menu.counting
     validity = selected_menu.validity_period
+    @menu_id = selected_menu.id
     @expiration_date = @patients_receipt.created_at.to_datetime + validity
     @coupon_life = (@expiration_date - DateTime.now).to_i
     @user = User.find(params[:user_id])
@@ -46,7 +47,7 @@ class Practice::CouponsController < Practice::Base
     @coupon = Coupon.new(coupon_params)
     @coupon.buyer = @user
     if @coupon.save
-      redirect_to user_patients_receipts_url(:patients_receipt_id => @coupon.patients_receipt_id), notice: "登録完了しました"
+      redirect_to practice_user_patients_receipts_url(:patients_receipt_id => @coupon.patients_receipt_id), notice: "登録完了しました"
     else
       render "new"
     end
@@ -70,7 +71,7 @@ class Practice::CouponsController < Practice::Base
   	@coupon = Coupon.find(params[:id])
   	@coupon.assign_attributes(coupon_params)
   	if @coupon.save
-  		redirect_to user_coupons_url(id: @coupon.id), notice: "クーポンを更新しました"
+  		redirect_to practice_user_coupons_url(id: @coupon.id), notice: "クーポンを更新しました"
   	else
   		render "edit"
   	end
@@ -79,11 +80,11 @@ class Practice::CouponsController < Practice::Base
   def destroy
   	@coupon = Coupon.find(params[:id])
   	@coupon.destroy
-  	redirect_to user_coupons_url(id: @coupon.id), notice: "クーポンを削除しました"
+  	redirect_to practice_user_coupons_url(id: @coupon.id), notice: "クーポンを削除しました"
   end
 
   private
   def coupon_params
-  	params.require(:coupon).permit(:patients_receipt_id, :seller_id, :buyer_id, :name, :remaining, :expiration_date)
+  	params.require(:coupon).permit(:menu_id, :patients_receipt_id, :seller_id, :buyer_id, :name, :remaining, :expiration_date)
   end
 end

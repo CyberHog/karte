@@ -3,7 +3,7 @@
 
 <div class="row">
 <div class="col s8">
-<%= form_tag :search_user_coupons, method: :get do %>
+<%= form_tag :search_practice_user_coupons, method: :get do %>
   <p><%= text_field_tag "q", params[:q] %>
   <%= button_tag "検索", class: "btn waves-effect waves-light", type: "button", onclick: "submit();" %></p>
 <% end %>
@@ -14,7 +14,7 @@
 <div class="row">
 <div class="col s8">
   <p>
-    <%= link_to "会計一覧", user_patients_receipts_path(@user, @patients_receipt) %>
+    <%= link_to "会計一覧", practice_user_patients_receipts_path(@user, @patients_receipt) %>
   </p>
 </div>
 </div>
@@ -30,7 +30,7 @@
     <li class="collection-item avatar">
       <%= image_tag coupon.seller.avatar.url, class: "circle" %>
       <p><%= coupon.seller.clinic.name %><br>
-          <%= link_to coupon.name, user_coupon_url(id: coupon.id) %>
+          <%= link_to coupon.name, practice_user_coupon_url(id: coupon.id) %>
       </p>
       <span class="title">残り回数<%= coupon.remaining %></span>
       <p class="secondary-content">有効期限<%= simple_time(coupon.expiration_date) %> 残り<%= @coupon_life %>日</p>

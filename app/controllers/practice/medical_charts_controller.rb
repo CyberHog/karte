@@ -32,7 +32,7 @@
   	@medical_chart = MedicalChart.new(medical_chart_params)
     @medical_chart.patient = @user
   	if @medical_chart.save
-  		redirect_to user_medical_chart_url(id: @medical_chart.id), notice: "カルテを登録しました"
+  		redirect_to practice_user_medical_chart_url(id: @medical_chart.id), notice: "カルテを登録しました"
   	else
   		render "new"
   	end
@@ -50,7 +50,7 @@
   	@medical_chart = MedicalChart.find(params[:id])
   	@medical_chart.assign_attributes(medical_chart_params)
   	if @medical_chart.save
-  		redirect_to user_medical_charts_url(id: @medical_chart.id), notice: "カルテを更新しました"
+  		redirect_to practice_user_medical_charts_url(id: @medical_chart.id), notice: "カルテを更新しました"
   	else
   		render "edit"
   	end
@@ -60,7 +60,7 @@
   def destroy
   	@medical_chart = MedicalChart.find(params[:id])
   	@medical_chart.destroy
-  	redirect_to user_medical_charts_url(id: @medical_chart.id), notice: "カルテを削除しました"
+  	redirect_to practice_user_medical_charts_url(id: @medical_chart.id), notice: "カルテを削除しました"
   end
 
   def br(str) 

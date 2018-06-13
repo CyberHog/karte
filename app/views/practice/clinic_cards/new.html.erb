@@ -2,11 +2,11 @@
 
 <h1><%= @page_title %></h1>
 
-<p><%= link_to "カード一覧に戻る", user_clinic_cards_url(id: @user.id) %></p>
+<p><%= link_to "カード一覧に戻る", practice_user_clinic_cards_path(id: @user.id) %></p>
 
 <div class="row">
 
-<%= form_for [@user, @clinic_card] do |form| %>
+<%= form_for [:practice, @user, @clinic_card] do |form| %>
 
 <%= render "form", form: form %>
 

@@ -28,7 +28,7 @@ class Practice::StaffsController < Practice::Base
   	@staff = Staff.new(staff_params)
     @staff.owner = current_user
   	if @staff.save
-  		redirect_to user_staffs_url(id: @staff.id), notice: "スタッフを登録しました"
+  		redirect_to practice_user_staffs_url(id: @staff.id), notice: "スタッフを登録しました"
   	else
   		render "new"
   	end
@@ -45,7 +45,7 @@ class Practice::StaffsController < Practice::Base
   	@staff = Staff.find(params[:id])
   	@staff.assign_attributes(staff_params)
   	if @staff.save
-  		redirect_to user_staffs_url(id: @staff.id), notice: "スタッフを更新しました"
+  		redirect_to practice_user_staffs_url(id: @staff.id), notice: "スタッフを更新しました"
   	else
   		render "edit"
   	end
@@ -55,7 +55,7 @@ class Practice::StaffsController < Practice::Base
   def destroy
   	@staff = Staff.find(params[:id])
   	@staff.destroy
-  	redirect_to user_staffs_url(id: @staff.id), notice: "スタッフを削除しました"
+  	redirect_to practice_user_staffs_url(id: @staff.id), notice: "スタッフを削除しました"
   end
 
   private

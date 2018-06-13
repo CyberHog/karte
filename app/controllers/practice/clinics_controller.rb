@@ -27,7 +27,7 @@ class Practice::ClinicsController < Practice::Base
     @clinic = Clinic.new(clinic_params)
     @clinic.owner = current_user
     if @clinic.save
-      redirect_to user_clinic_url(id: @clinic.id), notice: "クリニックを登録しました"
+      redirect_to practice_user_clinic_url(id: @clinic.id), notice: "クリニックを登録しました"
     else
       render "new"
     end
@@ -44,7 +44,7 @@ class Practice::ClinicsController < Practice::Base
   	@clinic = current_user.clinic
   	@clinic.assign_attributes(clinic_params)
   	if @clinic.save
-  	  redirect_to user_clinic_url(id: @clinic.user_id), notice: "クリニックの情報を更新しました"
+  	  redirect_to practice_user_clinic_url(id: @clinic.user_id), notice: "クリニックの情報を更新しました"
   	else
       render "edit"
     end
@@ -54,7 +54,7 @@ class Practice::ClinicsController < Practice::Base
   def destroy
   	@clinic = current_user.clinic
   	@clinic.destroy
-  	redirect_to current_user, notice: "クリニックを削除しました"
+  	redirect_to practice_user_path(current_user), notice: "クリニックを削除しました"
   end
 
   private

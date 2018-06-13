@@ -4,9 +4,9 @@
 
 <div class="row">
 
-<p><%= link_to "クーポンの詳細に戻る", user_coupon_url(@coupon) %></p>
+<p><%= link_to "クーポンの詳細に戻る", practice_user_coupon_url(@user, @coupon) %></p>
 
-<%= form_for [@user, @coupon] do |form| %>
+<%= form_for [:practice, @user, @coupon] do |form| %>
 
 <%= render "form", form: form %>
 

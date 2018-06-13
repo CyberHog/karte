@@ -4,9 +4,9 @@
 <div class="row">
 <div class="col s9">
 
-<p><%= link_to "記事の表示に戻る", @notice %></p>
+<p><%= link_to "記事の表示に戻る", [:practice, @notice] %></p>
 
-<%= form_for @notice do |form| %>
+<%= form_for [:practice, @notice] do |form| %>
 <%= render "form", form: form %>
 <p><%= button_tag '投稿する', class: "btn waves-effect waves-light btn", type: "button", onclick: "submit();" %></p>
 <% end %>

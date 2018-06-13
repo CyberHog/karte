@@ -10,11 +10,11 @@
   <% end %>
    >> <%= @user.full_name %></p>
 
-<p><%= link_to "会計一覧", user_patients_receipts_url(id: @user.id) %> | <%= link_to "所有クーポン一覧", user_coupons_url(id: @user.id) %></p>
+<p><%= link_to "会計一覧", practice_user_patients_receipts_url(id: @user.id) %> | <%= link_to "所有クーポン一覧", practice_user_coupons_url(id: @user.id) %></p>
 
 <div class="row">
 
-<%= form_for [@user, @coupon] do |form| %>
+<%= form_for [:practice, @user, @coupon] do |form| %>
 
 <%= render "form", form: form %>
 
