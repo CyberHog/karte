@@ -71,8 +71,8 @@ class User < ApplicationRecord
     def search(query)
       rel = order("last_name")
       if query.present?
-        rel = rel.where("last_name LIKE ? OR first_name LIKE ?",
-          "%#{query}%", "%#{query}%")
+        rel = rel.where("last_name LIKE ? OR first_name LIKE ? OR phone LIKE ?",
+          "%#{query}%", "%#{query}%", "%#{query}%")
       end
       rel
     end

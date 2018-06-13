@@ -3,18 +3,19 @@ class NoticesController < ApplicationController
 
   # 記事一覧
   def index
-  	@users = current_user.all_following
-    puts "debug----"
-    puts @users
-    puts "debug/---"
-    @notices = @users.notices
-  	@notices = @notices.readable_for(current_user)
-  	.order(released_at: :desc).page(params[:page]).per(10)
+    @users = current_user.all_following
+    user_ids = []
+    @users.each do |user|
+      user_ids.push(user.id)
+    end
+    @notices = Notice.all.order(released_at: :desc).page(params[:page]).per(10)
+    @notices = @notices.where(user_id: user_ids)
   end
 
   #  記事詳細
   def show
-  	@notice = Notice.readable_for(current_user).find(params[:id])
+    
+  	@notice = Notice.find(params[:id])
   end
 
 end

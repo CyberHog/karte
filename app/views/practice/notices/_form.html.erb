@@ -1,5 +1,5 @@
 <%= render "shared/errors", obj: @notice %>
-
+<%= form.hidden_field :user_id, value: current_user.id %>
 <table class="highlight">
   <tr>
     <th width="80"><%= form.label :title %></th>

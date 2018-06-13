@@ -1,7 +1,7 @@
 <%  @page_title = @user.full_name + "さんのお会計一覧" %>
 <h1><%=  @page_title %></h1>
 
-<P><%= link_to "マイクリニックリストへ", users_path %>
+<P><%= link_to "マイクリニックリスト", users_path %>
   <% if current_user.received_coupons.where(buyer_id: current_user.id).present? %>
    | <%= link_to "クーポン一覧", user_coupons_path(current_user, @coupon) %></P>
    <% end %>

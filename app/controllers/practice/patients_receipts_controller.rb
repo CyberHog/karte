@@ -37,6 +37,10 @@ class Practice::PatientsReceiptsController < Practice::Base
     @user = User.find(params[:user_id])
     @patients_receipt = PatientsReceipt.new(patients_receipt_params)
     @patients_receipt.buyer = @user
+    @menu_name = Menu.where(user_id: current_user.id).pluck(:content_name)
+    @menu_point = Menu.where(user_id: current_user.id).pluck(:attached_point)
+    @menu_price = Menu.where(user_id: current_user.id).pluck(:price)
+    @card = ClinicCard.find_by(holder_id: @user.id, publisher_id: current_user.id)
 
     # @payment支払い金額,@payment_method支払い方法,@point取得ポイント
     @patients_receipt.receipts.each do |receipt|
@@ -62,7 +66,7 @@ class Practice::PatientsReceiptsController < Practice::Base
         end
       else
         save_valid = false
-        render "new", notice: "クーポンは使用済みです"
+        message =  "クーポンは使用済みです"
       end
     # 支払が現金またはカードの場合
     elsif @payment_method == "現金" || @payment_method == "カード"
@@ -81,16 +85,18 @@ class Practice::PatientsReceiptsController < Practice::Base
         @clinic_card.save
       else
         save_valid = false
-        render "new", notice: "ポイントが不足しています。"
+        message = "ポイントが不足しています。"
       end
     end
     if save_valid
       if @patients_receipt.save
         redirect_to practice_user_patients_receipt_url(id: @patients_receipt.id), notice: "会計情報の登録が完了しました"
       else
+        flash[:notice] = message
         render "new"
       end
     else
+      flash[:notice] = message
       render "new"
     end
   end

@@ -9,7 +9,7 @@
 <% end %>
 by
 <% if notice.author.clinic.present? %>
-  <%= link_to notice.author.clinic.name, [notice.author, :notices] %>
+  <%= link_to notice.author.clinic.name, user_path(notice.author) %>
 <% else %>
   <%= link_to notice.author.full_name, [notice.author, :notices] %>
 <% end %>
