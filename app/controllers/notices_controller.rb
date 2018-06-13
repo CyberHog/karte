@@ -7,14 +7,7 @@ class NoticesController < ApplicationController
     puts "debug----"
     puts @users
     puts "debug/---"
-    @users.each do |user|
-      @name = user.last_name
-      @notices = user.notices
-    end
-    puts "debug----"
-    puts @name
-    puts @notices
-    puts "debug/---"
+    @notices = @users.notices
   	@notices = @notices.readable_for(current_user)
   	.order(released_at: :desc).page(params[:page]).per(10)
   end

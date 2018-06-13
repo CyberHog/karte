@@ -16,7 +16,8 @@ class UsersController < ApplicationController
 
   # 検索
   def search
-    @users = User.search(params[:q])
+    @users = User.includes(:clinic).where("name like '%" + params[:q] + "%'").references(:clinic)
+     @users += User.search(params[:q])
       .page(params[:page]).per(10)
     render "index"
   end
