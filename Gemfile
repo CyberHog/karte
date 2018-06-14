@@ -15,6 +15,7 @@ gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'rails_12factor', groups: %w(production), require: false
+gem 'sendgrid-ruby', '~> 5.2'
 
 # gem 'therubyracer', platforms: :ruby
 
