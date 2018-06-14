@@ -83,7 +83,7 @@ Rails.application.routes.draw do
       resources :coupons do
         collection { get "search"}
       end
-      resources :notices, only: [:index]
+      resources :notices
       resources :addresses
       resources :clinic_cards
       resources :patients_receipts do

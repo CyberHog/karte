@@ -4,7 +4,7 @@ class Practice::NoticesController < Practice::Base
   # 記事一覧
   def index
   	if params[:user_id]
-  	  @user = User.find(params[:user_id])
+  	  @user = current_user
   	  @notices = @user.notices
   	else
   		@notices = Notice.all
@@ -15,6 +15,7 @@ class Practice::NoticesController < Practice::Base
 
   #  記事詳細
   def show
+    @user = current_user
   	@notice = Notice.readable_for(current_user).find(params[:id])
   end
 
@@ -25,6 +26,7 @@ class Practice::NoticesController < Practice::Base
 
   # 編集フォーム
   def edit
+    @user = current_user
     @notice = current_user.notices.find(params[:id])
   end
 
@@ -33,7 +35,7 @@ class Practice::NoticesController < Practice::Base
     @notice = Notice.new(notice_params)
     @notice.author = current_user
     if @notice.save
-      redirect_to practice_notice_path(@notice), notice: "お知らせ記事を作成しました"
+      redirect_to practice_user_notices_path(current_user), notice: "お知らせ記事を作成しました"
     else
       render "new"
     end
@@ -41,10 +43,11 @@ class Practice::NoticesController < Practice::Base
 
   # 更新
   def update
+    @user = current_user
     @notice = current_user.notices.find(params[:id])
     @notice.assign_attributes(notice_params)
     if @notice.save
-      redirect_to practice_notice_path(@notice), notice: "お知らせ記事を更新しました"
+      redirect_to practice_user_notices_path(@user), notice: "お知らせ記事を更新しました"
     end
   end
 
@@ -52,7 +55,7 @@ class Practice::NoticesController < Practice::Base
   def destroy
     @notice =  current_user.notices.find(params[:id])
     @notice.destroy
-    redirect_to practice_notices_path(@notice), notice: "お知らせ記事を削除しました"
+    redirect_to practice_user_notices_path(@notice), notice: "お知らせ記事を削除しました"
   end
 
   private

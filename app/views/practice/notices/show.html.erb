@@ -3,9 +3,11 @@
 <h2><%= @notice.title %></h2>
 
 <% if current_user == @notice.author %>
-  <p><%= link_to "お知らせ一覧に戻る", :practice_notices %> | <%= link_to "編集", [:edit, :practice, @notice] %></p>
+  <p><%= link_to "お知らせ一覧に戻る", practice_user_notices_path(@user) %> | <%= link_to "編集", edit_practice_user_notice_path(:user_id => @user.id) %></p>
+  <p><%= link_to "削除", [:practice, @user, @notice], class: "btn waves-effect waves-light red", method: :delete,
+  data: { confirm: "本当に削除しますか?" } %></p>
   <% else %>
-  <p><%= link_to "お知らせ一覧に戻る", :practice_notices %></p>
+  <p><%= link_to "お知らせ一覧に戻る", practice_user_notices_path(@notice) %></p>
   <% end %>
 
   <%= simple_format(@notice.body) %>

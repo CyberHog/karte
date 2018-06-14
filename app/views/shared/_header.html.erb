@@ -1,9 +1,3 @@
-<ul id="dropdown1" class="dropdown-content">
-  <li><a href="#!">one</a></li>
-  <li><%= link_to "アカウント編集", edit_user_registration_path %></li>
-  <li class="divider"></li>
-  <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-</ul>
 <nav>
   <div class="nav-wrapper">
     <a href="#!" class="brand-logo">Karte</a>
@@ -12,11 +6,10 @@
         <% if current_user.try(:practice?) %>
           <li><%= link_to current_user.full_name, practice_user_path(current_user) %></li>
           <li><a href="<%= practice_users_path %>"><i class="material-icons">supervisor_account</i></a></li>
-          <li><%= link_to "お知らせ", :practice_notices %></li>
+          <li><%= link_to "お知らせ", practice_user_notices_path(current_user, @notice) %></li>
           <li><%= link_to "メニュー管理", practice_user_menus_url(current_user, @menu) %></li>
           <li><%= link_to "スタッフ管理", practice_user_staffs_url(current_user, @staff) %></li>
           <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
         <% else %>
           <li><%= link_to current_user.full_name, current_user %></li>
           <li><a href="<%= users_path %>"><i class="material-icons">local_hospital</i></a></li>
@@ -24,7 +17,6 @@
           <li><%= link_to "お会計履歴", [current_user, :patients_receipts] %></li>
           <li><%= link_to "お知らせ", :notices %></li>
           <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
         <% end %>
       <% else %>
         <li><%= link_to 'アカウント作成', new_user_registration_path %></li>
