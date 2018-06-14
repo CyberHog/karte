@@ -14,7 +14,7 @@ gem 'pg', '~> 1.0', groups: %w(production), require: false
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'rails_12factor', group: :production
+gem 'rails_12factor', groups: %w(production), require: false
 
 # gem 'therubyracer', platforms: :ruby
 
