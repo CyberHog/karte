@@ -1,18 +1,27 @@
 <nav>
   <div class="nav-wrapper">
     <a href="#!" class="brand-logo">Karte</a>
-    <ul class="right hide-on-med-and-down">
+    <ul id="list" class="right hide-on-med-and-down">
       <% if user_signed_in? %>
         <% if current_user.try(:practice?) %>
-          <li><%= link_to current_user.full_name, practice_user_path(current_user) %></li>
-          <li><a href="<%= practice_users_path %>"><i class="material-icons">supervisor_account</i></a></li>
+          <% unless current_user.clinic.present? %>
+            <li class="tooltip-clinic" data-tooltip="自分の治療院を登録しましょう！">
+          <% else %>
+            <li>
+          <% end %>
+            <%= link_to current_user.full_name, practice_user_path(current_user) %>
+          </li>
+          <li class="tooltip" data-tooltip="患者一覧">
+            <a href="<%= practice_users_path %>"><i class="material-icons">supervisor_account</i>
+            </a>
+          </li>
           <li><%= link_to "お知らせ", practice_user_notices_path(current_user, @notice) %></li>
           <li><%= link_to "メニュー管理", practice_user_menus_url(current_user, @menu) %></li>
           <li><%= link_to "スタッフ管理", practice_user_staffs_url(current_user, @staff) %></li>
           <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
         <% else %>
           <li><%= link_to current_user.full_name, current_user %></li>
-          <li><a href="<%= users_path %>"><i class="material-icons">local_hospital</i></a></li>
+          <li class="tooltip" data-tooltip="マイクリニックリスト"><a href="<%= users_path %>"><i class="material-icons">local_hospital</i></a></li>
           <li><%= link_to "カルテ", [current_user, :medical_charts] %></li>
           <li><%= link_to "お会計履歴", [current_user, :patients_receipts] %></li>
           <li><%= link_to "お知らせ", :notices %></li>

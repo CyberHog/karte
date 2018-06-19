@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get "users/following/:user_id",to: "users#following", as: "users_following"
   put 'users/follow/:user_id' => 'users#follow'
   put 'users/unfollow/:user_id' => 'users#unfollow'
+  get "homes/agreement", to: "homes#agreement", as: "homes_agreement"
 
   resources :users do
     collection { get "search" }
@@ -57,6 +58,7 @@ Rails.application.routes.draw do
   end
   resources :medical_charts
   resources :notices
+  resources :homes
 
   namespace :practice do
     root "users#index"

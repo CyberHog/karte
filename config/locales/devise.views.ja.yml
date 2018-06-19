@@ -110,7 +110,7 @@
         staff_name: "名前"
         staff_suspension: "状態"
       coupon:
-        name: "クーポン名"
+        coupon_name: "クーポン名"
         remaining: "残り回数"
         expiration_date: "有効期限"
   views:

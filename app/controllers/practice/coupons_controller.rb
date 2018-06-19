@@ -85,6 +85,6 @@ class Practice::CouponsController < Practice::Base
 
   private
   def coupon_params
-  	params.require(:coupon).permit(:menu_id, :patients_receipt_id, :seller_id, :buyer_id, :name, :remaining, :expiration_date)
+  	params.require(:coupon).permit(:menu_id, :patients_receipt_id, :seller_id, :buyer_id, :coupon_name, :remaining, :expiration_date)
   end
 end

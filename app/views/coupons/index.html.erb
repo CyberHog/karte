@@ -30,7 +30,7 @@
     <li class="collection-item avatar">
       <%= image_tag coupon.seller.avatar.url, class: "circle" %>
       <p><%= coupon.seller.clinic.name %><br>
-          <%= link_to coupon.name, user_coupon_url(id: coupon.id) %>
+          <%= link_to coupon.coupon_name, user_coupon_url(id: coupon.id) %>
       </p>
       <span class="title">残り回数<%= coupon.remaining %></span>
       <p class="secondary-content">有効期限<%= simple_time(coupon.expiration_date) %> 残り<%= @coupon_life %>日</p>

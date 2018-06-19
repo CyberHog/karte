@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20180528120353) do
     t.integer "menu_id"
     t.integer "seller_id"
     t.integer "buyer_id"
-    t.string "name"
+    t.string "coupon_name"
     t.integer "remaining"
     t.datetime "expiration_date"
     t.datetime "created_at", null: false

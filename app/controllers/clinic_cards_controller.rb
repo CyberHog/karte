@@ -10,7 +10,10 @@ class ClinicCardsController < ApplicationController
   def show
     @user = current_user
     @clinic_card = ClinicCard.find(params[:id])
-    @card_receipts = ClinicCard.includes(:patients_receipts).references(:patients_receipts)
+    if PatientsReceipt.where(clinic_card_id: @clinic_card.id).present?
+      card_receipts = PatientsReceipt.where(clinic_card_id: @clinic_card.id).order(:payday)
+      @payday = card_receipts.last.payday
+    end
   end
 
 end

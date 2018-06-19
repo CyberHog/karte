@@ -20,7 +20,7 @@
       <p><%= clinic_card.publisher.clinic.name %><br>
           診察券番号<%= link_to clinic_card.number, user_clinic_card_url(id: clinic_card.id) %>
       </p>
-      <span class="title">最終来院日</span>
+      <span class="title"><%= clinic_card.publisher.phone %></span>
       <p class="secondary-content">保有ポイント<%= clinic_card.holding_point %>P</p>
     </li>
   <% end %>

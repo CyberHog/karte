@@ -42,3 +42,102 @@ td #short_td {
 table #short_t {
   width: 80%;
 }
+
+.list-clinic{
+  position: relative;
+}
+.list-clinic:hover:after{
+  content: "自分の治療院を登録しましょう！";
+  display: block;
+  position: absolute;
+  bottom: -60px;
+  left: -95px;
+  width: 270px;
+  height: 40px;
+  line-height: 40px;
+  background-color: #ce93d8;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+  box-shadow: 2px 2px 4px -2px gray;
+  border-radius: 2px;
+}
+
+/* ツールチップ 患者一覧 */
+.tooltip, .tooltip-clinic {
+  position: relative;
+}
+.tooltip::before, .tooltip-clinic::before,
+.tooltip-clinic::after, .tooltip::after {
+  position: absolute;
+  transition: all 0.3s ease 0s;
+  opacity: 0;
+}
+//マウスオン前　吹き出し三角
+.tooltip::before {
+  content: "";
+  border: 10px solid transparent;
+  border-bottom-color: #81d4fa;
+  bottom: -21px;
+  left: 15px;
+}
+//ツールチップ表示 文章
+.tooltip::after {
+  content: attr(data-tooltip);
+  display: block;
+  background: #81d4fa;
+  color: #fff;
+  width: 160px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 5px;
+  bottom: -60px;
+  left: -50px;
+  box-shadow: 3px 3px 4px -2px gray;
+}
+//マウスオン後　吹き出し三角
+.tooltip-clinic:hover::before,
+.tooltip:hover::before{
+  bottom: -15px;
+  opacity: 1;
+}
+//マウスオン後 文章
+.tooltip:hover::after{
+  bottom: -54px;
+  left: -50px;
+  opacity: 1;
+}
+
+/* ツールチップ　クリニック未作成 */
+//マウスオン前　吹き出し三角
+.tooltip-clinic::before {
+  content: "";
+  border: 10px solid transparent;
+  border-bottom-color: #ce93d8;
+  bottom: -21px;
+  left: 25px;
+}
+//ツールチップ表示 文章
+.tooltip-clinic::after {
+  content: attr(data-tooltip);
+  display: block;
+  background: #ce93d8;
+  color: #fff;
+  width: 260px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 5px;
+  bottom: -60px;
+  left: -80px;
+  box-shadow: 3px 3px 4px -2px gray;
+}
+//マウスオン後 文章
+.tooltip-clinic:hover::after{
+  bottom: -54px;
+  left: -80px;
+  opacity: 1;
+}
