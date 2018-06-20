@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   put 'users/unfollow/:user_id' => 'users#unfollow'
   get "homes/agreement", to: "homes#agreement", as: "homes_agreement"
   get "homes/privacy", to: "homes#privacy", as: "homes_privacy"
+  get 'contacts' => 'contacts#index'
+  post 'contacts/confirm' => 'contacts#confirm', as: "contacts_confirm"
+  post 'contacts/thanks' => 'contacts#thanks', as: "contacts_thanks"
 
   resources :users do
     collection { get "search" }
