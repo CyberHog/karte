@@ -4,4 +4,7 @@ class HomesController < ApplicationController
 
   def agreement
   end
+
+  def privacy
+  end
 end

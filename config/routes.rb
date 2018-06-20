@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   put 'users/follow/:user_id' => 'users#follow'
   put 'users/unfollow/:user_id' => 'users#unfollow'
   get "homes/agreement", to: "homes#agreement", as: "homes_agreement"
+  get "homes/privacy", to: "homes#privacy", as: "homes_privacy"
 
   resources :users do
     collection { get "search" }
