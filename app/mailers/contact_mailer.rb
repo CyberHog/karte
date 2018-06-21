@@ -1,6 +1,6 @@
 class ContactMailer < ActionMailer::Base
   default from: "example@example.com"
-  default to: "sakaoka.g.396@gmail.com"
+  default to: "example@example.com"
      
   def received_email(contact)
     @contact = contact

@@ -1,7 +1,8 @@
+<div class="navbar-fixed">
 <nav>
   <div class="nav-wrapper">
-    <a href="#!" class="brand-logo">Karte</a>
-    <ul id="list" class="right hide-on-med-and-down">
+    <a href="#!" class="brand-logo left">Karte</a>
+    <ul id="list" class="right">
       <% if user_signed_in? %>
         <% if current_user.try(:practice?) %>
           <% unless current_user.clinic.present? %>
@@ -34,3 +35,4 @@
     </ul>
   </div>
 </nav>
+</div>

@@ -22,8 +22,10 @@ class Practice::UsersController < Practice::Base
 
   # 検索
   def search
+    if params[:q] != ""
     @users = User.search(params[:q])
       .page(params[:page]).per(10)
+    end
     render "index"
   end
 

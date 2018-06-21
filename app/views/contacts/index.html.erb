@@ -25,7 +25,7 @@
       <td><%= f.text_area :message %></td>
     </tr>
   </table>
-  <%= f.submit '確認', class: "btn waves-effect waves-light btn" %>
+  <%= button_tag "確認", class: "btn waves-effect waves-light btn", type: "button", onclick: "submit();" %>
 <% end %>
   </div>
 </div>

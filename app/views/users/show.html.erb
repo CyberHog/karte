@@ -14,10 +14,10 @@
 <div class="row">
   <div class="col s12">
     <% if @user.menus.present? %>
-    <%= link_to "メニュー", user_menus_path(@user, @menu), class: "btn waves-effect waves-light blue" %>
+    <%= link_to "メニュー", user_menus_path(@user), class: "btn waves-effect waves-light blue" %>
     <% end %>
     <% if @user.staffs.present? %>
-      <%= link_to "スタッフ一覧", user_staffs_path(@user, @staff), class: "btn waves-effect waves-light blue" %>
+      <%= link_to "スタッフ一覧", user_staffs_path(@user), class: "btn waves-effect waves-light blue" %>
     <% end %>
   </div>
 </div>

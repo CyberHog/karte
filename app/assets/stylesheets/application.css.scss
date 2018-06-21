@@ -27,6 +27,19 @@ main {
   flex: 1 0 auto;
 }
 
+.fixed-action-btn {
+  position: fixed;
+  top: 1px;
+  right: 23px;
+  margin-bottom: 0;
+  z-index: 997;
+}
+
+.fixed-action-btn.horizontal ul {
+  width: 600px;
+  top: 48%;
+}
+
 select {
   display: inline;
 }
@@ -43,25 +56,6 @@ table #short_t {
   width: 80%;
 }
 
-.list-clinic{
-  position: relative;
-}
-.list-clinic:hover:after{
-  content: "自分の治療院を登録しましょう！";
-  display: block;
-  position: absolute;
-  bottom: -60px;
-  left: -95px;
-  width: 270px;
-  height: 40px;
-  line-height: 40px;
-  background-color: #ce93d8;
-  color: white;
-  text-align: center;
-  vertical-align: middle;
-  box-shadow: 2px 2px 4px -2px gray;
-  border-radius: 2px;
-}
 
 /* ツールチップ 患者一覧 */
 .tooltip, .tooltip-clinic {
@@ -79,7 +73,7 @@ table #short_t {
   border: 10px solid transparent;
   border-bottom-color: #81d4fa;
   bottom: -21px;
-  left: 15px;
+  left: 16px;
 }
 //ツールチップ表示 文章
 .tooltip::after {
@@ -117,7 +111,7 @@ table #short_t {
   border: 10px solid transparent;
   border-bottom-color: #ce93d8;
   bottom: -21px;
-  left: 25px;
+  left: 30px;
 }
 //ツールチップ表示 文章
 .tooltip-clinic::after {

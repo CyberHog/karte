@@ -7,3 +7,4 @@ document.addEventListener('turbolinks:load', function () {
         $('#receipt_point').val(point[i - 1]);
     });
 });
+
