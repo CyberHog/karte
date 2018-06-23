@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   get 'contacts' => 'contacts#index'
   post 'contacts/confirm' => 'contacts#confirm', as: "contacts_confirm"
   post 'contacts/thanks' => 'contacts#thanks', as: "contacts_thanks"
+  get '*not_found' => 'application#routing_error'
+  post '*not_found' => 'application#routing_error'
 
   resources :users do
     collection { get "search" }
@@ -73,8 +75,6 @@ Rails.application.routes.draw do
     get "users/following/:user_id",to: "users#following", as: "users_following"
     put 'users/follow/:user_id' => 'users#follow'
     put 'users/unfollow/:user_id' => 'users#unfollow'
-    get '*not_found' => 'application#routing_error'
-    post '*not_found' => 'application#routing_error'
 
     resources :users do
       collection { get "search" }
