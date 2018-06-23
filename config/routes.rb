@@ -73,6 +73,8 @@ Rails.application.routes.draw do
     get "users/following/:user_id",to: "users#following", as: "users_following"
     put 'users/follow/:user_id' => 'users#follow'
     put 'users/unfollow/:user_id' => 'users#unfollow'
+    get '*not_found' => 'application#routing_error'
+    post '*not_found' => 'application#routing_error'
 
     resources :users do
       collection { get "search" }

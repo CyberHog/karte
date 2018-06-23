@@ -3,10 +3,6 @@ class StaffsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @staffs = Staff.where(user_id: @user.id, staff_suspension: false).order("staff_number")
-    puts "debug------"
-    puts @user.last_name
-    puts @staffs
-    puts "debug/------"
   end
 
   # 検索
