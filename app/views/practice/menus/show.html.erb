@@ -20,6 +20,15 @@
   </tr>
   <% if @menu.coupon %>
   <tr>
+    <th>用途</th>
+    <td><%= @menu.usage == 0 ? "購入" : "使用" %></td>
+  </tr>
+  <tr>
+    <th>リンク先メニュー</th>
+    <td><%= @link_menu %></td>
+  </tr>
+  <% if @menu.usage == 0 %>
+  <tr>
     <th>使用可能回数</th>
     <td><%= @menu.counting %>回</td>
   </tr>
@@ -27,6 +36,7 @@
     <th>有効期間</th>
     <td><%= @menu.validity_period %>日間</td>
   </tr>
+  <% end %>
   <% end %>
   <tr>
     <th>価格</th>

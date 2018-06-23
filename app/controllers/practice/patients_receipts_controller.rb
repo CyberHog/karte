@@ -7,7 +7,7 @@ class Practice::PatientsReceiptsController < Practice::Base
     else
       @patients_receipts = PatientsReceipt.all
     end
-  	@patients_receipts = PatientsReceipt.order(:payday).page(params[:page]).per(10)
+  	@patients_receipts = PatientsReceipt.order(:payday)
   end
 
   # 詳細
@@ -47,18 +47,27 @@ class Practice::PatientsReceiptsController < Practice::Base
       @payment = receipt.payment
       @payment_method = receipt.payment_method
       @point = receipt.gained_point
+      @selected_menu_name = receipt.service
+    end
+    @selected_menu = Menu.find_by(content_name: @selected_menu_name, user_id: current_user.id)
+    if @selected_menu.coupon_number.present?
+      selected_id = @selected_menu.coupon_number
+      selected_coupon_name = Menu.find_by(user_id: current_user.id, content_id: selected_id).content_name
+    end
+    if @user.received_coupons.present?
+      @using_coupon = Coupon.find_by(seller_id: current_user.id, buyer_id: @user.id, coupon_name: selected_coupon_name)
     end
     save_valid = true
     # 支払いがクーポンの場合
     if @payment_method == "クーポン"  
-      if @user.received_coupons
-      	@using_coupon = Coupon.find_by(seller_id: current_user.id, buyer_id: @user.id)
+      if @user.received_coupons.present?
         @count = @using_coupon.remaining # @count,クーポンの残り回数
         # 使用可能回数が残っている場合
       	if @count
           used = @using_coupon.remaining - 1 
           @using_coupon.assign_attributes(remaining: used)
-          if @count == 0 # 使用後に残り回数が0になったら
+          @used_count = @using_coupon.remaining
+          if @used_count == 0 # 使用後に残り回数が0になったら
             @using_coupon.destroy
           else
             @using_coupon.save
@@ -70,7 +79,7 @@ class Practice::PatientsReceiptsController < Practice::Base
       else
       	save_valid = false
         message =  "クーポンを所有していません"
-	  end
+      end
     # 支払が現金またはカードの場合
     elsif @payment_method == "現金" || @payment_method == "カード"
       @clinic_card = ClinicCard.find_by(publisher_id: current_user.id, holder_id: @user.id)
@@ -117,27 +126,33 @@ class Practice::PatientsReceiptsController < Practice::Base
   # 更新
   def update
   	@user = User.find(params[:user_id])
-  	@clinic_card = ClinicCard.find_by(publisher_id: current_user.id, holder_id: @user.id)
-    @holding_point = @clinic_card.holding_point
+    @menu_name = Menu.where(user_id: current_user.id).pluck(:content_name)
+    @menu_point = Menu.where(user_id: current_user.id).pluck(:attached_point)
+    @menu_price = Menu.where(user_id: current_user.id).pluck(:price)
+  	@card = ClinicCard.find_by(publisher_id: current_user.id, holder_id: @user.id)
+    @holding_point = @card.holding_point
   	@patients_receipt = PatientsReceipt.find(params[:id])
   	@patients_receipt.receipts.each do |receipt|
       @before_payment = receipt.payment
       @before_payment_method = receipt.payment_method
       @before_point = receipt.gained_point
-      @before_selected_menu = receipt.service
+      @before_selected_menu_name = receipt.service
     end
-    if @before_payment_method == "クーポン"
-      if @user.received_coupons
-      	@using_coupon = Coupon.find_by(seller_id: current_user.id, buyer_id: @user.id)
-      	@user.received_coupons.each do |coupon|
-  	      @menu_id = coupon.menu_id
-  	      @patients_receipt_id = coupon.patients_receipt_id
-  	      @seller_id = coupon.seller_id
-  	      @buyer_id = coupon.buyer_id
-  	      @coupon_name = coupon.coupon_name
-          @count = coupon.remaining # @count,クーポンの残り回数
-          @expiration_date = coupon.expiration_date
-        end
+    @before_selected_menu = Menu.find_by(content_name: @before_selected_menu_name, user_id: current_user.id)
+    if @before_selected_menu.coupon_number.present?
+      before_selected_id = @before_selected_menu.coupon_number
+      before_selected_coupon_name = Menu.find_by(user_id: current_user.id, content_id: before_selected_id).content_name
+    end
+    if @user.received_coupons.present?
+      @using_coupon = Coupon.find_by(seller_id: current_user.id, buyer_id: @user.id)
+      @user.received_coupons.each do |coupon|
+  	    @menu_id = coupon.menu_id
+  	    @patients_receipt_id = coupon.patients_receipt_id
+  	    @seller_id = coupon.seller_id
+  	    @buyer_id = coupon.buyer_id
+  	    @coupon_name = coupon.coupon_name
+        @count = coupon.remaining # @count,クーポンの残り回数
+        @expiration_date = coupon.expiration_date
       end
     end
   	@patients_receipt.assign_attributes(patients_receipt_params)
@@ -145,18 +160,29 @@ class Practice::PatientsReceiptsController < Practice::Base
       @after_payment = receipt.payment
       @after_payment_method = receipt.payment_method
       @after_point = receipt.gained_point
+      @after_selected_menu_name = receipt.service
   	end
+    @after_selected_menu = Menu.find_by(content_name: @after_selected_menu_name, user_id: current_user.id)
+    if @after_selected_menu.coupon_number.present?
+      after_selected_id = @after_selected_menu.coupon_number
+      after_selected_coupon_name = Menu.find_by(user_id: current_user.id, content_id: after_selected_id).content_name
+    end
   	save_valid = true
 
   	# 編集後の支払いがクーポン
   	if @after_payment_method == "クーポン"
-  	  if @user.received_coupons
+  	  if @user.received_coupons.present?
+        @using_coupon = Coupon.find_by(seller_id: current_user.id, buyer_id: @user.id, coupon_name: after_selected_coupon_name)
+        @using_coupon.each do |coupon|
+          @count = coupon.remaining
+        end
   	    if @count
   	      # 現金、またはカード → クーポン
   	      if @before_payment_method == "現金" || @before_payment_method == "カード"
       	    changed_point = @holding_point - @before_point
-      	    @clinic_card.assign_attributes(holding_point: changed_point)
-      	    @clinic_card.save
+      	    @card.assign_attributes(holding_point: changed_point)
+      	    @card.save
+            @using_coupon = Coupon.find_by(seller_id: current_user.id, buyer_id: @user.id, coupon_name: after_selected_coupon_name)
       	    used = @using_coupon.remaining - 1 
             @using_coupon.assign_attributes(remaining: used)
             if @using_coupon.remaining == 0
@@ -167,8 +193,9 @@ class Practice::PatientsReceiptsController < Practice::Base
           # ポイント → クーポン
   	      elsif @before_payment_method == "ポイント"
             unused_point = @holding_point + @before_payment
-            @clinic_card.assign_attributes(holding_point: unused_point)
-       	    @clinic_card.save
+            @card.assign_attributes(holding_point: unused_point)
+       	    @card.save
+            @using_coupon = Coupon.find_by(seller_id: current_user.id, buyer_id: @user.id, coupon_name: after_selected_coupon_name)
       	    used = @using_coupon.remaining - 1 
             @using_coupon.assign_attributes(remaining: used)
             if @using_coupon.remaining == 0
@@ -190,35 +217,41 @@ class Practice::PatientsReceiptsController < Practice::Base
   	elsif @after_payment_method == "現金" || @after_payment_method == "カード"
   	  # クーポン → 現金orカード
   	  if @before_payment_method == "クーポン"
-  	  	if @user.received_coupons
+  	  	if @user.received_coupons.present?
+          @using_coupon = Coupon.find_by(seller_id: current_user.id, buyer_id: @user.id, coupon_name: before_selected_coupon_name)
+          @using_coupon.each do |coupon|
+            @count = coupon.remaining
+          end
+        end
+        if @count
   	  	  unused = @count + 1
   	  	  @using_coupon.assign_attributes(remaining: unused)
   	  	  @using_coupon.save
           added = @holding_point + @after_point
-      	  @clinic_card.assign_attributes(holding_point: added)
-      	  @clinic_card.save
+      	  @card.assign_attributes(holding_point: added)
+      	  @card.save
       	else
       	  added = @holding_point + @after_point
-      	  @clinic_card.assign_attributes(holding_point: added)
-      	  @clinic_card.save
-      	  @menu = Menu.where(content_name: @before_selected_menu)
-      	  @coupon = Coupon.create(menu_id: @menu.id, patients_receipt_id: @patients_receipt.id, seller_id: @seller_id, buyer_id: @buyer_id, coupon_name: @before_selected_menu, remaining: 1)
+      	  @card.assign_attributes(holding_point: added)
+      	  @card.save
+      	  @menu = Menu.find_by(content_name: @before_selected_menu_name)
+      	  @coupon = Coupon.create(menu_id: @menu.id, patients_receipt_id: @patients_receipt.id, seller_id: @patients_receipt.seller_id, buyer_id: @patients_receipt.buyer_id, coupon_name: before_selected_coupon_name, remaining: 1)
       	  message = "クーポンの有効期限を再設定してください"
       	end
       # ポイント → 現金orカード
       elsif @before_payment_method == "ポイント"
       	unused_point = @holding_point + @before_payment
-        @clinic_card.assign_attributes(holding_point: unused_point)
-        @clinic_card.save
+        @card.assign_attributes(holding_point: unused_point)
+        @card.save
         added = @holding_point + @after_point
-      	@clinic_card.assign_attributes(holding_point: added)
-      	@clinic_card.save
+      	@card.assign_attributes(holding_point: added)
+      	@card.save
       # 現金orカード → 現金orカード
       elsif @before_payment_method == "現金" || @before_payment_method == "カード"
       	reset_point = 0
- 		reset_point = @holding_point + @after_point - @before_point
-      	@clinic_card.assign_attributes(holding_point: reset_point)
-      	@clinic_card.save
+ 		    reset_point = @holding_point + @after_point - @before_point
+      	@card.assign_attributes(holding_point: reset_point)
+      	@card.save
       end
 
     # 修正後の支払いがポイント
@@ -226,30 +259,34 @@ class Practice::PatientsReceiptsController < Practice::Base
   	  if @holding_point
   	    # クーポン → ポイント
   	    if @before_payment_method == "クーポン"
-          if @user.received_coupons
+          if @user.received_coupons.present?
+            @using_coupon = Coupon.find_by(seller_id: current_user.id, buyer_id: @user.id, coupon_name: before_selected_coupon_name)
+            @using_coupon.each do |coupon|
+              @count = coupon.remaining
+            end
   	  	    unused = @count + 1
   	  	    @using_coupon.assign_attributes(remaining: unused)
   	  	    @using_coupon.save
             used = @holding_point - @before_payment
-      	    @clinic_card.assign_attributes(holding_point: used)
-      	    @clinic_card.save
+      	    @card.assign_attributes(holding_point: used)
+      	    @card.save
       	  else
       	    used = @holding_point - @before_payment
-      	    @clinic_card.assign_attributes(holding_point: used)
-      	    @clinic_card.save
-      	    @menu = Menu.where(content_name: @before_selected_menu)
-      	    @coupon = Coupon.create(menu_id: @menu.id, patients_receipt_id: @patients_receipt.id, seller_id: @seller_id, buyer_id: @buyer_id, coupon_name: @before_selected_menu, remaining: 1)
+      	    @card.assign_attributes(holding_point: used)
+      	    @card.save
+      	    @menu = Menu.find_by(content_name: @before_selected_menu_name)
+      	    @coupon = Coupon.create(menu_id: @menu.id, patients_receipt_id: @patients_receipt.id, seller_id: @patients_receipt.seller_id, buyer_id: @patients_receipt.buyer_id, coupon_name: before_selected_coupon_name, remaining: 1)
       	    message = "クーポンの有効期限を再設定してください"
       	  end
         # 現金orカード → ポイント
   	    elsif @before_payment_method == "カード" || @befor_payment_method == "現金"
   	      changed_point = @holding_point - @before_point - @before_payment
-          @clinic_card.assign_attributes(holding_point: used)
-          @clinic_card.save
+          @card.assign_attributes(holding_point: used)
+          @card.save
         elsif @before_payment_method == "ポイント"
       	  changed_point = @holding_point + @before_payment - @after_payment
-      	  @clinic_card.assign_attributes(holding_point: changed_point)
-      	  @clinic_card.save
+      	  @card.assign_attributes(holding_point: changed_point)
+      	  @card.save
         end
   	  else
   	    save_valid = false
@@ -279,18 +316,16 @@ class Practice::PatientsReceiptsController < Practice::Base
       @payment = receipt.payment
       @payment_method = receipt.payment_method
       @point = receipt.gained_point
+      @selected_menu_name = receipt.service
     end
-    if @payment_method == "クーポン"
-      @using_coupon = Coupon.find_by(seller_id: current_user.id, buyer_id: @user.id)
-      @user.received_coupons.each do |coupon|
-  	    @menu_id = coupon.menu_id
-  	    @patients_receipt_id = coupon.patients_receipt_id
-  	    @seller_id = coupon.seller_id
-  	    @buyer_id = coupon.buyer_id
-  	    @coupon_name = coupon.coupon_name
-        @count = coupon.remaining # @count,クーポンの残り回数
-        @expiration_date = coupon.expiration_date
-      end
+    @selected_menu = Menu.find_by(content_name: @selected_menu_name, user_id: current_user.id)
+    if @selected_menu.coupon_number.present?
+      selected_id = @selected_menu.coupon_number
+      selected_coupon_name = Menu.find_by(user_id: current_user.id, content_id: selected_id).content_name
+    end
+    @using_coupon = Coupon.find_by(seller_id: current_user.id, buyer_id: @user.id, coupon_name: selected_coupon_name)
+    if @using_coupon.present?
+      @count = @using_coupon.remaining
     end
   	@patients_receipt.destroy
   	if @payment_method == "クーポン"
@@ -299,7 +334,9 @@ class Practice::PatientsReceiptsController < Practice::Base
         @using_coupon.assign_attributes(remaining: unused)
        	@using_coupon.save
       else
-      	@coupon = Coupon.create(menu_id: @menu_id, patients_receipt_id: @patients_receipt_id, seller_id: @seller_id, buyer_id: @buyer_id, coupon_name: @coupon_name, remaining: 1, expiration_date: @expiration_date)
+      	@menu = Menu.find_by(user_id: current_user.id, content_name: @selected_menu_name)
+        @coupon = Coupon.create(menu_id: @menu.id, seller_id: @patients_receipt.seller_id, buyer_id: @patients_receipt.buyer_id, coupon_name: selected_coupon_name, remaining: 1)
+        message = "クーポンの有効期限を再設定してください"
       end
   	elsif @payment_method == "ポイント"
       unused_point = @clinic_card.holding_point + @payment
@@ -310,6 +347,7 @@ class Practice::PatientsReceiptsController < Practice::Base
       @clinic_card.assign_attributes(holding_point: unadded)
       @clinic_card.save
   	end
+    flash[:notice] = message
   	redirect_to practice_user_patients_receipts_url(id: @patients_receipt.id), notice: "会計情報を削除しまた"
   end
 

@@ -20,6 +20,9 @@ class Practice::MenusController < Practice::Base
   def show
     @user = User.find(params[:user_id])
   	@menu = Menu.find(params[:id])
+    if @menu.coupon_number.present?
+      @link_menu = Menu.find_by(content_id: @menu.coupon_number).content_name
+    end
   end
 
   # 新規作成フォーム
@@ -65,6 +68,6 @@ class Practice::MenusController < Practice::Base
 
   private
   def menu_params
-    params.require(:menu).permit(:id, :user_id, :content_id, :content_name, :price, :attached_point, :coupon, :counting, :validity_period)
+    params.require(:menu).permit(:id, :user_id, :content_id, :content_name, :price, :attached_point, :coupon, :coupon_number, :counting, :validity_period, :usage)
   end
 end

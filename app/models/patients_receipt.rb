@@ -5,6 +5,7 @@ class PatientsReceipt < ApplicationRecord
   has_many :receipts, dependent: :destroy, inverse_of: :patients_receipt
   accepts_nested_attributes_for :receipts, allow_destroy: true
   has_many :coupons, dependent: :destroy
+  accepts_nested_attributes_for :coupons, allow_destroy: true
 
   validates :payday, :payer, presence: true
 end

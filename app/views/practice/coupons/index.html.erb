@@ -33,7 +33,11 @@
           <%= link_to coupon.coupon_name, practice_user_coupon_url(id: coupon.id) %>
       </p>
       <span class="title">残り回数<%= coupon.remaining %></span>
-      <p class="secondary-content">有効期限<%= simple_time(coupon.expiration_date) %> 残り<%= @coupon_life %>日</p>
+      <p class="secondary-content">有効期限
+        <% if coupon.expiration_date.present? %>
+          <%= simple_time(coupon.expiration_date) %>
+        <% end %>
+         残り<%= @coupon_life %>日</p>
     </li>
   <% end %>
   <% end %>

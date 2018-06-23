@@ -10,12 +10,14 @@
 
 <% if @selected_menu.coupon %>
 <% @coupon = Coupon.find_by(patients_receipt_id: @patients_receipt.id) %>
+<% if @selected_menu.usage == 0 %>
 <% unless @coupon.present? %>
   <p><%= link_to "クーポン登録", new_practice_user_coupon_path(@user, @coupon, :patients_receipt_id => @patients_receipt.id), class: "waves-effect waves-light btn blue" %></p>
 <% else %>
   <p>
     <%= link_to "クーポン詳細", practice_user_coupon_url(@coupon, user_id: @user.id) %>
   </p>
+<% end %>
 <% end %>
 <% end %>
 

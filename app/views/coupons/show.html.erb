@@ -17,7 +17,11 @@
   </tr>
   <tr>
     <th>有効期限</th>
-    <td><%= simple_time(@coupon.expiration_date) %></td>
+    <td>
+      <% if @coupon.expiration_date.present? %>
+        <%= simple_time(@coupon.expiration_date) %>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <th>残り日数</th>

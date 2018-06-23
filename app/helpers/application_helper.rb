@@ -6,6 +6,6 @@ module ApplicationHelper
 	end
 
 	def simple_time(datetime)
-		datetime.strftime("%Y/%m/%d")
+	  datetime.strftime("%Y/%m/%d")
 	end
 end

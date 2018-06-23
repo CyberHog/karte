@@ -12,6 +12,7 @@ class Menu < ApplicationRecord
   		numericality: { only_integer: true,
   			allow_blank: true }
   validates :counting, :validity_period, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, if: :coupon?
+  validates :coupon_number, exclusion: { in: %w(self.content_id) }
 
 
   def coupon?

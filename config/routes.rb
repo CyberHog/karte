@@ -22,8 +22,6 @@ Rails.application.routes.draw do
   get 'contacts' => 'contacts#index'
   post 'contacts/confirm' => 'contacts#confirm', as: "contacts_confirm"
   post 'contacts/thanks' => 'contacts#thanks', as: "contacts_thanks"
-  get '*not_found' => 'application#routing_error'
-  post '*not_found' => 'application#routing_error'
 
   resources :users do
     collection { get "search" }

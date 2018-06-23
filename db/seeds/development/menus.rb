@@ -69,7 +69,12 @@ menu = Menu.create(
 	content_id: "9",
 	content_name: "回数券利用(60分)",
 	price: "0",
-	attached_point: "0"
+	attached_point: "0",
+	coupon: true,
+	counting: 0,
+	validity_period: "0",
+	coupon_number: "8",
+	usage: "1"
 	)
 menu = Menu.create(
 	user_id: "1",
@@ -86,7 +91,12 @@ menu = Menu.create(
 	content_id: "11",
 	content_name: "回数券利用(30分)",
 	price: "0",
-	attached_point: "0"
+	attached_point: "0",
+	coupon: true,
+	counting: 0,
+	validity_period: "0",
+	coupon_number: "10",
+	usage: "1"
 	)
 menu = Menu.create(
 	user_id: "2",

@@ -15,10 +15,18 @@
       <%= form.label :coupon, for: "coupon" %>
     </th>
     <td id="count">
-      <%= form.label :counting %>
-      <%= form.number_field :counting %>
-      <%= form.label :validity_period %>
-      <%= form.text_field :validity_period, placeholder: "ex. 3ヶ月の場合　→　90" %>
+      <div>
+      <%= form.radio_button :usage, 0, id: "buy", class: "with-gap" %>
+      <%= form.label :usage_0, for: "buy" %>
+      <%= form.radio_button :usage, 1, id: "use", class: "with-gap" %>
+      <%= form.label :usage_1, for: "use" %>
+    </div>
+      <%= form.label :coupon_number, id: "use_coupon" %>
+      <%= form.text_field :coupon_number, placeholder: "回数券購入と使用をリンクします。リンク先のコースIDを入力して下さい。", id: "use_coupon" %>
+      <%= form.label :counting, id: "use_coupon" %>
+      <%= form.number_field :counting, id: "use_coupon" %>
+      <%= form.label :validity_period, id: "use_coupon" %>
+      <%= form.text_field :validity_period, placeholder: "ex. 3ヶ月の場合　→　90", id: "use_coupon" %>
     </td>
   </tr>
   <tr>

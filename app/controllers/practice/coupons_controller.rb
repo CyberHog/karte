@@ -1,16 +1,12 @@
 class Practice::CouponsController < Practice::Base
   def index
-  	if params[:user_id]
-  	  @user = User.find(params[:user_id])
-  	  @coupons = @user.issued_coupons
-  	else
-  	  @coupons = Coupon.all
-  	end
-  	@coupons = Coupon.order(:id)
+  	@user = User.find(params[:user_id])
+  	@coupons = Coupon.where(seller_id: current_user.id, buyer_id: @user.id).order(:id)
     @coupons.each do |coupon|
-      @coupon_life = (coupon.expiration_date.to_datetime - DateTime.now).to_i
+      if coupon.expiration_date.present?
+        @coupon_life = (coupon.expiration_date.to_datetime - DateTime.now).to_i
+      end
     end
-
   end
 
   def search
@@ -22,7 +18,9 @@ class Practice::CouponsController < Practice::Base
   def show
   	@user = User.find(params[:user_id])
   	@coupon = Coupon.find(params[:id])
-    @coupon_life = (@coupon.expiration_date.to_datetime - DateTime.now).to_i
+    if @coupon.expiration_date.present?
+      @coupon_life = (@coupon.expiration_date.to_datetime - DateTime.now).to_i
+    end
   end
 
   def new
@@ -57,14 +55,22 @@ class Practice::CouponsController < Practice::Base
   	@user = User.find(params[:user_id])
   	@coupon = Coupon.find(params[:id])
     @patients_receipt = PatientsReceipt.find_by(id: @coupon.patients_receipt_id)
-    @patients_receipt.receipts.each do |receipt|
-      @course = receipt.service
+    if @patients_receipt.present?
+      @patients_receipt.receipts.each do |receipt|
+        @course = receipt.service
+      end
+      selected_menu = Menu.find_by(user_id: current_user.id, content_name: @course.to_s)
+      @remaining = selected_menu.counting
+      validity = selected_menu.validity_period
+    else
+      selected_c_menu = Menu.find_by(user_id: current_user.id, content_name: @coupon.coupon_name)
+      @remaining_c = @coupon.remaining
+      @course_c = @coupon.coupon_name
     end
-    selected_menu = Menu.find_by(user_id: current_user.id, content_name: @course.to_s)
-    @remaining = selected_menu.counting
-    validity = selected_menu.validity_period
-    @expiration_date = @patients_receipt.created_at.to_time + validity*(60*60*24)
-    @coupon_life = (( @expiration_date - Time.now )/(60 * 60 * 24)).to_i
+    if @patients_receip.present?
+      @expiration_date = @patients_receipt.created_at.to_time + validity*(60*60*24)
+      @coupon_life = (( @expiration_date - Time.now )/(60 * 60 * 24)).to_i
+    end
   end
 
   def update

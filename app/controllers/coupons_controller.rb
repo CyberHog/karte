@@ -4,7 +4,9 @@ class CouponsController < ApplicationController
   	@coupons = @user.issued_coupons
   	@coupons = Coupon.order(:id)
     @coupons.each do |coupon|
-      @coupon_life = (coupon.expiration_date.to_datetime - DateTime.now).to_i
+      if coupon.expiration_date.present?
+        @coupon_life = (coupon.expiration_date.to_datetime - DateTime.now).to_i
+      end
     end
 
   end
@@ -18,7 +20,9 @@ class CouponsController < ApplicationController
   def show
   	@user = current_user
   	@coupon = Coupon.find(params[:id])
-    @coupon_life = (@coupon.expiration_date.to_datetime - DateTime.now).to_i
+    if @coupon.expiration_date.present?
+      @coupon_life = (@coupon.expiration_date.to_datetime - DateTime.now).to_i
+    end
   end
 
 end

@@ -10,7 +10,9 @@
 
 <%= form.hidden_field :seller_id, value: current_user.id %>
 <%= form.hidden_field :buyer_id, value: @user.id %>
-<%= form.hidden_field :patients_receipt_id, value: @patients_receipt.id %>
+<% if @patients_receipt.present? %>
+  <%= form.hidden_field :patients_receipt_id, value: @patients_receipt.id %>
+<% end %>
 <%= form.hidden_field :menu_id, value: @menu_id %>
 
 <%= @menu %>
@@ -18,11 +20,23 @@
 <table class="highlight">
   <tr>
     <th><%= form.label :coupon_name %></th>
-    <td><%= form.text_field :coupon_name, value: @course %></td>
+    <td>
+      <% if @patients_receipt.present? %>
+        <%= form.text_field :coupon_name, value: @course %>
+      <% else %>
+        <%= form.text_field :coupon_name, value: @course_c %>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <th><%= form.label :remaining %></th>
-    <td><%= form.text_field :remaining, value: @remaining %></td>
+    <td>
+      <% if @patients_receipt.present? %>
+        <%= form.text_field :remaining, value: @remaining %>
+      <% else %>
+        <%= form.text_field :remaining, value: @remaining_c %>
+       <% end %>
+    </td>
   </tr>
   <tr>
     <th><%= form.label :expiration_date %></th>

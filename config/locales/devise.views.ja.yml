@@ -82,6 +82,10 @@
         coupon: "回数券"
         counting: "利用可能回数"
         validity_period: "有効日数"
+        coupon_number: "リンク先ID"
+        usage: "使用法"
+        usage_0: "購入"
+        usage_1: "使用"
       notice:
         title: "タイトル"
         body: "本文"
