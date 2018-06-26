@@ -23,12 +23,12 @@
     <div class="input-field col s6">
       <i class="material-icons prefix">account_circle</i>
         <%= f.text_field :last_name, id: "icon_prefix", class: "validate" %>
-      <label for="icon_prefix" class="active">名字</label>
+      <label for="icon_prefix" class="active">名字(代表者)</label>
     </div>
 
     <div class="input-field col s6">
       <%= f.text_field :first_name, id: "first_name",  class: "validate" %>
-      <label for="first_name" class="active">名前</label>
+      <label for="first_name" class="active">名前(代表者)</label>
     </div>
 
     <div class="input-field col s12">
@@ -46,7 +46,7 @@
     <div class="input-field col s12">
       <i class="material-icons prefix">cake</i>
         <%= f.date_field :birthday,id: "icon_cake", autocomplete: "birthday" %>
-        <label class="active" for="icon_cake">生年月日</label>
+        <label class="active" for="icon_cake">創立年月日</label>
     </div>
 
       <div class="col s2">

@@ -49,6 +49,9 @@
       <% if (@user == current_user) && (@user.practice?) %>
         <% unless @user.clinic.present? %>
           <p><%= link_to "クリニック登録", new_practice_user_clinic_url(@user), class: "btn waves-effect waves-light blue" %></p>
+          <div class="balloon1-top">
+            <p>ここからクリニック情報を入力しよう！</p>
+          </div>
         <% else %>
           <%= link_to "クリニック情報の編集", edit_practice_user_clinic_url(@user), class: "btn waves-effect waves-light blue" %></p>
         <% end %>

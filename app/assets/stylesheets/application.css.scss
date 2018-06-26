@@ -1,14 +1,4 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
  *
  *= require_tree .
  *= require_self
@@ -109,7 +99,7 @@ table #short_t {
 .tooltip-clinic::before {
   content: "";
   border: 10px solid transparent;
-  border-bottom-color: #ce93d8;
+  border-bottom-color: #ff8e9d;
   bottom: -21px;
   left: 30px;
 }
@@ -117,7 +107,7 @@ table #short_t {
 .tooltip-clinic::after {
   content: attr(data-tooltip);
   display: block;
-  background: #ce93d8;
+  background: #ff8e9d;
   color: #fff;
   width: 260px;
   height: 40px;
@@ -144,7 +134,32 @@ table #short_t {
   padding: 40px;
 }
 
-//エラーページ
-.error_page {
-  background-image: url(/assets/skull-2723063_1920.jpg);
+//クーポン登録しましょう
+.balloon1-top {
+	position: relative;
+	display: inline-block;
+ 	margin: 1.5em 0;
+	padding: 15px 20px;
+	min-width: 120px;
+ 	max-width: 100%;
+ 	color: #fff;
+	font-size: 16px;
+	background: #ff8e9d;
+  border-radius: 10px;
+  box-shadow: 3px 3px 4px -2px gray;
+}
+
+.balloon1-top:before{
+	content: "";
+	position: absolute;
+	top: -30px;
+	left: 30%;
+ 	margin-left: -15px;
+	border: 15px solid transparent;
+	border-bottom: 15px solid #ff8e9d;
+}
+
+.balloon1-top p {
+	margin: 0;
+	padding: 0;
 }

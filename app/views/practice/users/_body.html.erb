@@ -4,7 +4,11 @@
     <td><%= image_tag @user.avatar.url %></td>
   </tr>
   <tr>
-    <th>氏名</th>
+    <% if @user.try(:practice?) %>
+      <th>代表者</th>
+    <% else %>
+      <th>氏名</th>
+    <% end %>
     <td><%= @user.full_name %></td>
   </tr>
   <tr>
@@ -16,7 +20,11 @@
     <td><%= @user.email %></td>
   </tr>
   <tr>
-    <th>生年月日</th>
+    <% if @user.try(:practice?) %>
+      <th>創立年月日</th>
+    <% else %>
+      <th>生年月日</th>
+    <% end %>
     <td><%= @user.birthday.try(:strftime, "%Y年%m月%d日") %></td>
   </tr>
   <tr>

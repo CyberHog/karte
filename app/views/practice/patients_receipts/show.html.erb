@@ -12,7 +12,12 @@
 <% @coupon = Coupon.find_by(patients_receipt_id: @patients_receipt.id) %>
 <% if @selected_menu.usage == 0 %>
 <% unless @coupon.present? %>
-  <p><%= link_to "クーポン登録", new_practice_user_coupon_path(@user, @coupon, :patients_receipt_id => @patients_receipt.id), class: "waves-effect waves-light btn blue" %></p>
+  <p>
+    <%= link_to "クーポン登録", new_practice_user_coupon_path(@user, @coupon, :patients_receipt_id => @patients_receipt.id), class: "waves-effect waves-light btn blue" %>
+  </p>
+  <div class="balloon1-top">
+    <p>クーポンを登録しましょう</p>
+  </div>
 <% else %>
   <p>
     <%= link_to "クーポン詳細", practice_user_coupon_url(@coupon, user_id: @user.id) %>

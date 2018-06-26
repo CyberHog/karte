@@ -45,7 +45,11 @@
     <div class="input-field col s12">
       <i class="material-icons prefix">cake</i>
         <%= f.date_field :birthday, id: "icon_cake", autocomplete: "birthday" %>
-        <label class="active" for="icon_cake">生年月日</label>
+        <% if @user.try(:practice?) %>
+          <label class="active" for="icon_cake">創立年月日</label>
+        <% else %>
+          <label class="active" for="icon_cake">生年月日</label>
+        <% end %>
     </div>
 
     <div class="col s2">
