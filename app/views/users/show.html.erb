@@ -32,6 +32,8 @@
 
 <%= render "body" %>
 
+<%= render "stats" %>
+
 
 <% unless @user.id == current_user.id %>
 <%= render "follow_form" if user_signed_in? %>

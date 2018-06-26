@@ -6,6 +6,11 @@
 <%= form_tag :search_practice_users, method: :get do %>
   <p><%= text_field_tag "q", params[:q] %>
   <%= button_tag "検索", class: "btn waves-effect waves-light", type: "button", onclick: "submit();" %></p>
+  <% unless @users.present? %>
+    <div class="balloon1-top patients-list">
+      <p>ユーザーを検索&フォローで一覧に追加</p>
+    </div>
+  <% end %>
 <% end %>
 </div>
 </div>

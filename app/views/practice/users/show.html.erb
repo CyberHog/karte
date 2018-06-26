@@ -48,7 +48,9 @@
     <div class="col s12">
       <% if (@user == current_user) && (@user.practice?) %>
         <% unless @user.clinic.present? %>
+          <div class="add-clinic">
           <p><%= link_to "クリニック登録", new_practice_user_clinic_url(@user), class: "btn waves-effect waves-light blue" %></p>
+          </div>
           <div class="balloon1-top">
             <p>ここからクリニック情報を入力しよう！</p>
           </div>
