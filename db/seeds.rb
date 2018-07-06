@@ -126,6 +126,81 @@ user.save!
 user.skip_confirmation!
 user.save!
 
+
+clinic = Clinic.new(
+    name: "リプラーナ整骨鍼灸院",
+    hp_url: "https://www.reprana.com/"
+    )
+user = User.first
+clinic.owner = user
+clinic.save!
+
+clinic = Clinic.new(
+    name: "小守スポーツマッサージ療院",
+    hp_url: "http://www.jta-komori.com/"
+    )
+user = User.second
+clinic.owner = user
+clinic.save!
+
+
+clinic_card = ClinicCard.create(
+    publisher_id: "1",
+    holder_id: "4",
+    holding_point: "3000",
+    number: "1234"
+    )
+
+clinic_card = ClinicCard.create(
+    publisher_id: "2",
+    holder_id: "4",
+    holding_point: "0",
+    number: "A0001"
+    )
+
+clinic_card = ClinicCard.create(
+    publisher_id: "1",
+    holder_id: "5",
+    holding_point: "0",
+    number: "1235"
+    )
+
+clinic_card = ClinicCard.create(
+    publisher_id: "2",
+    holder_id: "5",
+    holding_point: "0",
+    number: "A0002"
+    )
+
+clinic_card = ClinicCard.create(
+    publisher_id: "1",
+    holder_id: "6",
+    holding_point: "0",
+    number: "1236"
+    )
+
+clinic_card = ClinicCard.create(
+    publisher_id: "2",
+    holder_id: "6",
+    holding_point: "0",
+    number: "A0005"
+    )
+
+follow = Follow.create(
+    followable_type: "User",
+    followable_id: 4,
+    follower_type: "User",
+    follower_id: 1
+    )
+follow = Follow.create(
+    followable_type: "User",
+    followable_id: 5,
+    follower_type: "User",
+    follower_id: 1
+    )
+
+
+
 staff = Staff.create(
     user_id: "1",
     staff_number: "1",
@@ -206,6 +281,21 @@ medical_chart = MedicalChart.create(
     tx_comment: "腹部周りの脂肪を中心に揉みほぐしていきました。長年溜め込んだ脂肪がかなり固まっておりましたが、90分でなんとかほぐれてきました。
     この塊がよりほぐれることで腹部の部分痩せがスムーズに行えます。次回は骨の歪みも整えてより美しくなりましょう。",
     comment: "また来週お待ちしております。"
+    )
+
+karte_menu = KarteMenu.create(
+    medical_chart_id: "1",
+    course: "整体"
+    )
+
+karte_menu = KarteMenu.create(
+    medical_chart_id: "2",
+    course: "鍼60"
+    )
+
+karte_menu = KarteMenu.create(
+    medical_chart_id: "3",
+    course: "オイルマッサージ90分"
     )
 
 menu = Menu.create(
@@ -422,4 +512,13 @@ receipt = Receipt.create(
     payment: "30000",
     gained_point: "300",
     payment_method: "現金"
+    )
+
+coupon = Coupon.create(
+    patients_receipt_id: "4",
+    seller_id: "1",
+    buyer_id: "4",
+    coupon_name: "回数券購入(60分×6回分)",
+    remaining: "1",
+    expiration_date: "2018-11-29"
     )
