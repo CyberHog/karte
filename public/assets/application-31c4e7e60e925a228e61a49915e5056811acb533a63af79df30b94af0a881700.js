@@ -13220,6 +13220,7 @@ document.addEventListener('turbolinks:load', function () {
         $('#receipt_point').val(point[i - 1]);
     });
 });
+
 (function() {
   var context = this;
 
@@ -13847,6 +13848,10 @@ document.addEventListener('turbolinks:load', function () {
 
 }).call(this);
 (function() {
+
+
+}).call(this);
+(function() {
   $(document).on('turbolinks:load', function() {
     return $('.datepicker').pickadate({
       monthsFull: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
@@ -13938,9 +13943,37 @@ document.addEventListener('turbolinks:load', function () {
 
 }).call(this);
 (function() {
+  $(document).on("ready turbolinks:load", function() {
+    var coupon_usage;
+    coupon_usage = function() {
+      if ($("#buy").prop("checked")) {
+        return $("#use_coupon").show();
+      } else {
+        return $("#use_coupon").hide();
+      }
+    };
+    $("#buy").bind("click", coupon_usage);
+    return coupon_usage();
+  });
+
+}).call(this);
+(function() {
 
 
 }).call(this);
+// 価格とポイントの自動入力
+document.addEventListener('turbolinks:load', function () {
+    $(".title").click(function(){
+    if(is_smartphone()){
+      window.href=$(this).attr("data-href");
+    }
+    });
+});
+
+function is_smartphone(){
+  return ($(window).width()<480);//スマートフォンならtrue、そうでないならfalseを返す関数
+}
+;
 (function() {
   $(document).on("ready turbolinks:load", function() {
     var change_expired_at;

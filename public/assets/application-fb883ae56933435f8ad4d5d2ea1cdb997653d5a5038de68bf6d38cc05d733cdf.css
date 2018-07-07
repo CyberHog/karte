@@ -37,16 +37,6 @@ p.notice {
 }
 @charset "UTF-8";
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
  *
 
 
@@ -12832,19 +12822,19 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   /*shape-rendering: crispEdges;*/
 }
 
-/* line 21, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+/* line 11, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
 body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
 }
 
-/* line 27, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+/* line 17, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
 main {
   flex: 1 0 auto;
 }
 
-/* line 31, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+/* line 21, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
 .fixed-action-btn {
   position: fixed;
   top: 1px;
@@ -12853,39 +12843,39 @@ main {
   z-index: 997;
 }
 
-/* line 39, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+/* line 29, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
 .fixed-action-btn.horizontal ul {
   width: 600px;
   top: 48%;
 }
 
-/* line 44, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+/* line 34, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
 select {
   display: inline;
 }
 
-/* line 48, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+/* line 38, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
 th #short_th {
   width: 120px;
 }
 
-/* line 52, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+/* line 42, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
 td #short_td {
   width: 400px;
 }
 
-/* line 56, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+/* line 46, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
 table #short_t {
   width: 80%;
 }
 
 /* ツールチップ 患者一覧 */
-/* line 62, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+/* line 52, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
 .tooltip, .tooltip-clinic {
   position: relative;
 }
 
-/* line 65, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+/* line 55, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
 .tooltip::before, .tooltip-clinic::before,
 .tooltip-clinic::after, .tooltip::after {
   position: absolute;
@@ -12893,7 +12883,7 @@ table #short_t {
   opacity: 0;
 }
 
-/* line 72, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+/* line 62, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
 .tooltip::before {
   content: "";
   border: 10px solid transparent;
@@ -12902,7 +12892,7 @@ table #short_t {
   left: 16px;
 }
 
-/* line 80, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+/* line 70, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
 .tooltip::after {
   content: attr(data-tooltip);
   display: block;
@@ -12919,14 +12909,14 @@ table #short_t {
   box-shadow: 3px 3px 4px -2px gray;
 }
 
-/* line 96, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+/* line 86, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
 .tooltip-clinic:hover::before,
 .tooltip:hover::before {
   bottom: -15px;
   opacity: 1;
 }
 
-/* line 102, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+/* line 92, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
 .tooltip:hover::after {
   bottom: -54px;
   left: -50px;
@@ -12934,20 +12924,20 @@ table #short_t {
 }
 
 /* ツールチップ　クリニック未作成 */
-/* line 110, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+/* line 100, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
 .tooltip-clinic::before {
   content: "";
   border: 10px solid transparent;
-  border-bottom-color: #ce93d8;
+  border-bottom-color: #ff8e9d;
   bottom: -21px;
   left: 30px;
 }
 
-/* line 118, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+/* line 108, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
 .tooltip-clinic::after {
   content: attr(data-tooltip);
   display: block;
-  background: #ce93d8;
+  background: #ff8e9d;
   color: #fff;
   width: 260px;
   height: 40px;
@@ -12960,17 +12950,63 @@ table #short_t {
   box-shadow: 3px 3px 4px -2px gray;
 }
 
-/* line 134, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+/* line 124, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
 .tooltip-clinic:hover::after {
   bottom: -54px;
   left: -80px;
   opacity: 1;
 }
 
-/* line 141, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+/* line 131, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
 .homes_privacy, .homes_agreement {
   border: 5px solid #b2ebf2;
   border-radius: 20px;
   background-color: #e0f7fa;
   padding: 40px;
+}
+
+/* line 139, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+.balloon1-top {
+  position: relative;
+  display: inline-block;
+  margin: 1.5em 0;
+  padding: 15px 20px;
+  min-width: 120px;
+  max-width: 100%;
+  color: #fff;
+  font-size: 16px;
+  background: #ff8e9d;
+  border-radius: 10px;
+  box-shadow: 3px 3px 4px -2px gray;
+}
+
+/* line 153, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+.balloon1-top:before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  left: 30%;
+  margin-left: -15px;
+  border: 15px solid transparent;
+  border-bottom: 15px solid #ff8e9d;
+}
+
+/* line 163, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+.balloon1-top p {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 168, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+.add-clinic {
+  border: 3px solid #ff8e9d;
+  border-radius: 30px;
+  width: 210px;
+  position: relative;
+  padding: 5px 22px;
+}
+
+/* line 177, /Users/cyberhog/Desktop/karte/app/assets/stylesheets/application.css.scss */
+.patients-list {
+  right: 50px;
 }
