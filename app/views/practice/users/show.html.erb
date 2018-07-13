@@ -31,7 +31,13 @@
         <ul class="collection hoverable">
         <li class="collection-item avatar">
           <%= image_tag @clinic_card.publisher.avatar.url, class: "circle" %>
-          <p><%= @clinic_card.publisher.clinic.name %><br>
+          <p>
+            <% if current_user.clinic.present? %>
+              <%= @clinic_card.publisher.clinic.name %>
+            <% else %>
+              施術者　<%= current_user.full_name %>
+            <% end %>
+            <br>
               診察券番号<%= link_to @clinic_card.number, practice_user_clinic_card_url(id: @clinic_card.id, user_id: @user.id) %>
           </p>
           <span class="title">最終来院日 <%= @payday %></span>
