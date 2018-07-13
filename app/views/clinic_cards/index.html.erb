@@ -18,7 +18,7 @@
     <li class="collection-item avatar">
       <%= image_tag clinic_card.publisher.avatar.url, class: "circle" %>
       <p>
-        <% if clinic_card.publisher.clinic.presen? %>
+        <% if clinic_card.publisher.clinic.present? %>
           <%= clinic_card.publisher.clinic.name %>
         <% else %>
           <%= clinic_card.publisher.full_name %>

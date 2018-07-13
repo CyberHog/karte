@@ -9,8 +9,20 @@
 <table class="highlight">
 
   <tr>
-    <th>治療院名</th>
-    <td><%= @clinic_card.publisher.clinic.name %></td>
+    <th>
+      <% if @clinic_card.publisher.clinic.present? %>
+        治療院名
+      <% else %>
+        施術者
+      <% end %>
+    </th>
+    <td>
+      <% if @clinic_card.publisher.clinic.present? %>
+        <%= @clinic_card.publisher.clinic.name %>
+      <% else %>
+        <%= @clinic_card.publisher.full_name %>
+      <% end %>
+    </td>
   </tr>
   <tr>
     <th>診察券番号</th>
