@@ -17,7 +17,13 @@
   <% if clinic_card.holder.id == @user.id %>
     <li class="collection-item avatar">
       <%= image_tag clinic_card.publisher.avatar.url, class: "circle" %>
-      <p><%= clinic_card.publisher.clinic.name %><br>
+      <p>
+        <% if clinic_card.publisher.clinic.presen? %>
+          <%= clinic_card.publisher.clinic.name %>
+        <% else %>
+          <%= clinic_card.publisher.full_name %>
+        <% end %>
+        <br>
           診察券番号<%= link_to clinic_card.number, user_clinic_card_url(id: clinic_card.id) %>
       </p>
       <span class="title"><%= clinic_card.publisher.phone %></span>
